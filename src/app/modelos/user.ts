@@ -5,7 +5,8 @@ export class User {
       public email: string,
       public username: string,
       public pass: string,
-      public token = ""
+      public token = "",
+      public confirm: string
     ){}
   }
   
