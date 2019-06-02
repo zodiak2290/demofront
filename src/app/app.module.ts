@@ -1,22 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { routing, appRoutingProviders } from './route/route-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+//guards
+import { RutaGuard }  from './validacion/ruta.guard';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule
+    routing,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule, // required animations module
   ],
-  providers: [],
+  providers: [appRoutingProviders, RutaGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
