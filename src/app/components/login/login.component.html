@@ -1,3 +1,19 @@
-<p>
-  login works!
-</p>
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height:100vh">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form-login" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="email" #email="ngModel" [(ngModel)]="user.email" required placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                        </div>
+                        <div class="form-group">
+                          <input type="password" class="form-control" name="pass" #pass="ngModel" [(ngModel)]="user.pass" required placeholder="Password">
+                        </div>
+                        <button id="submitBtn" type="submit" class="btn btn-primary float-right" [disabled]="!loginForm.form.valid">login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

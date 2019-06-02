@@ -1,3 +1,33 @@
-<p>
-  register works!
-</p>
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height:100vh">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Registro</h4>
+                    <form class="form-horizontal" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="user.name" required  placeholder="Nombre"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="user.username" required  placeholder="Nombre de usuario"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="email"  #email="ngModel" [(ngModel)]="user.email"
+                                required  placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="pass" #pass="ngModel" [(ngModel)]="user.pass" required  placeholder="Password"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="confirm" #confirm="ngModel"  [(ngModel)]="user.confirm" required placeholder="Confirmar Password"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block login-button" [disabled]="!registerForm.form.valid">
+                            Registrarme
+                        </button>
+              
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
