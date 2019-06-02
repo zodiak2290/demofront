@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from '../global/global.service';
+import 'rxjs/add/observable/forkJoin'
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriaService {
-
+export class DataService {
   public url:string;
   private headers: HttpHeaders;
   constructor(public _http: HttpClient) {
@@ -26,7 +27,17 @@ export class CategoriaService {
     return response;
   }
 
-  getCategorias(params: any): Observable<any>{
-    return this._http.get(this.url + 'categoria', {headers: this.headers, params: params});
+  getData(params: any): Observable<any>{
+    return this._http.get(this.url + 'data', {headers: this.headers, params: params});
+  }
+
+  public requestDataFromMultipleSources( categorias: any[]) {
+    let peticiones = [];
+    let self = this;
+    categorias.forEach(function (categoria) {
+      let params = { size: 0, idcategoria: categoria._id };
+      peticiones.push( self.getData(params) );
+    }); 
+    return Observable.forkJoin(peticiones);
   }
 }

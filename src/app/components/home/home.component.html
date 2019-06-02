@@ -22,7 +22,7 @@
                 Puedes arrastrar el marcador para ver las variables en el tiempo
             </p>
         </div>
-        <div class="col-12">
+        <div class="col-12" *ngIf="categorias">
             <app-categoria-estadisticas [categorias]="categorias"></app-categoria-estadisticas>
         </div>
     </div>
