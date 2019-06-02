@@ -28,14 +28,14 @@
               </ul>
               <ul class="nav navbar-nav ml-auto" *ngIf="!identity">
                 <li class="nav-item"> 
-                  <a routerLink="/login" routerlinkactive="active"class="nav-link">
+                  <a routerLink="/login" routerLinkActive="active"class="nav-link">
                     <span class="glyphicon glyphicon-log-in">
                       Login
                     </span>
                   </a>
                 </li>
                 <li class="nav-item"> 
-                  <a routerLink="/registro" routerlinkactive="active" class="nav-link">
+                  <a routerLink="/registro" routerLinkActive="active" class="nav-link">
                     <span class="glyphicon glyphicon-user">
                       Registrarme
                     </span>
@@ -48,11 +48,11 @@
   </div>
   <main>
     <div id="wrapper">
-      <!--<app-sidebar *ngIf="identity"></app-sidebar>-->
+      <app-sidebar *ngIf="identity"></app-sidebar>
       <!-- Page Content -->
       <div id="page-content-wrapper">
         <div class="container-fluid">
-          <div class="row" style="margin-top:7%;" *ngIf="identity"> 
+          <div class="row" style="margin-top:6%; position: fixed" *ngIf="identity"> 
             <a (click)="toggleSidebar()" class="btn btn-secondary" id="menu-toggle" style="cursor:pointer;">
               <i class="glyphicon glyphicon-menu-hamburger"></i>
             </a>
