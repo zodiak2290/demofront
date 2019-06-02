@@ -1,3 +1,30 @@
-<p>
-  home works!
-</p>
+<div class="container-fluid" >
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Inicio</h1>
+    </div>
+    <div class="row">
+        <p>
+            Te mostramos el estado de tus máquinas aquí.
+        </p>
+    </div>
+    <div class="row">  
+        <div class="col-xl-2 col-md-2 mb-2" *ngFor="let categoria of categorias; let i = index" style="border-radius:32px; height:150px; max-height: 170px;">
+            <app-categoria-dashboard [categoria]="categoria"></app-categoria-dashboard>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Tendencias</h1>
+        </div>
+        <div class="col-12">
+            <p>
+                Puedes arrastrar el marcador para ver las variables en el tiempo
+            </p>
+        </div>
+        <div class="col-12">
+            <app-categoria-estadisticas [categorias]="categorias"></app-categoria-estadisticas>
+        </div>
+    </div>
+
+</div>
