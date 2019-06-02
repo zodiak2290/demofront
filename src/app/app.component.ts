@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, DoCheck {
     private _router: Router,
     private _userService:UserService
   ){
-      this.title = 'Contabilidad';
+      this.title = 'Demo';
   }
 
   ngOnInit() {
@@ -37,7 +37,8 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   toggleSidebar(){
-    $("#wrapper").toggleClass("toggled");
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
   }
 
 }
