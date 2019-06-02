@@ -1,67 +1,65 @@
 <div>
-  <div class="navigation col-xl-12">
-    <nav class="navbar navbar-light bg-light fixed-top navbar-expand-md" style="background: #FDF6F6">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggler"> 
-              <span class="sr-only">Toggle navigation</span>&#x2630;
-            </button> 
-            <a routerLink="/home" class="navbar-brand">
-              {{title}}
-            </a>
-            <div id="navbarCollapse" class="collapse navbar-collapse">
-              <ul class="nav navbar-nav ml-auto" *ngIf="identity">
-                <li class="dropdown nav-item"> 
-                  <a class="dropdown-toggle nav-link" data-toggle="dropdown">
-                    <span class="caret"></span>
-                    {{identity.username| uppercase}}
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown-item"> 
-                      <a style="cursor:pointer" (click)="logout()">
-                        <span class="glyphicon glyphicon-log-out"></span>
-                        Cerrar sesión
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-              <ul class="nav navbar-nav ml-auto" *ngIf="!identity">
-                <li class="nav-item"> 
-                  <a routerLink="/login" routerLinkActive="active"class="nav-link">
-                    <span class="glyphicon glyphicon-log-in">
-                      Login
-                    </span>
-                  </a>
-                </li>
-                <li class="nav-item"> 
-                  <a routerLink="/registro" routerLinkActive="active" class="nav-link">
-                    <span class="glyphicon glyphicon-user">
-                      Registrarme
-                    </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-        </div>
-    </nav>
-  </div>
+  
   <main>
-    <div id="wrapper">
-      <app-sidebar *ngIf="identity"></app-sidebar>
+    <div id="wrapper" >
+        <div class="navigation col-xl-12">
+            <nav class="navbar navbar-light bg-light fixed-top navbar-expand-md" style="background: #FDF6F6">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggler"> 
+                      <span class="sr-only">Toggle navigation</span>&#x2630;
+                    </button> 
+                    <a routerLink="/home" class="navbar-brand">
+                      {{title}}
+                    </a>
+                    <div id="navbarCollapse" class="collapse navbar-collapse">
+                      <ul class="nav navbar-nav ml-auto" *ngIf="identity">
+                        <li class="dropdown nav-item"> 
+                          <a class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            {{identity.username| uppercase}}
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li class="dropdown-item"> 
+                              <a style="cursor:pointer" (click)="logout()">
+                                <span class="glyphicon glyphicon-log-out"></span>
+                                Cerrar sesión
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                      <ul class="nav navbar-nav ml-auto" *ngIf="!identity">
+                        <li class="nav-item"> 
+                          <a routerLink="/login" routerLinkActive="active"class="nav-link">
+                            <span class="glyphicon glyphicon-log-in">
+                              Login
+                            </span>
+                          </a>
+                        </li>
+                        <li class="nav-item"> 
+                          <a routerLink="/registro" routerLinkActive="active" class="nav-link">
+                            <span class="glyphicon glyphicon-user">
+                              Registrarme
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+            </nav>
+          </div>
+      
       <!-- Page Content -->
-      <div id="page-content-wrapper">
-        <div class="container-fluid">
-          <div class="row" style="margin-top:6%; position: fixed" *ngIf="identity"> 
-            <a (click)="toggleSidebar()" class="btn btn-secondary" id="menu-toggle" style="cursor:pointer;">
-              <i class="glyphicon glyphicon-menu-hamburger"></i>
-            </a>
+      <div id="page-content-wrapper" class="d-flex flex-column">
+        <div id="content" style="flex: 1 0 auto; padding-left: 5%; padding-right: 5%;">
+          <app-sidebar *ngIf="identity"></app-sidebar>
+          <div class="row" style="margin-top:6%; position: relative; width:2%;" *ngIf="identity"> 
+              <a (click)="toggleSidebar()" class="btn btn-secondary" id="menu-toggle" style="cursor:pointer;">
+                <i class="glyphicon glyphicon-menu-hamburger"></i>
+              </a>
           </div>
-          <div class="row">
-            <div class="col-xl-12">
-              <router-outlet></router-outlet>
-            </div>
-          </div>
+          <router-outlet></router-outlet>
         </div>
       </div>
       <!-- /#page-content-wrapper -->

@@ -12,6 +12,8 @@ import { RegisterComponent } from './components/register/register.component';
 //guards
 import { RutaGuard }  from './validacion/ruta.guard';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { CategoriaDashboardComponent } from './components/categoria-dashboard/categoria-dashboard.component';
+import { CategoriaEstadisticasComponent } from './components/categoria-estadisticas/categoria-estadisticas.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    SidebarComponent
+    SidebarComponent,
+    CategoriaDashboardComponent,
+    CategoriaEstadisticasComponent
   ],
   imports: [
     routing,
