@@ -103,9 +103,9 @@ export class CategoriaEstadisticasComponent implements OnInit {
     series.stroke = am4core.color(color);
     
     if(addXYAxis){
-      let valueAxis = this.getValueAxis(chart, '#dfcc64');
+      //let valueAxis = this.getValueAxis(chart, color);
       valueAxis.renderer.grid.template.strokeDasharray = "2,3";
-      let dateAxis2 = this.getDateAxis(chart,'#dfcc64');
+      //let dateAxis2 = this.getDateAxis(chart, color);
       series.yAxis = valueAxis;
       series.xAxis = dateAxis;
     }
@@ -116,18 +116,21 @@ export class CategoriaEstadisticasComponent implements OnInit {
   showGrafica() {
     let chart = am4core.create("chartdiv", am4charts.XYChart);
     chart.data = this.data;
-
+console.log(this.data)
     let self = this;
    
-    
-    //let series2 = this.getSeries(chart, "V2", "v2", "v2valor", '#dfcc64', true);
-    
+    /*
+    let series = this.getSeries(chart, "V1", "v1", "v1valor", '#dfcc64', false);
+    let series2 = this.getSeries(chart, "V2", "v2", "v2valor", '#'+(Math.random()*0xFFFFFF<<0).toString(16), false);
+  
+    let series3 = this.getSeries(chart, "V3", "v3", "v3valor", '#'+(Math.random()*0xFFFFFF<<0).toString(16), false);
+    */
     let total  =this.categorias.length;
     this.categorias.forEach(function (categoria:Categoria, indice:Number) {
       let color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
       let nombre = categoria.nombre;
       
-      let series = self.getSeries(chart, nombre.toUpperCase(), nombre, nombre + "valor", color, indice == total - 1);
+      let series = self.getSeries(chart, nombre.toUpperCase(), nombre, nombre + "valor", color, false);
       if( indice == 0){
         let scrollbarX = new am4charts.XYChartScrollbar();
         scrollbarX.series.push(series);
