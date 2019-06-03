@@ -6,9 +6,13 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { DataService } from '../../services/data/data.service';
-import { Observable } from 'rxjs/Observable';
 
+import { interval } from 'rxjs/observable/interval';
 am4core.useTheme(am4themes_animated);
+
+//emit value in sequence every 1 second
+const source = interval(2000);
+ 
 
 @Component({
   selector: 'app-categoria-estadisticas',
@@ -19,8 +23,10 @@ export class CategoriaEstadisticasComponent implements OnInit {
 
   @Input() categorias: Array<Categoria>;
   private chart: am4charts.XYChart;
+  
 
   private data:any;
+  private mostrada:Boolean;
 
   constructor(private zone: NgZone,
     private _dataService: DataService
@@ -29,9 +35,9 @@ export class CategoriaEstadisticasComponent implements OnInit {
   ngOnInit() {
     let catComponet = this;
     catComponet.data = [];
-    
-    catComponet.getData( );
 
+    catComponet.getData();
+    //source.subscribe(val => catComponet.getData());
   }
 
   findCategoriaById(idCategoria:String){
@@ -57,102 +63,85 @@ export class CategoriaEstadisticasComponent implements OnInit {
             catComponet.data.push(obj);
           });
         });
-        
-        /*
-        response.data.docs.forEach(function (doc:any, index:Number) {
-          let key = categoria.nombre;
-          let value = key + "valor";
-          let obj = {};
-          obj[key] = doc.fecha;
-          obj[value] = doc.valor;
-          catComponet.data.push(obj);
-            //data[categoria.nombre] = doc.fecha;
-            //data['valor' + index] = doc.valor;
-         });*/
-         //console.log(data);
-         //data = data;
       }, error => {
           console.log(error);
       }).add(() => {
-        this.showGrafica()
+        this.showGrafica();
       });;
   }
 
-  showGrafica() {
-    this.zone.runOutsideAngular(() => {
-      let chart = am4core.create("chartdiv", am4charts.XYChart);
+  getDateAxis(chart, color){
+    
+    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis.renderer.grid.template.location = 0;
+    dateAxis.renderer.labels.template.fill = am4core.color(color);
+    dateAxis.renderer.grid.template.strokeOpacity = 0.07;
+    return dateAxis;
+  }
 
-      /*let data = [];
-      let price1 = 1000, price2 = 1200;
-      let quantity = 30000;
-      for (var i = 0; i < 360; i++) {
-        price1 += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 100);
-        data.push({ date1: new Date(2015, 0, i), price1: price1 });
+  getValueAxis(chart, color){
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.tooltip.disabled = true;
+    valueAxis.renderer.labels.template.fill = am4core.color("#e59165");
+    valueAxis.renderer.minWidth = 60;
+    valueAxis.renderer.grid.template.strokeOpacity = 0.07;
+    return valueAxis;
+  }
+
+  getSeries(chart, name, dateX, valueY, color, addXYAxis){
+    let dateAxis = this.getDateAxis(chart, color);
+    
+
+    let valueAxis = this.getValueAxis(chart, color);
+
+    let series = chart.series.push(new am4charts.LineSeries());
+    series.name = name;
+    series.dataFields.dateX = dateX;
+    series.dataFields.valueY = valueY;
+    series.tooltipText = "{valueY.value}";
+    series.fill = am4core.color(color);
+    series.stroke = am4core.color(color);
+    
+    if(addXYAxis){
+      let valueAxis = this.getValueAxis(chart, '#dfcc64');
+      valueAxis.renderer.grid.template.strokeDasharray = "2,3";
+      let dateAxis2 = this.getDateAxis(chart,'#dfcc64');
+      series.yAxis = valueAxis;
+      series.xAxis = dateAxis;
+    }
+
+    return series;
+  }
+
+  showGrafica() {
+    let chart = am4core.create("chartdiv", am4charts.XYChart);
+    chart.data = this.data;
+
+    let self = this;
+   
+    
+    //let series2 = this.getSeries(chart, "V2", "v2", "v2valor", '#dfcc64', true);
+    
+    let total  =this.categorias.length;
+    this.categorias.forEach(function (categoria:Categoria, indice:Number) {
+      let color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+      let nombre = categoria.nombre;
+      
+      let series = self.getSeries(chart, nombre.toUpperCase(), nombre, nombre + "valor", color, indice == total - 1);
+      if( indice == 0){
+        let scrollbarX = new am4charts.XYChartScrollbar();
+        scrollbarX.series.push(series);
+        chart.scrollbarX = scrollbarX;
       }
-      for (var i = 0; i < 360; i++) {
-        price2 += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 100);
-        data.push({ date2: new Date(2017, 0, i), price2: price2 });
-      }
-      console.log( data );*/
-      chart.data = this.data;
-      console.log(this.data);
-      let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-      dateAxis.renderer.grid.template.location = 0;
-      dateAxis.renderer.labels.template.fill = am4core.color("#e59165");
-      
-      let dateAxis2 = chart.xAxes.push(new am4charts.DateAxis());
-      dateAxis2.renderer.grid.template.location = 0;
-      dateAxis2.renderer.labels.template.fill = am4core.color("#dfcc64");
-      
-      let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-      valueAxis.tooltip.disabled = true;
-      valueAxis.renderer.labels.template.fill = am4core.color("#e59165");
-      
-      valueAxis.renderer.minWidth = 60;
-      
-      let valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
-      valueAxis2.tooltip.disabled = true;
-      valueAxis2.renderer.grid.template.strokeDasharray = "2,3";
-      valueAxis2.renderer.labels.template.fill = am4core.color("#dfcc64");
-      valueAxis2.renderer.minWidth = 60;
-      
-      let series = chart.series.push(new am4charts.LineSeries());
-      series.name = "V1";
-      series.dataFields.dateX = "v1";
-      series.dataFields.valueY = "v1valor";
-      series.tooltipText = "{valueY.value}";
-      series.fill = am4core.color("#e59165");
-      series.stroke = am4core.color("#e59165");
-      //series.strokeWidth = 3;
-      
-      let series2 = chart.series.push(new am4charts.LineSeries());
-      series2.name = "V2";
-      series2.dataFields.dateX = "v2";
-      series2.dataFields.valueY = "v2valor";
-      series2.yAxis = valueAxis2;
-      series2.xAxis = dateAxis2;
-      series2.tooltipText = "{valueY.value}";
-      series2.fill = am4core.color("#dfcc64");
-      series2.stroke = am4core.color("#dfcc64");
-      //series2.strokeWidth = 3;
-      
-      chart.cursor = new am4charts.XYCursor();
-      chart.cursor.xAxis = dateAxis2;
-      
-      let scrollbarX = new am4charts.XYChartScrollbar();
-      scrollbarX.series.push(series);
-      chart.scrollbarX = scrollbarX;
-      
-      chart.legend = new am4charts.Legend();
-      chart.legend.parent = chart.plotContainer;
-      chart.legend.zIndex = 100;
-      
-      valueAxis2.renderer.grid.template.strokeOpacity = 0.07;
-      dateAxis2.renderer.grid.template.strokeOpacity = 0.07;
-      dateAxis.renderer.grid.template.strokeOpacity = 0.07;
-      valueAxis.renderer.grid.template.strokeOpacity = 0.07;
 
     });
+
+    chart.cursor = new am4charts.XYCursor();
+     // chart.cursor.xAxis = dateAxis2;
+    chart.legend = new am4charts.Legend();
+    chart.legend.parent = chart.plotContainer;
+    chart.legend.zIndex = 100;
+
   }
 
 
