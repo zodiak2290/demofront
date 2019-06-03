@@ -144,6 +144,7 @@ console.log(this.data)
     chart.legend = new am4charts.Legend();
     chart.legend.parent = chart.plotContainer;
     chart.legend.zIndex = 100;
+    chart.responsive.enabled = true;
 
   }
 
