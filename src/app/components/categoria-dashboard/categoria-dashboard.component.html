@@ -1,13 +1,17 @@
-<div class="card text-center border-left-primary shadow h-100 py-2">
+<div class="card border-left-primary shadow h-100 py-2">
     <div class="card-body">
-        <h5 class="card-title">
-            {{ categoria.nombre }}
-        </h5>
-        <h2 class="card-subtitle mb-2 text-muted">
-           00 
-        </h2>
-        <p class="card-text">
-            {{ categoria.descripcion }}
-        </p>
+      <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+              {{ categoria.nombre }}
+          </div>
+          <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{ categoria.descripcion }}
+          </div>
+        </div>
+        <div class="col-auto">
+              00
+        </div>
+      </div>
     </div>
 </div>

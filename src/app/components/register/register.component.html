@@ -21,6 +21,7 @@
                         <div class="form-group">
                             <input type="password" class="form-control" name="confirm" #confirm="ngModel"  [(ngModel)]="user.confirm" required placeholder="Confirmar Password"/>
                         </div>
+                        <a class="sidebar-brand d-flex float-left" routerLink="/login">Ingresar</a>
                         <button type="submit" class="btn btn-primary btn-lg btn-block login-button" [disabled]="!registerForm.form.valid">
                             Registrarme
                         </button>

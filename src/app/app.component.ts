@@ -1,6 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { UserService } from './services/user/user.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import {  ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 
 @Component({
@@ -15,7 +15,6 @@ export class AppComponent implements OnInit, DoCheck {
   private token;
   constructor(
     private _route: ActivatedRoute,
-    private _router: Router,
     private _userService:UserService
   ){
       this.title = 'Demo';
@@ -31,10 +30,6 @@ export class AppComponent implements OnInit, DoCheck {
     this.token = this._userService.getToken();
   }
 
-  logout(){
-    localStorage.clear();
-    this._router.navigate(['/login']);
-  }
 
   toggleSidebar(){
     document.getElementById("mySidebar").style.width = "250px";

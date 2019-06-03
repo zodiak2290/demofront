@@ -14,6 +14,7 @@ import { RutaGuard }  from './validacion/ruta.guard';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CategoriaDashboardComponent } from './components/categoria-dashboard/categoria-dashboard.component';
 import { CategoriaEstadisticasComponent } from './components/categoria-estadisticas/categoria-estadisticas.component';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CategoriaEstadisticasComponent } from './components/categoria-estadisti
     HomeComponent,
     SidebarComponent,
     CategoriaDashboardComponent,
-    CategoriaEstadisticasComponent
+    CategoriaEstadisticasComponent,
+    TopBarComponent
   ],
   imports: [
     routing,
