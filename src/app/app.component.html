@@ -52,9 +52,9 @@
       
       <!-- Page Content -->
       <div id="page-content-wrapper" class="d-flex flex-column">
-        <div id="content" style="flex: 1 0 auto; padding-left: 5%; padding-right: 5%;">
+        <div id="content" style="flex: 1 0 auto; padding-left: 5%; padding-right: 5%; padding-top: 5%;">
           <app-sidebar *ngIf="identity"></app-sidebar>
-          <div class="row" style="margin-top:6%; position: relative; width:2%;" *ngIf="identity"> 
+          <div class="row" style="margin-left: 5%; margin-top:8%; ; position: relative; width:3%;" *ngIf="identity"> 
               <a (click)="toggleSidebar()" class="btn btn-secondary" id="menu-toggle" style="cursor:pointer;">
                 <i class="glyphicon glyphicon-menu-hamburger"></i>
               </a>
