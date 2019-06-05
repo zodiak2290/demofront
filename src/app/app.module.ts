@@ -15,6 +15,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CategoriaDashboardComponent } from './components/categoria-dashboard/categoria-dashboard.component';
 import { CategoriaEstadisticasComponent } from './components/categoria-estadisticas/categoria-estadisticas.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { Planta1Component } from './componets/planta1/planta1.component';
+import { Planta2Component } from './componets/planta2/planta2.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
     SidebarComponent,
     CategoriaDashboardComponent,
     CategoriaEstadisticasComponent,
-    TopBarComponent
+    TopBarComponent,
+    Planta1Component,
+    Planta2Component
   ],
   imports: [
     routing,
