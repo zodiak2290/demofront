@@ -12,11 +12,15 @@ import { RegisterComponent } from './components/register/register.component';
 //guards
 import { RutaGuard }  from './validacion/ruta.guard';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { CategoriaDashboardComponent } from './components/categoria-dashboard/categoria-dashboard.component';
-import { CategoriaEstadisticasComponent } from './components/categoria-estadisticas/categoria-estadisticas.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
-import { Planta1Component } from './componets/planta1/planta1.component';
-import { Planta2Component } from './componets/planta2/planta2.component';
+
+import { DatosPersonalesComponent } from './components/datos-personales/datos-personales.component';
+import { SeccionHabilidadesComponent } from './components/seccion-habilidades/seccion-habilidades.component';
+import { SeccionIdiomasComponent } from './components/seccion-idiomas/seccion-idiomas.component';
+import { EmpresaResumenComponent } from './components/empresa-resumen/empresa-resumen.component';
+import { RedesSocialesComponent } from './components/redes-sociales/redes-sociales.component';
+import { ProfileComponent } from './components/profile/profile.component';
+
 
 
 @NgModule({
@@ -26,11 +30,13 @@ import { Planta2Component } from './componets/planta2/planta2.component';
     RegisterComponent,
     HomeComponent,
     SidebarComponent,
-    CategoriaDashboardComponent,
-    CategoriaEstadisticasComponent,
     TopBarComponent,
-    Planta1Component,
-    Planta2Component
+    DatosPersonalesComponent,
+    SeccionHabilidadesComponent,
+    SeccionIdiomasComponent,
+    EmpresaResumenComponent,
+    RedesSocialesComponent,
+    ProfileComponent
   ],
   imports: [
     routing,
