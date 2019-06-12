@@ -11,7 +11,7 @@ export class EmpresaResumenComponent implements OnInit {
 
   private param:string;
   private empresas: Array<any> = [];
-  private empresa;
+  public empresa;
 
   constructor(
     private route: ActivatedRoute
