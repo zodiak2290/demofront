@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SeccionHabilidadesComponent implements OnInit {
 
   
-  private habilidades: any[];
+  public habilidades: any[];
   
   constructor() { }
 
