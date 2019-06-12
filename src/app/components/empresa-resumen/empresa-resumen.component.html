@@ -1,13 +1,44 @@
 <div class="container-fluid">
+  <div class="row" *ngIf="empresa">
+    <div class="col-xl-12">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">
+            {{empresa.nombre}}
+          </h6>
+          {{empresa.fechaInicial}} - {{empresa.fechaFin}}
+        </div>
+        <div class="card-body">
+          <p class="text-justify">
+            {{ empresa.descripcionEmpleo }}
+          </p>
+          <p *ngIf="empresa.tecnologias">
+            <strong>Tecnologías usadas : </strong>
+            <span class="badge badge-secondary" *ngFor="let tecnologia of empresa.tecnologias">
+              {{ tecnologia }}
+            </span>
+          </p>
 
-    <!-- 404 Error Text -->
-    <div class="text-center">
-      <div class="error mx-auto" data-text="Sin info">Sin info</div>
-      <p class="lead text-gray-800 mb-5">
-        =)
-      </p>
-      <p class="text-gray-500 mb-0">Esta página esta siendo desarrollada.</p>
-      <a routerLink="/home"> Vuelve a casa</a>
+          <div class="container-fluid" *ngIf="empresa.actividades">
+            <strong>Actividades realizadas: </strong>
+            <hr/>
+            <div id="{{actividad.id}}-actividad" class="col-lg-12" *ngFor="let actividad of empresa.actividades">
+                <div class="container-fluid">
+                  <div class="col-lg-12">
+                      Reto: {{  actividad.reto }}
+                  </div>
+                  <div class="col-lg-12">
+                      Acción: {{ actividad.accion }}
+                  </div>
+                  <div class="col-lg-12">
+                      Resultado: {{ actividad.resultado }}
+                  </div>
+                </div>
+                <hr/>
+            </div>
+          </div>
+        </div>
+      </div>    
     </div>
-
   </div>
+</div>

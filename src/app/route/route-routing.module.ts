@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [RutaGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
-  { path: 'empresa', component: EmpresaResumenComponent, canActivate: [RutaGuard] },
+  { path: 'empresa/:id', component: EmpresaResumenComponent, canActivate: [RutaGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [RutaGuard] }
 ];
 
