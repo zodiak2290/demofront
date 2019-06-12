@@ -5,16 +5,16 @@ import { HomeComponent } from '../components/home/home.component';
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { RutaGuard }  from '../validacion/ruta.guard';
-import { Planta1Component } from '../componets/planta1/planta1.component';
-import { Planta2Component } from '../componets/planta2/planta2.component';
+import { EmpresaResumenComponent } from '../components/empresa-resumen/empresa-resumen.component';
+import { ProfileComponent } from '../components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [RutaGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
-  { path: 'planta1', component: Planta1Component },
-  { path: 'planta2', component: Planta2Component },
+  { path: 'empresa/:id', component: EmpresaResumenComponent, canActivate: [RutaGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [RutaGuard] }
 ];
 
 export const appRoutingProviders: any[] = [];
