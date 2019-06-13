@@ -1,6 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { UserService } from './services/user/user.service';
-import {  ActivatedRoute } from '@angular/router';
+import {  ActivatedRoute, NavigationEnd,Router } from '@angular/router';
 import * as $ from 'jquery';
 
 @Component({
@@ -15,8 +15,15 @@ export class AppComponent implements OnInit, DoCheck {
   private token;
   constructor(
     private _route: ActivatedRoute,
-    private _userService:UserService
+    private _userService:UserService,
+    private _router: Router
   ){
+    this._router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {        
+        (<any>window).ga('set', 'page', event.urlAfterRedirects);
+        (<any>window).ga('send', 'pageview');
+      }
+    });
       this.title = 'Demo';
   }
 
