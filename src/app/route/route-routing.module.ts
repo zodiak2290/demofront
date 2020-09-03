@@ -9,12 +9,12 @@ import { EmpresaResumenComponent } from '../components/empresa-resumen/empresa-r
 import { ProfileComponent } from '../components/profile/profile.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'home', component: HomeComponent, canActivate: [RutaGuard] },
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
-  { path: 'empresa/:id', component: EmpresaResumenComponent, canActivate: [RutaGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [RutaGuard] }
+  { path: 'empresa/:id', component: EmpresaResumenComponent },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 export const appRoutingProviders: any[] = [];

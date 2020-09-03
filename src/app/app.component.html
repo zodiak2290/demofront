@@ -2,7 +2,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <app-sidebar *ngIf="identity"></app-sidebar> 
+        <app-sidebar></app-sidebar> 
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -11,7 +11,7 @@
             <div id="content">
               <app-top-bar *ngIf="identity"></app-top-bar>
               <!-- Begin Page Content -->
-              <div class="container-fluid">
+              <div class="container-fluid" style="margin-top:5%;">
                   <router-outlet></router-outlet>
               </div>
               <!-- /.container-fluid -->
@@ -31,4 +31,3 @@
 
   </div>
   <!-- End of Page Wrapper -->
-  

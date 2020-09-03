@@ -17,11 +17,18 @@ export class EmpresaResumenComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.empresas = [{
+      id: 7,
+      nombre: 'Famsa',
+      fechaInicial: '16-01-2020',
+      fechaFin: '11-08-2020',
+      descripcionEmpleo: 'Desarrollo SCV, con spring y angularjs',
+      tecnologias: ['JAVA', 'JQuery', 'Bootstrap', 'GIT', 'Docker', 'Angular'],
+    }, {
       id:6,
       nombre: 'Sistemas aKubica',
       fechaInicial:'15-05-2018',
       descripcionEmpleo:'Soporte sistema SOFT (FAMSA).',
-      fechaFin: moment().format('DD-MM-YYYY'),
+      fechaFin: '15-01-2020',
       tecnologias: ['JAVA', 'JQuery', 'Bootstrap', 'GIT', 'Docker', 'Angular', 'SCRUM'],
       situacion:[{
         reto:'',
