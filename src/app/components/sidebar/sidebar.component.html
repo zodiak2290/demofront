@@ -4,7 +4,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="home">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="profile">
           <div class="sidebar-brand-icon rotate-n-15">
             <i class="far fa-grin"></i>
           </div>
@@ -37,24 +37,9 @@
             <span>Experiencia Profesional</span>
           </a>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item"   [routerLink]="['/empresa/', 6]">
-                  Sistemas aKubica
-              </a>
-              <a class="collapse-item" [routerLink]="['/empresa/', 5]">
-                  FipaSofp
-              </a>
-              <a class="collapse-item" [routerLink]="['/empresa/', 4]">
-                  UXIerp
-              </a>
-              <a class="collapse-item" [routerLink]="['/empresa/', 3]">
-                  Biblioteca pública central
-              </a>
-              <a class="collapse-item" [routerLink]="['/empresa/', 2]">
-                  Volkswagen Bonn Oaxaca
-              </a>
-              <a class="collapse-item" [routerLink]="['/empresa/', 1]">
-                  Despacho Jurídico 
+            <div class="bg-white py-2 collapse-inner rounded" style="text-overflow: ellipsis !important; width: 100% !important; overflow: hidden !important;  white-space: nowrap !important;">
+              <a class="collapse-item" [routerLink]="['/empresa/', empresa.id]" *ngFor="let empresa of empresas;">
+                {{ empresa.nombre }}
               </a>
             </div>
           </div>
