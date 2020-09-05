@@ -21,6 +21,7 @@ export class TopBarComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.translate.setDefaultLang(this.activeLang);
+    translate.use(this.activeLang);
   }
 
   ngOnInit() {

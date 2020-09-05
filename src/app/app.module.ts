@@ -24,6 +24,16 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TimelineComponent } from './components/timeline/timeline.component';
+import { LocalizeDatePipe } from './pipes/localize-date.pipe';
+
+import { DatePipe } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+
+import localeEn from '@angular/common/locales/en';
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEn, 'en');
+registerLocaleData(localeEs, 'es');
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -44,7 +54,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EmpresaResumenComponent,
     RedesSocialesComponent,
     ProfileComponent,
-    TimelineComponent
+    TimelineComponent,
+    LocalizeDatePipe
   ],
   imports: [
     AppRoutingModule,
@@ -59,7 +70,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [ RutaGuard],
+  providers: [RutaGuard, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
