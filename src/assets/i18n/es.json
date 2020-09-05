@@ -1,0 +1,16 @@
+{
+  "principal.inicio": "Inicio",
+  "menu.trajectory": "Trayectoria",
+  "menu.experiencia": "Experiencia profesional",
+  "menu.estudios": "Preparación Académica",
+  "menu.inproress": "En construcción",
+  "home.habilidades": "Habilidades",
+
+  "lenguajes.en": "Inglés",
+  "lenguajes.es": "Español",
+
+  "sidebar.menu.profile": "Perfil",
+  "sidebar.menu.settings": "Configuración",
+  "sidebar.menu.activity": "Actividad",
+  "sidebar.menu.logout": "Salir"
+}
