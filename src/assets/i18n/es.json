@@ -12,5 +12,16 @@
   "sidebar.menu.profile": "Perfil",
   "sidebar.menu.settings": "Configuración",
   "sidebar.menu.activity": "Actividad",
-  "sidebar.menu.logout": "Salir"
+  "sidebar.menu.logout": "Salir",
+
+  "topbar.notificaciones.creatividad": "Creatividad",
+  "topbar.notificaciones.creatividad.text": "La creatividad puede ser la solución a la mayoría de los problemas!",
+  "topbar.notificaciones.puntualidad": "Puntualidad",
+  "topbar.notificaciones.puntualidad.text": "Valor necesario para dotar a nuestra personalidad de carácter, orden y eficacia",
+  "topbar.notificaciones.autodidacta": "Autodidacta",
+  "topbar.notificaciones.autodidacta.text": "Ser autodidacta no es una tarea fácil, requiere de tiempo, paciencia y sobre todo de voluntad para querer aprender por sí mismo.",
+  "topbar.notificaciones.workteam": "Trabajo en Equipo",
+  "topbar.notificaciones.workteam.text": "La buena relación entre los diferentes miembros del equipo es primordial.",
+  "topbar.notificaciones.service": "Excelente Servicio"
+
 }
