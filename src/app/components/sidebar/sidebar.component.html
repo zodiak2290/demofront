@@ -23,7 +23,14 @@
       </span>
     </a>
   </li>
-
+  <li class="nav-item active">
+    <a class="nav-link" routerLink="experience">
+      <i class="fas fa-fw fa-file-pdf"></i>
+      <span>
+        {{ 'menu.experiencia' | translate }}
+      </span>
+    </a>
+  </li>
   <!-- Divider -->
   <hr class="sidebar-divider">
 
@@ -44,7 +51,6 @@
       <div class="bg-white py-2 collapse-inner rounded" style="text-overflow: ellipsis !important; width: 100% !important; overflow: hidden !important;  white-space: nowrap !important;">
         <a class="collapse-item" [routerLink]="['/empresa/', empresa.id]" *ngFor="let empresa of empresas;">
           {{ empresa.nombre }}
-
         </a>
       </div>
     </div>
