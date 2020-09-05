@@ -12,5 +12,16 @@
   "sidebar.menu.profile": "Profile",
   "sidebar.menu.settings": "Settings",
   "sidebar.menu.activity": "Activity Log",
-  "sidebar.menu.logout": "Logout"
+  "sidebar.menu.logout": "Logout",
+
+
+  "topbar.notificaciones.creatividad": "Creativity",
+  "topbar.notificaciones.creatividad.text": "Creativity can be the solution to most problems!",
+  "topbar.notificaciones.puntualidad": "Puntuality",
+  "topbar.notificaciones.puntualidad.text": "Necessary courage to endow our personality with character, order and efficiency",
+  "topbar.notificaciones.autodidacta": "Autodidact",
+  "topbar.notificaciones.autodidacta.text": "Being self-taught is not an easy task, it requires time, patience and above all the will to want to learn by yourself",
+  "topbar.notificaciones.workteam": "Teamwork",
+  "topbar.notificaciones.workteam.text": "The good relationship between the different members of the team is essential.",
+  "topbar.notificaciones.service": "Excellent service"
 }
