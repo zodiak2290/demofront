@@ -28,7 +28,26 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    !function (t) { "use strict"; t("#sidebarToggle, #sidebarToggleTop").on("click", function (o) { t("body").toggleClass("sidebar-toggled"), t(".sidebar").toggleClass("toggled"), t(".sidebar").hasClass("toggled") && t(".sidebar .collapse").collapse("hide") }), t(window).resize(function () { t(window).width() < 768 && t(".sidebar .collapse").collapse("hide") }), t("body.fixed-nav .sidebar").on("mousewheel DOMMouseScroll wheel", function (o) { if (768 < t(window).width()) { var e = o.originalEvent, l = e.wheelDelta || -e.detail; this.scrollTop += 30 * (l < 0 ? 1 : -1), o.preventDefault() } }), t(document).on("scroll", function () { 100 < t(this).scrollTop() ? t(".scroll-to-top").fadeIn() : t(".scroll-to-top").fadeOut() }), t(document).on("click", "a.scroll-to-top", function (o) { var e = t(this); t("html, body").stop().animate({ scrollTop: t(e.attr("href")).offset().top }, 1e3, "easeInOutExpo"), o.preventDefault() }) }(jQuery);
+    $("#sidebarToggle, #sidebarToggleTop").on("click", function (o) {
+          $("body").toggleClass("sidebar-toggled"),
+          $(".sidebar").toggleClass("toggled"),
+          $(".sidebar").hasClass("toggled") //&& $(".sidebar .collapse").collapse("hide")
+    }), $(window).resize(function () {
+      $(window).width() < 768 //&& $(".sidebar .collapse").collapse("hide")
+    }), $("body.fixed-nav .sidebar").on("mousewheel DOMMouseScroll wheel", function (o) {
+      if (768 < $(window).width()) {
+        /*var e = o.originalEvent, l = e.wheelDelta || -e.detail; this.scrollTop += 30 * (l < 0 ? 1 : -1), o.preventDefault()*/
+      }
+    }),
+      $(document).on("scroll", function () {
+        100 < $(this).scrollTop() ? $(".scroll-to-top").fadeIn() : $(".scroll-to-top").fadeOut()
+      }), $(document).on("click", "a.scroll-to-top", function (o) {
+        var e = $(this);
+        $("html, body").stop().animate({
+          scrollTop: $(e.attr("href")).offset().top
+        }, 1e3, "easeInOutExpo"), o.preventDefault()
+      });
+
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
   }
