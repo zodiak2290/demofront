@@ -5,7 +5,7 @@
         <div class="timeline" *ngFor="let empresa of empresas;">
           <span class="timeline-icon"></span>
           <span class="year">
-            {{ empresa.fechaInicial | date:"mediumDate"}} - {{ empresa.fechaFin | date:"mediumDate"}}
+            {{ empresa.fechaInicial | localizeDate }} - {{ empresa.fechaFin | localizeDate}}
           </span>
           <div class="timeline-content">
             <h3 class="title">
