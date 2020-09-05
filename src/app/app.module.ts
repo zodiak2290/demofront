@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { routing, appRoutingProviders } from './route/route-routing.module';
+import { AppRoutingModule } from './route/route-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //components
@@ -39,12 +39,12 @@ import { ProfileComponent } from './components/profile/profile.component';
     ProfileComponent
   ],
   imports: [
-    routing,
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule, // required animations module
   ],
-  providers: [appRoutingProviders, RutaGuard],
+  providers: [ RutaGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
