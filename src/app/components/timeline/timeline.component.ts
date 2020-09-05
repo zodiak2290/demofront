@@ -7,7 +7,7 @@ import { EmpresaService } from '../../services/empresa/empresa.service';
   styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
-  private empresas: Array<any> = [];
+  public empresas: Array<any> = [];
   constructor(
     private empresaService: EmpresaService
   ) {
