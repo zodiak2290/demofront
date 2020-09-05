@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-timeline8">
+        <div class="timeline" *ngFor="let empresa of empresas;">
+          <span class="timeline-icon"></span>
+          <span class="year">
+            {{ empresa.fechaInicial | date:"mediumDate"}} - {{ empresa.fechaFin | date:"mediumDate"}}
+          </span>
+          <div class="timeline-content">
+            <h3 class="title">
+              {{ empresa.nombre }}
+            </h3>
+            <p class="description">
+              {{ empresa.descripcionEmpleo }}
+              <span *ngIf="empresa.tecnologias">
+                {{ empresa.tecnologias.join() }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

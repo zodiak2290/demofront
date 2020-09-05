@@ -23,6 +23,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -42,7 +43,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SeccionIdiomasComponent,
     EmpresaResumenComponent,
     RedesSocialesComponent,
-    ProfileComponent
+    ProfileComponent,
+    TimelineComponent
   ],
   imports: [
     AppRoutingModule,
