@@ -23,7 +23,7 @@ export class EmpresaService {
     }, {
       id: 6,
       nombre: 'Sistemas aKubica',
-      fechaInicial: '2008-05-15',
+      fechaInicial: '2018-05-15',
       descripcionEmpleo: 'Soporte sistema SOFT (FAMSA).',
       fechaFin: '2020-01-15',
       tecnologias: ['JAVA', 'JQuery', 'Bootstrap', 'GIT', 'Docker', 'Angular', 'SCRUM'],
