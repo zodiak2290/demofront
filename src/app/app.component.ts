@@ -57,7 +57,7 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   private initFacebookService(): void {
-    const initParams: InitParams = { xfbml: true, version: 'v3.2' };
+    const initParams: InitParams = { xfbml: true, version: 'v8.0' };
     this.facebookService.init(initParams);
   }
 
