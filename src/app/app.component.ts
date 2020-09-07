@@ -3,6 +3,8 @@ import { UserService } from './services/user/user.service';
 import {  ActivatedRoute, NavigationEnd,Router } from '@angular/router';
 import * as $ from 'jquery';
 
+import { FacebookService, InitParams } from 'ngx-facebook';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +18,8 @@ export class AppComponent implements OnInit, DoCheck {
   constructor(
     private _route: ActivatedRoute,
     private _userService:UserService,
-    private _router: Router
+    private _router: Router,
+    private facebookService: FacebookService
   ){
     this._router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {        
@@ -28,6 +31,7 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
+    this.initFacebookService();
     $("#sidebarToggle, #sidebarToggleTop").on("click", function (o) {
           $("body").toggleClass("sidebar-toggled"),
           $(".sidebar").toggleClass("toggled"),
@@ -50,6 +54,11 @@ export class AppComponent implements OnInit, DoCheck {
 
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
+  }
+
+  private initFacebookService(): void {
+    const initParams: InitParams = { xfbml: true, version: 'v3.2' };
+    this.facebookService.init(initParams);
   }
 
   ngDoCheck() {

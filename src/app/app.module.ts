@@ -33,6 +33,7 @@ import localeEn from '@angular/common/locales/en';
 import localeEs from '@angular/common/locales/es';
 
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+import { FacebookModule } from 'ngx-facebook';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows
@@ -75,7 +76,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient],
       }
     }),
-    NgWizardModule.forRoot(ngWizardConfig)
+    NgWizardModule.forRoot(ngWizardConfig),
+    FacebookModule.forRoot()
   ],
   providers: [RutaGuard, DatePipe],
   bootstrap: [AppComponent]
