@@ -32,6 +32,13 @@ import { registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import localeEs from '@angular/common/locales/es';
 
+import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+import { FacebookModule } from 'ngx-facebook';
+
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.arrows
+};
+
 registerLocaleData(localeEn, 'en');
 registerLocaleData(localeEs, 'es');
 
@@ -68,7 +75,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       }
-    })
+    }),
+    NgWizardModule.forRoot(ngWizardConfig),
+    FacebookModule.forRoot()
   ],
   providers: [RutaGuard, DatePipe],
   bootstrap: [AppComponent]

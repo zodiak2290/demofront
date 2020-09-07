@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { EmpresaService } from '../../services/empresa/empresa.service';
+
+import { NgWizardConfig, THEME, StepChangedArgs, NgWizardService } from 'ng-wizard';
 
 @Component({
   selector: 'app-empresa-resumen',
@@ -9,33 +9,41 @@ import { EmpresaService } from '../../services/empresa/empresa.service';
 })
 export class EmpresaResumenComponent implements OnInit {
 
-  private param:string;
-  private empresas: Array<any> = [];
-  public empresa;
 
-  constructor(
-    private route: ActivatedRoute,
-    private empresaService: EmpresaService
-  ) {
-    this.empresas = this.empresaService.getEmpresas();
-   }
+  config: NgWizardConfig = {
+    selected: 0,
+    theme: THEME.dots,
+    toolbarSettings: {
+      toolbarExtraButtons: [
+        {
+          text: 'Finish', class: 'btn btn-info', event: () => { alert("Finished!!!"); }
+        }]
+    }
+  };
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.param = params['id'];
-      this.getEmpresa( this.param );
-  });
-
+  constructor(private ngWizardService: NgWizardService) {
   }
 
-  getEmpresa( idEmpresa ){
-    if( idEmpresa){
-      this.empresa = this.empresas.find(function(empresa) {
-        return empresa.id == idEmpresa;
-      });
-    }
-    //this.empresa = this.empresas.find( (empresa) => { return empresa.id === idEmpresa } );
-    //console.log( this.empresa );
-  }  
+  ngOnInit() {
+  }
 
+  showPreviousStep(event?: Event) {
+    this.ngWizardService.previous();
+  }
+
+  showNextStep(event?: Event) {
+    this.ngWizardService.next();
+  }
+
+  resetWizard(event?: Event) {
+    this.ngWizardService.reset();
+  }
+
+  setTheme(theme: THEME) {
+    this.ngWizardService.theme(theme);
+  }
+
+  stepChanged(args: StepChangedArgs) {
+    console.log(args.step);
+  }
 }
