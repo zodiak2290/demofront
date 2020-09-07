@@ -77,7 +77,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     NgWizardModule.forRoot(ngWizardConfig),
-    //FacebookModule.forRoot()
+    FacebookModule.forRoot()
   ],
   providers: [RutaGuard, DatePipe],
   bootstrap: [AppComponent]
