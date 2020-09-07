@@ -32,6 +32,12 @@ import { registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import localeEs from '@angular/common/locales/es';
 
+import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.arrows
+};
+
 registerLocaleData(localeEn, 'en');
 registerLocaleData(localeEs, 'es');
 
@@ -68,7 +74,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       }
-    })
+    }),
+    NgWizardModule.forRoot(ngWizardConfig)
   ],
   providers: [RutaGuard, DatePipe],
   bootstrap: [AppComponent]
