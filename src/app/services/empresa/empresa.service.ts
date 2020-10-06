@@ -9,10 +9,22 @@ export class EmpresaService {
 
   getEmpresas() {
     return [{
+      id: 8,
+      nombre: 'Futurite',
+      fechaInicial: '2020-09-01',
+      fechaFin: new Date(),
+      descripcionEmpleo: 'Desarrollo frontEnd ',
+      tecnologias: ['PHP', 'JQuery', 'Bootstrap', 'GIT', 'Laravel', 'JIRA'],
+      situacion: [{
+        reto: '',
+        accion: '',
+        resultado: ''
+      }]
+    },{
       id: 7,
       nombre: 'Famsa',
       fechaInicial: '2020-01-16',
-      fechaFin: '2020-08-01',
+      fechaFin: '2020-08-11',
       descripcionEmpleo: 'Desarrollo SCV, con spring y angularjs',
       tecnologias: ['JAVA', 'JQuery', 'Bootstrap', 'GIT', 'Docker', 'Angular'],
       situacion: [{
