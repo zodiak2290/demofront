@@ -22,6 +22,10 @@
   "topbar.notificaciones.autodidacta.text": "Ser autodidacta no es una tarea fácil, requiere de tiempo, paciencia y sobre todo de voluntad para querer aprender por sí mismo.",
   "topbar.notificaciones.workteam": "Trabajo en Equipo",
   "topbar.notificaciones.workteam.text": "La buena relación entre los diferentes miembros del equipo es primordial.",
-  "topbar.notificaciones.service": "Excelente Servicio"
+  "topbar.notificaciones.service": "Excelente Servicio",
+
+  "topbar.menu.openCV": "Abrir CV WORD",
+  "topbar.news.label": "Noticias CNN",
+  "topbar.news.readMore": "Leer Mas"
 
 }
