@@ -3,6 +3,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 
 import { TranslateService } from '@ngx-translate/core';
+import { FeedsService } from '../../services/externos/feeds.service';
+import { FeedVue } from '../../modelos/FeedVue/feed-vue';
 
 @Component({
   selector: 'app-top-bar',
@@ -14,11 +16,15 @@ export class TopBarComponent implements OnInit {
   private token;
   public activeLang = 'es';
 
+  feed: FeedVue;
+  items: any[];
+  
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
     private _userService: UserService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private feedsService: FeedsService
   ) {
     this.translate.setDefaultLang(this.activeLang);
     translate.use(this.activeLang);
@@ -27,6 +33,12 @@ export class TopBarComponent implements OnInit {
   ngOnInit() {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
+
+    this.feedsService.getNewsVUE().subscribe(resp => {
+      this.feed = resp as FeedVue;
+      this.items = this.feed.items;
+      console.log(this.items);
+    });
   }
 
   logout(){

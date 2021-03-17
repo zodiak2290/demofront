@@ -23,5 +23,9 @@
   "topbar.notificaciones.autodidacta.text": "Being self-taught is not an easy task, it requires time, patience and above all the will to want to learn by yourself",
   "topbar.notificaciones.workteam": "Teamwork",
   "topbar.notificaciones.workteam.text": "The good relationship between the different members of the team is essential.",
-  "topbar.notificaciones.service": "Excellent service"
+  "topbar.notificaciones.service": "Excellent service",
+
+  "topbar.menu.openCV": "Open CV WORD",
+  "topbar.news.label": "News CNN",
+  "topbar.news.readMore":  "Read More"
 }
