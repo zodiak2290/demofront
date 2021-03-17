@@ -16,13 +16,13 @@ export class SeccionHabilidadesComponent implements OnInit {
   ngOnInit() {
     this.habilidades = [{
       name:'Angular',
-      porcentaje:80 
+      porcentaje:82 
     },{
       name:'git',
-      porcentaje:80
+      porcentaje:82
     },{
       name:'JAVA',
-      porcentaje: 70
+      porcentaje: 73
     },{
       name:'Node',
       porcentaje:50
@@ -47,7 +47,13 @@ export class SeccionHabilidadesComponent implements OnInit {
     },{
       name:'scrum',
       porcentaje:40
-    }
+      }, {
+        name: 'Spring Boot',
+        porcentaje: 50
+      }, {
+        name: 'VUE',
+        porcentaje: 40
+      }
   ]
   }
 

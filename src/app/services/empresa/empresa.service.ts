@@ -9,6 +9,18 @@ export class EmpresaService {
 
   getEmpresas() {
     return [{
+      id: 9,
+      nombre: 'Indautosoft',
+      fechaInicial: '2020-09-01',
+      fechaFin: '2021-03-12',
+      descripcionEmpleo: 'Desarrollo FullSatck: Espacios Publicitarios OXXO ',
+      tecnologias: ['Angular', 'Spring boot', 'Bootstrap', 'GIT', 'Material Design', 'Azure'],
+      situacion: [{
+        reto: '',
+        accion: '',
+        resultado: ''
+      }]
+    },{
       id: 8,
       nombre: 'Futurite',
       fechaInicial: '2020-09-01',
