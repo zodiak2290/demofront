@@ -1,21 +1,11 @@
 <!-- Project Card Example -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">
-        {{ 'home.habilidades' | translate }}
-      </h6>
-    </div>
-    <div class="card-body">
-        <div *ngFor="let habilidad of habilidades;">
-            <h4 class="small font-weight-bold">
-                {{ habilidad.name | uppercase}}
-                <span class="float-right">
-                    {{ habilidad.porcentaje}}%
-                </span>
-            </h4>
-            <div class="progress mb-4">
-                <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="getStyleBar(habilidad.porcentaje)" [attr.aria-valuenow]="habilidad.porcentaje" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div> 
-    </div>
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">
+      {{ 'home.habilidades' | translate }}
+    </h6>
+  </div>
+  <div class="card-body">
+    <div id="chartdiv" style="height: 500px"></div>
+  </div>
 </div>
