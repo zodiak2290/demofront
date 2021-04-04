@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import { DataItem } from '@amcharts/amcharts4/core';
+import { TreeMapDataItem, TreeMapSeriesDataItem } from '@amcharts/amcharts4/charts';
 am4core.useTheme(am4themes_animated);
 
 @Component({
@@ -97,7 +99,7 @@ export class SeccionHabilidadesComponent implements OnInit {
     label.valign = "middle";
     label.opacity = 0.25;
     label.adapter.add("text", function (text, target) {
-      let dataItem = target.parent.dataItem;
+      let dataItem: TreeMapSeriesDataItem = target.parent.dataItem as TreeMapSeriesDataItem ;
       if (!target.dataItem) {
         return "Otro";
       }
