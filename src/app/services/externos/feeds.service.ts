@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { FeedVue } from '../../modelos/FeedVue/feed-vue';
 
 @Injectable({
@@ -11,5 +11,9 @@ export class FeedsService {
 
   getNewsVUE() {
     return this.http.get<FeedVue>("https://rss.app/feeds/hmsyAr3PyniBpmOd.json");
+  }
+
+  getMarket(params?: HttpParams) {
+    return this.http.get<any>("http://api.marketstack.com/v1/eod", {params});
   }
 }
