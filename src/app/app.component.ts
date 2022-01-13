@@ -4,6 +4,7 @@ import {  ActivatedRoute, NavigationEnd,Router } from '@angular/router';
 import * as $ from 'jquery';
 
 import { FacebookService, InitParams } from 'ngx-facebook';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,8 @@ export class AppComponent implements OnInit, DoCheck {
   public title:string;
   public identity;
   private token;
+
+  public year = 0;
   constructor(
     private _route: ActivatedRoute,
     private _userService:UserService,
@@ -54,6 +57,8 @@ export class AppComponent implements OnInit, DoCheck {
 
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
+
+    this.year = moment().year();
   }
 
   private initFacebookService(): void {
