@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, DoCheck {
   private token;
 
   public year = 0;
+
   constructor(
     private _route: ActivatedRoute,
     private _userService:UserService,
