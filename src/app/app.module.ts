@@ -35,6 +35,7 @@ import localeEs from '@angular/common/locales/es';
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 import { FacebookModule } from 'ngx-facebook';
 
+
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows
 };
