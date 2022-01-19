@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EmpresaService } from '../../services/empresa/empresa.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,13 +6,11 @@ import { EmpresaService } from '../../services/empresa/empresa.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  empresas: any[];
-  constructor(private empresaService: EmpresaService) {
+  constructor() {
     
   }
 
   ngOnInit() {
-    this.empresas = this.empresaService.getEmpresas();
   }
 
   openNav() {

@@ -6,20 +6,18 @@ import { DataItem } from '@amcharts/amcharts4/core';
 import { TreeMapDataItem, TreeMapSeriesDataItem } from '@amcharts/amcharts4/charts';
 am4core.useTheme(am4themes_animated);
 
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { environment } from "../../../environments/environment";
+import { collection, getDocs } from "firebase/firestore";
+
 @Component({
   selector: 'app-seccion-habilidades',
   templateUrl: './seccion-habilidades.component.html',
   styleUrls: ['./seccion-habilidades.component.css']
 })
 export class SeccionHabilidadesComponent implements OnInit {
-
-  public data = {
-    "BackEnd": { "SPRING BOOT": 6000, "Laravel": 3000, "Ruby on Rails": 2000, "Flask": 500, "Node":360 },
-    "FrontEnd": { "Angular": 9500, "Vue": 3100, "HTML": 780, "Bootstrap": 3890  },
-    "Control de versiones": { "GIT": 8000 },
-    "Base de datos": { "MySQL": 1080, "Postgresql":"750", "SQL Server":570,  "MongoDB":439},
-    "Otros": { "Patrones de diseño": 5078, "SCRUM": 5060, },
-  }
+  public data = {};
 
  processData(data) {
   let treeData = [];
@@ -54,10 +52,28 @@ export class SeccionHabilidadesComponent implements OnInit {
 }
 
 
-  constructor() {}
+  constructor() {
+    this.data = this.getHabilidades();
+  }
 
+  async getHabilidades(){
+    const firebaseApp = initializeApp(environment.firebase);
+    const db = getFirestore();
+    //console.log("###################")
+    //console.log(db);
+    const querySnapshot = await getDocs(collection(db, "habilidades"));
+    querySnapshot.forEach((doc) => {
+      //console.log(`${doc.id} => ${doc.data()}`);
+      //console.log("response")
+      console.log(doc.data())
+      this.data = doc.data();
+      this.loadGrafica()
+    });    
+  }
+
+  ngOnInit(){}
   
-  ngOnInit() {
+  loadGrafica() {
   
     let chart = am4core.create("chartdiv", am4charts.TreeMap);
     chart.hiddenState.properties.opacity = 0;
