@@ -44,3 +44,4 @@ testem.log
 Thumbs.db
 /.vs/demofront/v16
 /.vs
+package-lock.json
