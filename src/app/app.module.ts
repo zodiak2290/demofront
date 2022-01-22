@@ -37,6 +37,7 @@ import { FacebookModule } from 'ngx-facebook';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows
@@ -83,7 +84,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgWizardModule.forRoot(ngWizardConfig),
     FacebookModule.forRoot(),
     ReactiveFormsModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    ToastrModule.forRoot()
   ],
   providers: [RutaGuard, DatePipe],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@ import { getDatabase ,set, ref } from "firebase/database";
 import { environment } from "../../../environments/environment";
 
 import { v4 as uuidv4 } from 'uuid';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contacto',
@@ -24,7 +25,7 @@ export class ContactoComponent implements OnInit {
   submitted = false;
   enviando = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -65,7 +66,7 @@ export class ContactoComponent implements OnInit {
     const app = initializeApp(environment.realtimefirebase);
     const database = getDatabase(app);
     set(ref(database, 'correos/' + uuidv4()), this.form.value).then((snapshot) => {
-      console.log("enviado")
+      this.toastr.success("Mensaje enviado correctamente", "Aviso");
       this.onReset();
       this.enviando = false;
     })
