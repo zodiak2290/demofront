@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 //import Validation from './utils/validation';
+import { initializeApp } from 'firebase/app';
+import { getDatabase ,set, ref } from "firebase/database";
+
+import { environment } from "../../../environments/environment";
+
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-contacto',
@@ -55,8 +61,15 @@ export class ContactoComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    console.log(JSON.stringify(this.form.value, null, 2));    
-    console.log("send")
+
+    const app = initializeApp(environment.realtimefirebase);
+    const database = getDatabase(app);
+    set(ref(database, 'correos/' + uuidv4()), this.form.value).then((snapshot) => {
+      console.log("enviado")
+      this.onReset();
+
+    })
+    
   }
 
   onReset(): void {
