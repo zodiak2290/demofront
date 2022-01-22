@@ -10,6 +10,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { environment } from "../../../environments/environment";
 import { collection, getDocs } from "firebase/firestore";
+import { EmpresaService } from '../../services/empresa/empresa.service';
 
 @Component({
   selector: 'app-seccion-habilidades',
@@ -52,20 +53,13 @@ export class SeccionHabilidadesComponent implements OnInit {
 }
 
 
-  constructor() {
-    this.data = this.getHabilidades();
+  constructor(private empresaService: EmpresaService) {
+    this.getHabilidades();
   }
 
   async getHabilidades(){
-    const firebaseApp = initializeApp(environment.firebase);
-    const db = getFirestore();
-    //console.log("###################")
-    //console.log(db);
-    const querySnapshot = await getDocs(collection(db, "habilidades"));
+    let querySnapshot = await this.empresaService.getHabilidades();
     querySnapshot.forEach((doc) => {
-      //console.log(`${doc.id} => ${doc.data()}`);
-      //console.log("response")
-      console.log(doc.data())
       this.data = doc.data();
       this.loadGrafica()
     });    
