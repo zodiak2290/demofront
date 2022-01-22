@@ -63,13 +63,16 @@ export class ContactoComponent implements OnInit {
       return;
     }
     this.enviando = true;
-    const app = initializeApp(environment.realtimefirebase);
+    const app = initializeApp(environment.realtimefirebase, 'CVWEB');
     const database = getDatabase(app);
     set(ref(database, 'correos/' + uuidv4()), this.form.value).then((snapshot) => {
       this.toastr.success("Mensaje enviado correctamente", "Aviso");
       this.onReset();
       this.enviando = false;
-    })
+    }).catch((error) => {
+      this.enviando = false;
+      this.toastr.error("No fue posible enviar su mensaje", "Importante");
+    });
     
   }
 
