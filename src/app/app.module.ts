@@ -35,7 +35,7 @@ import localeEs from '@angular/common/locales/es';
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 import { FacebookModule } from 'ngx-facebook';
 import { ContactoComponent } from './components/contacto/contacto.component';
-
+import { NgxLoadingModule } from 'ngx-loading';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const ngWizardConfig: NgWizardConfig = {
@@ -82,7 +82,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     NgWizardModule.forRoot(ngWizardConfig),
     FacebookModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxLoadingModule.forRoot({})
   ],
   providers: [RutaGuard, DatePipe],
   bootstrap: [AppComponent]

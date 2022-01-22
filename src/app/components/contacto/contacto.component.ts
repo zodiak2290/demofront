@@ -22,6 +22,7 @@ export class ContactoComponent implements OnInit {
     message: new FormControl(''),
   });
   submitted = false;
+  enviando = false;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -57,17 +58,16 @@ export class ContactoComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-    console.log(this.form.invalid)
     if (this.form.invalid) {
       return;
     }
-
+    this.enviando = true;
     const app = initializeApp(environment.realtimefirebase);
     const database = getDatabase(app);
     set(ref(database, 'correos/' + uuidv4()), this.form.value).then((snapshot) => {
       console.log("enviado")
       this.onReset();
-
+      this.enviando = false;
     })
     
   }
