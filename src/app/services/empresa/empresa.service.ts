@@ -10,14 +10,18 @@ import { collection, getDocs, orderBy } from "firebase/firestore";
   providedIn: 'root'
 })
 export class EmpresaService {
-
+  public db;
   constructor() { 
+    const firebaseApp = initializeApp(environment.firebase/*, 'CVWEB'*/);
+    this.db = getFirestore();
   }
 
   async getEmpresasAsync(){
-    const firebaseApp = initializeApp(environment.firebase);
-    const db = getFirestore();
-    return await getDocs(collection(db, "Empresas"));
+    return await getDocs(collection(this.db, "Empresas"));
+  }
+
+  async getHabilidades(){
+    return await getDocs(collection(this.db, "habilidades"));  
   }
 
 }

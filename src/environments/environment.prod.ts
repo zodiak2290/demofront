@@ -18,7 +18,7 @@ export const environment = {
     // form https://[databaseName].[region].firebasedatabase.app.
     // For example, https://your-database-123.europe-west1.firebasedatabase.app
     databaseURL: "https://cvweb-17bce-default-rtdb.firebaseio.com",
-    storageBucket: "bucket.appspot.com"
+    storageBucket: "cvweb-17bce.appspot.com"
   }
 
 
