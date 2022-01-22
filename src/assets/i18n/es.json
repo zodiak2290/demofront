@@ -5,6 +5,7 @@
   "menu.estudios": "Preparación Académica",
   "menu.inproress": "En construcción",
   "home.habilidades": "Habilidades",
+  "menu.contacto":"Contacto",
 
   "lenguajes.en": "Inglés",
   "lenguajes.es": "Español",
@@ -26,6 +27,23 @@
 
   "topbar.menu.openCV": "Abrir CV WORD",
   "topbar.news.label": "Noticias CNN",
-  "topbar.news.readMore": "Leer Mas"
+  "topbar.news.readMore": "Leer Mas",
 
+  "contacto.name": "Nombre",
+  "contacto.email": "Email",
+  "contacto.subject": "Asunto",
+  "contacto.message": "Mensaje",
+  "contacto.send":"Enviar",
+  "contacto.me" : "Contáctame",
+  "contacto.subject.required":"El asunto es requerido",
+  "contacto.subject.minlength":"El asunto deberia tener al menos 6 caracteres",
+  "contacto.subject.maxlength":"El asunto no deberia exceder los 30 caracteres",
+  "contacto.email.required":"Email es requerido",
+  "contacto.email.email":"Email es invalido",
+  "contacto.name.required":"Nombre es requerido",
+
+
+  "contacto.message.required":"El Mensaje es requerido",
+  "contacto.message.minlength":"El Mensaje deberia tener al menos 10 caracteres",
+  "contacto.message.maxlength":"El Mensaje no deberia exceder los 200 caracteres"
 }

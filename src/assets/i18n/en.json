@@ -5,7 +5,8 @@
   "menu.estudios": "Education",
   "menu.inproress": "Work in Progress",
   "home.habilidades": "Skills",
-
+  "menu.contacto":"Contact",
+  
   "lenguajes.en": "English",
   "lenguajes.es": "Spanish",
 
@@ -27,5 +28,27 @@
 
   "topbar.menu.openCV": "Open CV WORD",
   "topbar.news.label": "News CNN",
-  "topbar.news.readMore":  "Read More"
+  "topbar.news.readMore":  "Read More",
+
+
+  "contacto.name": "Name",
+  "contacto.email": "Email",
+  "contacto.subject": "Subject",
+  "contacto.message": "Message",
+  "contacto.send":"Send",
+  "contacto.me" : "Contact me",
+  "contacto.subject.required":"Subject is required",
+  "contacto.subject.minlength":"Subject must be at least 6 characters",
+  "contacto.subject.maxlength":"Subject must not exceed 30 characters",
+
+  "contacto.email.required":"Email is required",
+  "contacto.email.email":"Email is invalid",
+
+  "contacto.name.required":"Name is required",
+
+  "contacto.message.required":"Message is required",
+  "contacto.message.minlength":"Message must be at least 10 characters",
+  "contacto.message.maxlength":"Message must not exceed 200 characters"
+
+
 }
