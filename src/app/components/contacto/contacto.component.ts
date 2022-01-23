@@ -8,6 +8,7 @@ import { environment } from "../../../environments/environment";
 
 import { v4 as uuidv4 } from 'uuid';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-contacto',
@@ -63,6 +64,7 @@ export class ContactoComponent implements OnInit {
       return;
     }
     this.enviando = true;
+    this.form.value.fecha = moment().utc().format();
     const app = initializeApp(environment.realtimefirebase, 'CVWEB');
     const database = getDatabase(app);
     set(ref(database, 'correos/' + uuidv4()), this.form.value).then((snapshot) => {
