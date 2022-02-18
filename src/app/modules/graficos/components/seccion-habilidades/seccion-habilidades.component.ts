@@ -8,9 +8,9 @@ am4core.useTheme(am4themes_animated);
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { environment } from "../../../environments/environment";
+//import { environment } from "../../../../../environments/environment";
 import { collection, getDocs } from "firebase/firestore";
-import { EmpresaService } from '../../services/empresa/empresa.service';
+import { EmpresaService } from '../../../../services/empresa/empresa.service';
 
 @Component({
   selector: 'app-seccion-habilidades',
@@ -62,13 +62,13 @@ export class SeccionHabilidadesComponent implements OnInit {
     querySnapshot.forEach((doc) => {
       this.data = doc.data();
       this.loadGrafica()
-    });    
+    });
   }
 
   ngOnInit(){}
-  
+
   loadGrafica() {
-  
+
     let chart = am4core.create("chartdiv", am4charts.TreeMap);
     chart.hiddenState.properties.opacity = 0;
 

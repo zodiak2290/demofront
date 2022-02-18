@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { AppRoutingModule } from './route/route-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,7 +14,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 
 import { DatosPersonalesComponent } from './components/datos-personales/datos-personales.component';
-import { SeccionHabilidadesComponent } from './components/seccion-habilidades/seccion-habilidades.component';
 import { SeccionIdiomasComponent } from './components/seccion-idiomas/seccion-idiomas.component';
 import { EmpresaResumenComponent } from './components/empresa-resumen/empresa-resumen.component';
 import { RedesSocialesComponent } from './components/redes-sociales/redes-sociales.component';
@@ -36,9 +34,9 @@ import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 import { FacebookModule } from 'ngx-facebook';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { NgxLoadingModule } from 'ngx-loading';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-
+import {  FormulariosModule } from "./modules/formularios/formularios.module";
+import {  GraficosModule } from "./modules/graficos/graficos.module";
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows
 };
@@ -60,7 +58,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     SidebarComponent,
     TopBarComponent,
     DatosPersonalesComponent,
-    SeccionHabilidadesComponent,
     SeccionIdiomasComponent,
     EmpresaResumenComponent,
     RedesSocialesComponent,
@@ -71,7 +68,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule, // required animations module
     TranslateModule.forRoot({
@@ -83,9 +79,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     NgWizardModule.forRoot(ngWizardConfig),
     FacebookModule.forRoot(),
-    ReactiveFormsModule,
     NgxLoadingModule.forRoot({}),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    FormulariosModule,
+    GraficosModule
   ],
   providers: [RutaGuard, DatePipe],
   bootstrap: [AppComponent]
