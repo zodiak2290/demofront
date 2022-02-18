@@ -32,7 +32,7 @@ import localeEs from '@angular/common/locales/es';
 
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 import { FacebookModule } from 'ngx-facebook';
-import { ContactoComponent } from './components/contacto/contacto.component';
+//import { ContactoComponent } from './components/contacto/contacto.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
 import {  FormulariosModule } from "./modules/formularios/formularios.module";
@@ -64,7 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProfileComponent,
     TimelineComponent,
     LocalizeDatePipe,
-    ContactoComponent
+    //ContactoComponent
   ],
   imports: [
     AppRoutingModule,
