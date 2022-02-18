@@ -9,7 +9,7 @@
         <ngx-loading [show]="enviando" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
         <!--Grid column-->
         <div class="col-md-9 mb-md-0 mb-5">
-            
+
             <form id="contact-form" name="contact-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
                 <!--Grid row-->
@@ -24,7 +24,7 @@
 								<div *ngIf="f['name'].errors['required']">
 									{{ 'contacto.name.required' | translate }}
 								</div>
-							</div>                            
+							</div>
                         </div>
                     </div>
                     <!--Grid column-->
@@ -55,10 +55,10 @@
                     <div class="col-md-12">
                         <div class="form-group">
                         	<label for="subject" class="">{{ 'contacto.subject' | translate }}</label>
-                            <input type="text"class="form-control" 
-							formControlName="subject" 
+                            <input type="text"class="form-control"
+							formControlName="subject"
                             [ngClass]="{ 'is-invalid': submitted &&  f['subject'].errors }">
-                            
+
 							<div *ngIf="submitted && f['subject'].errors" class="invalid-feedback">
 							    <div *ngIf="f['subject'].errors['required']">
 							    	{{ 'contacto.subject.required' | translate }}
@@ -83,10 +83,10 @@
 
                         <div class="form-group">
                         	<label for="message">{{ 'contacto.message' | translate }}</label>
-                        	
-                            <textarea type="text" formControlName="message" 
+
+                            <textarea type="text" formControlName="message"
                             [ngClass]="{ 'is-invalid': submitted &&  f['message'].errors }"  rows="3" class="form-control md-textarea"></textarea>
-                            
+
 							<div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
 							    <div *ngIf="f['message'].errors['required']">
 							    	{{ 'contacto.message.required' | translate }}
