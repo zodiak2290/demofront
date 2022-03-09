@@ -129,7 +129,7 @@ function openChat() {
 
    	icon.style.float = "right";
    	icon.className = "fa fa-times";
-      icon.src = '//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Times_symbol.svg/500px-Times_symbol.svg.png';
+      icon.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Times_symbol.svg/500px-Times_symbol.svg.png';
 
    	icon.removeEventListener("click", openChat);
 
