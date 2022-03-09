@@ -31,13 +31,16 @@ function loadMain() {
    div.style.borderRadius ="84px";
 
 
-   const icon = document.createElement('i');
+   const icon = document.createElement('img');
    icon.addEventListener("click", openChat);
    icon.id = 'myIcon';
    icon.style.cursor = 'pointer';
    icon.style.margin = "20px";
    icon.style.fontSize = "25px";
    icon.className = "far fa-comments";
+   icon.src = 'https://www.seekpng.com/png/full/905-9056717_png-file-svg-chat-icon-white-png.png';
+   icon.style.width = '30px';
+   icon.style.height = '30px';
    div.appendChild(icon);
    //div.innerHTML = '<i class="far fa-comments" aria-hidden="true" style="margin:20px; font-size=25px></i>';
    
@@ -126,6 +129,7 @@ function openChat() {
 
    	icon.style.float = "right";
    	icon.className = "fa fa-times";
+      icon.src = '//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Times_symbol.svg/500px-Times_symbol.svg.png';
 
    	icon.removeEventListener("click", openChat);
 
@@ -156,7 +160,8 @@ function closeChat() {
    	const icon = document.getElementById('myIcon');
 
    	delete icon.style.float;
-   	icon.className = "far fa-comments";
+   	//icon.className = "far fa-comments";
+      icon.src = 'https://www.seekpng.com/png/full/905-9056717_png-file-svg-chat-icon-white-png.png';
    	icon.style.cursor = 'pointer';
    	icon.removeEventListener("click", closeChat)
    	icon.addEventListener("click", openChat);
