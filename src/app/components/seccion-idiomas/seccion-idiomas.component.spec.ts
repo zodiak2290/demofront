@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SeccionIdiomasComponent } from './seccion-idiomas.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SeccionIdiomasComponent', () => {
   let component: SeccionIdiomasComponent;
@@ -8,7 +10,11 @@ describe('SeccionIdiomasComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeccionIdiomasComponent ]
+      declarations: [ SeccionIdiomasComponent ],
+      imports: [
+        TranslateModule.forRoot() ,
+        RouterTestingModule  // <-- Aquí se importa
+      ],
     })
     .compileComponents();
   }));

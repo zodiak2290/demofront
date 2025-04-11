@@ -1,25 +1,22 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 import { SeccionHabilidadesComponent } from './seccion-habilidades.component';
 
 describe('SeccionHabilidadesComponent', () => {
-  let component: SeccionHabilidadesComponent;
-  let fixture: ComponentFixture<SeccionHabilidadesComponent>;
-
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SeccionHabilidadesComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SeccionHabilidadesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        SeccionHabilidadesComponent
+      ],
+      imports: [
+        TranslateModule.forRoot() // <-- Se declara aquí
+      ],
+    }).compileComponents();
   });
 
   it('should create', () => {
+    const fixture = TestBed.createComponent(SeccionHabilidadesComponent);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });
