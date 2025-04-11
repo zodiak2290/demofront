@@ -30,7 +30,7 @@ import { registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import localeEs from '@angular/common/locales/es';
 
-import { FacebookModule } from 'ngx-facebook';
+//import { FacebookModule } from 'ngx-facebook';
 //import { ContactoComponent } from './components/contacto/contacto.component';
 import { ToastrModule } from 'ngx-toastr';
 import {  FormulariosModule } from "./modules/formularios/formularios.module";
@@ -71,7 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient],
       }
     }),
-    FacebookModule.forRoot(),
+    //FacebookModule.forRoot(),
     ToastrModule.forRoot(),
     FormulariosModule,
     GraficosModule
