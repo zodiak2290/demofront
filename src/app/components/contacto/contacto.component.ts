@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators, UntypedFormControl } from '@angular/forms';
 //import Validation from './utils/validation';
 import { initializeApp } from 'firebase/app';
 import { getDatabase ,set, ref } from "firebase/database";
@@ -17,16 +17,16 @@ import * as moment from 'moment';
 })
 export class ContactoComponent implements OnInit {
 
-  form: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl(''),
-    subject: new FormControl(''),
-    message: new FormControl(''),
+  form: UntypedFormGroup = new UntypedFormGroup({
+    name: new UntypedFormControl(''),
+    email: new UntypedFormControl(''),
+    subject: new UntypedFormControl(''),
+    message: new UntypedFormControl(''),
   });
   submitted = false;
   enviando = false;
 
-  constructor(private formBuilder: FormBuilder, private toastr: ToastrService) { }
+  constructor(private formBuilder: UntypedFormBuilder, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
