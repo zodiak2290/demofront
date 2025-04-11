@@ -16,7 +16,7 @@
   },
   "private": true,
   "dependencies": {
-    "@amcharts/amcharts4": "^4.10.17",
+    "@amcharts/amcharts4": "^4.10.20",
     "@angular/animations": "^15.2.10",
     "@angular/common": "^15.2.10",
     "@angular/compiler": "^15.2.10",
@@ -35,7 +35,7 @@
     "jquery": "^3.6.0",
     "moment": "^2.29.1",
     "ngx-facebook": "^3.0.0-0",
-    "ngx-toastr": "^14.2.1",
+    "ngx-toastr": "^15.2.2",
     "rxjs": "^6.6.7",
     "rxjs-compat": "^6.6.7",
     "tslib": "^2.0.0",
