@@ -1,0 +1,32 @@
+name: Run Angular Tests
+
+on:
+  # Ejecutar el workflow cuando haya push o pull request a main
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  test:
+    # El Job se ejecutará en un contenedor Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out (descargar) tu repositorio
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      # 2. Configurar la versión de Node.js que uses en tu proyecto
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.14.0
+
+      # 3. Instalar dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Ejecutar pruebas unitarias
+      - name: Run tests
+        run: npm test
