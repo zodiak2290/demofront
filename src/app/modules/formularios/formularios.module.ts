@@ -11,7 +11,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import localeEn from '@angular/common/locales/en';
 import localeEs from '@angular/common/locales/es';
-import { NgxLoadingModule } from 'ngx-loading';
 
 registerLocaleData(localeEn, 'en');
 registerLocaleData(localeEs, 'es');
@@ -33,7 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient],
       }
     }),
-    NgxLoadingModule.forRoot({})
+    //NgxLoadingModule.forRoot({})
   ],
   exports:[CommonModule,ContactoComponent,FormsModule]
 })

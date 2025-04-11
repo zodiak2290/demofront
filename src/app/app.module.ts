@@ -15,7 +15,7 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
 
 import { DatosPersonalesComponent } from './components/datos-personales/datos-personales.component';
 import { SeccionIdiomasComponent } from './components/seccion-idiomas/seccion-idiomas.component';
-import { EmpresaResumenComponent } from './components/empresa-resumen/empresa-resumen.component';
+
 import { RedesSocialesComponent } from './components/redes-sociales/redes-sociales.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
@@ -30,16 +30,11 @@ import { registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import localeEs from '@angular/common/locales/es';
 
-import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 import { FacebookModule } from 'ngx-facebook';
 //import { ContactoComponent } from './components/contacto/contacto.component';
-import { NgxLoadingModule } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
 import {  FormulariosModule } from "./modules/formularios/formularios.module";
 import {  GraficosModule } from "./modules/graficos/graficos.module";
-const ngWizardConfig: NgWizardConfig = {
-  theme: THEME.arrows
-};
 
 registerLocaleData(localeEn, 'en');
 registerLocaleData(localeEs, 'es');
@@ -59,7 +54,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TopBarComponent,
     DatosPersonalesComponent,
     SeccionIdiomasComponent,
-    EmpresaResumenComponent,
     RedesSocialesComponent,
     ProfileComponent,
     TimelineComponent,
@@ -77,9 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient],
       }
     }),
-    NgWizardModule.forRoot(ngWizardConfig),
     FacebookModule.forRoot(),
-    NgxLoadingModule.forRoot({}),
     ToastrModule.forRoot(),
     FormulariosModule,
     GraficosModule
