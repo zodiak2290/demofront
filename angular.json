@@ -41,7 +41,10 @@
               "raf",
               "xlsx",
               "@babel/runtime",
-              "pdfmake"
+              "pdfmake",
+              "rgbcolor",
+              "jquery",
+              "moment"
             ]
           },
           "configurations": {
