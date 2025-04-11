@@ -12,4 +12,5 @@ export class RedesSocialesComponent implements OnInit {
   ngOnInit() {
   }
 
+
 }
