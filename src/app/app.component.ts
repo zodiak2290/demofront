@@ -3,7 +3,7 @@ import { UserService } from './services/user/user.service';
 import {  ActivatedRoute, NavigationEnd,Router } from '@angular/router';
 import * as $ from 'jquery';
 
-import { FacebookService, InitParams } from 'ngx-facebook';
+//import { FacebookService, InitParams } from 'ngx-facebook';
 import * as moment from 'moment';
 
 @Component({
@@ -23,10 +23,10 @@ export class AppComponent implements OnInit, DoCheck {
     private _route: ActivatedRoute,
     private _userService:UserService,
     private _router: Router,
-    private facebookService: FacebookService
+    //private facebookService: FacebookService
   ){
     this._router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {        
+      if (event instanceof NavigationEnd) {
         (<any>window).ga('set', 'page', event.urlAfterRedirects);
         (<any>window).ga('send', 'pageview');
       }
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    this.initFacebookService();
+    //this.initFacebookService();
     $("#sidebarToggle, #sidebarToggleTop").on("click", function (o) {
           $("body").toggleClass("sidebar-toggled"),
           $(".sidebar").toggleClass("toggled"),
@@ -63,8 +63,9 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   private initFacebookService(): void {
-    const initParams: InitParams = { xfbml: true, version: 'v8.0', appId: "2946411025586049" };
-    this.facebookService.init(initParams);
+    console.log("Initializing Facebook SDK pendiente");
+    //const initParams: InitParams = { xfbml: true, version: 'v8.0', appId: "2946411025586049" };
+    //this.facebookService.init(initParams);
   }
 
   ngDoCheck() {
