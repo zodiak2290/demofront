@@ -18,7 +18,7 @@ export class TopBarComponent implements OnInit {
 
   feed: FeedVue;
   items: any[];
-  
+
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
@@ -37,7 +37,6 @@ export class TopBarComponent implements OnInit {
     this.feedsService.getNewsVUE().subscribe(resp => {
       this.feed = resp as FeedVue;
       this.items = this.feed.items;
-      console.log(this.items);
     });
   }
 
