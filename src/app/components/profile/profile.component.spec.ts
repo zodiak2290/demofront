@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ProfileComponent } from './profile.component';
+import { DatosPersonalesComponent } from '../datos-personales/datos-personales.component';
+import { RedesSocialesComponent } from '../redes-sociales/redes-sociales.component';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -8,7 +10,7 @@ describe('ProfileComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileComponent ]
+      declarations: [ ProfileComponent, DatosPersonalesComponent, RedesSocialesComponent ]
     })
     .compileComponents();
   }));

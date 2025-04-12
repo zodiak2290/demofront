@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import { DataItem } from '@amcharts/amcharts4/core';
-import { TreeMapDataItem, TreeMapSeriesDataItem } from '@amcharts/amcharts4/charts';
+import { TreeMapSeriesDataItem } from '@amcharts/amcharts4/charts';
 am4core.useTheme(am4themes_animated);
 
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 //import { environment } from "../../../../../environments/environment";
-import { collection, getDocs } from "firebase/firestore";
 import { EmpresaService } from '../../../../services/empresa/empresa.service';
 
 @Component({
@@ -17,7 +13,7 @@ import { EmpresaService } from '../../../../services/empresa/empresa.service';
   templateUrl: './seccion-habilidades.component.html',
   styleUrls: ['./seccion-habilidades.component.css']
 })
-export class SeccionHabilidadesComponent implements OnInit {
+export class SeccionHabilidadesComponent implements OnInit, AfterViewInit  {
   public data = {};
 
  processData(data) {
@@ -53,9 +49,7 @@ export class SeccionHabilidadesComponent implements OnInit {
 }
 
 
-  constructor(private empresaService: EmpresaService) {
-    this.getHabilidades();
-  }
+  constructor(private empresaService: EmpresaService) {}
 
   async getHabilidades(){
     let querySnapshot = await this.empresaService.getHabilidades();
@@ -65,7 +59,12 @@ export class SeccionHabilidadesComponent implements OnInit {
     });
   }
 
-  ngOnInit(){}
+  ngOnInit(){
+  }
+
+  ngAfterViewInit() {
+    this.getHabilidades();
+  }
 
   loadGrafica() {
 

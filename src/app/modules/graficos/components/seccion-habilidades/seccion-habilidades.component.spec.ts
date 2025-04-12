@@ -9,14 +9,16 @@ describe('SeccionHabilidadesComponent', () => {
         SeccionHabilidadesComponent
       ],
       imports: [
-        TranslateModule.forRoot() // <-- Se declara aquí
+        TranslateModule.forRoot()
       ],
     }).compileComponents();
   });
-
-  it('should create', () => {
+ //fix this test
+  it('should create the component', () => {
     const fixture = TestBed.createComponent(SeccionHabilidadesComponent);
     const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
+
 });
+
