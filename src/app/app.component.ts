@@ -63,7 +63,6 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   private initFacebookService(): void {
-    console.log("Initializing Facebook SDK pendiente");
     //const initParams: InitParams = { xfbml: true, version: 'v8.0', appId: "2946411025586049" };
     //this.facebookService.init(initParams);
   }

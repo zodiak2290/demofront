@@ -14,7 +14,7 @@ export class TimelineComponent implements OnInit {
     //this.empresas = this.empresaService.getEmpresas();
     //console.log(this.empresas);
 
-    
+
   }
 
   ngOnInit(): void {
@@ -23,11 +23,8 @@ export class TimelineComponent implements OnInit {
 
   async getEmpresas(){
     let querySnapshot = await this.empresaService.getEmpresasAsync();
-    console.log("las emrpesas")
-    console.log(querySnapshot)
     querySnapshot.forEach((doc) => {
       let data = doc.data();
-      console.log(data)
       this.empresas.push(data);
       this.empresas = this.empresas.sort(function (a, b) {
           if (a.id > b.id) {
@@ -40,7 +37,7 @@ export class TimelineComponent implements OnInit {
           return 0;
         });
       //this.empresas =  data;
-    }); 
+    });
   }
 
 }
