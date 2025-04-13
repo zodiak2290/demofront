@@ -5,7 +5,11 @@ import * as $ from 'jquery';
 
 //import { FacebookService, InitParams } from 'ngx-facebook';
 import * as moment from 'moment';
-
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -27,8 +31,9 @@ export class AppComponent implements OnInit, DoCheck {
   ){
     this._router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        (<any>window).ga('set', 'page', event.urlAfterRedirects);
-        (<any>window).ga('send', 'pageview');
+        window.gtag('config', 'G-3EQPKRCKB0', {
+          page_path: event.urlAfterRedirects
+        });
       }
     });
       this.title = 'Demo';
