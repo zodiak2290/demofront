@@ -5,6 +5,7 @@ import * as $ from 'jquery';
 
 //import { FacebookService, InitParams } from 'ngx-facebook';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 declare global {
   interface Window {
     gtag: (...args: any[]) => void;
@@ -29,13 +30,15 @@ export class AppComponent implements OnInit, DoCheck {
     private _router: Router,
     //private facebookService: FacebookService
   ){
-    this._router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        window.gtag('config', 'G-3EQPKRCKB0', {
-          page_path: event.urlAfterRedirects
-        });
-      }
-    });
+    if( environment.production ){
+      this._router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          window.gtag('config', 'G-3EQPKRCKB0', {
+            page_path: event.urlAfterRedirects
+          });
+        }
+      });
+    }
       this.title = 'Demo';
   }
 
