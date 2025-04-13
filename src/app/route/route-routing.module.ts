@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from '../components/home/home.component';
 import { LoginComponent } from '../components/login/login.component';
@@ -6,6 +6,7 @@ import { RegisterComponent } from '../components/register/register.component';
 import { TimelineComponent } from '../components/timeline/timeline.component';
 import { ProfileComponent } from '../components/profile/profile.component';
 import { ContactoComponent } from '../components/contacto/contacto.component';
+import { SettingsComponent } from '../components/settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,11 +15,12 @@ const routes: Routes = [
   { path: 'registro', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'experience', component: TimelineComponent},
-  { path: 'contacto', component: ContactoComponent}
+  { path: 'contacto', component: ContactoComponent},
+  { path: 'settings', component: SettingsComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {})],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -6,7 +6,8 @@
   "menu.inproress": "Work in Progress",
   "home.habilidades": "Skills",
   "menu.contacto":"Contact",
-  
+  "menu.components":"Components",
+
   "lenguajes.en": "English",
   "lenguajes.es": "Spanish",
 
@@ -48,7 +49,12 @@
 
   "contacto.message.required":"Message is required",
   "contacto.message.minlength":"Message must be at least 10 characters",
-  "contacto.message.maxlength":"Message must not exceed 200 characters"
+  "contacto.message.maxlength":"Message must not exceed 200 characters",
 
+  "settings.prefereces": "User Preferences",
+  "settings.prefereces.language": "Language",
+  "settings.theme": "Theme",
+  "settings.theme.dark": "Dark Mode",
+  "settings.theme.light": "Light Mode"
 
 }

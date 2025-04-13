@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -21,7 +21,6 @@ export class TopBarComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private _route: ActivatedRoute,
     private _userService: UserService,
     private translate: TranslateService,
     private feedsService: FeedsService
@@ -45,8 +44,4 @@ export class TopBarComponent implements OnInit {
     this._router.navigate(['/login']);
   }
 
-  cambiarLenguaje(lang) {
-    this.activeLang = lang;
-    this.translate.use(lang);
-  }
 }
