@@ -51,7 +51,7 @@ export class ContactoComponent implements OnInit {
           ]
         ],
       }
-    );    
+    );
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -59,11 +59,12 @@ export class ContactoComponent implements OnInit {
   }
 
   onSubmit(){
-    this.submitted = true;
+
     if (this.form.invalid) {
       return;
     }
     this.enviando = true;
+    this.submitted = true;
     this.form.value.fecha = moment().utc().format();
     const app = initializeApp(environment.realtimefirebase, 'CVWEB');
     const database = getDatabase(app);
@@ -75,7 +76,7 @@ export class ContactoComponent implements OnInit {
       this.enviando = false;
       this.toastr.error("No fue posible enviar su mensaje", "Importante");
     });
-    
+
   }
 
   onReset(): void {

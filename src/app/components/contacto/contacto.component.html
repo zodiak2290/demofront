@@ -6,9 +6,7 @@
     <!--Section description-->
 
     <div class="row">
-      <!--
-        <ngx-loading [show]="enviando" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
-        -->
+
         <!--Grid column-->
         <div class="col-md-9 mb-md-0 mb-5">
 
@@ -107,7 +105,14 @@
                 <!--Grid row-->
 	            <div class="text-center text-md-left">
 	                <button class="btn btn-primary"  type="submit">
-	                	{{ 'contacto.send' | translate }}
+                    <div class="spinner-border float-right spinner-border-sm" role="status"  *ngIf="enviando">
+                        <span class="sr-only">Loading...</span>
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <span *ngIf="!enviando">
+                      {{ 'contacto.send' | translate }}
+                    </span>
+
 	                </button>
 	            </div>
             </form>
