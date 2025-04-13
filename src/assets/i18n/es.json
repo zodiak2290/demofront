@@ -6,7 +6,7 @@
   "menu.inproress": "En construcción",
   "home.habilidades": "Habilidades",
   "menu.contacto":"Contacto",
-
+  "menu.components":"Componentes",
   "lenguajes.en": "Inglés",
   "lenguajes.es": "Español",
 
@@ -45,5 +45,10 @@
 
   "contacto.message.required":"El Mensaje es requerido",
   "contacto.message.minlength":"El Mensaje deberia tener al menos 10 caracteres",
-  "contacto.message.maxlength":"El Mensaje no deberia exceder los 200 caracteres"
+  "contacto.message.maxlength":"El Mensaje no deberia exceder los 200 caracteres",
+  "settings.prefereces": "Preferencias de usuario",
+  "settings.prefereces.language": "Idioma",
+  "settings.theme": "Tema",
+  "settings.theme.dark": "Modo oscuro",
+  "settings.theme.light": "Modo claro"
 }
