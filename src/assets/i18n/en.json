@@ -55,6 +55,7 @@
   "settings.prefereces.language": "Language",
   "settings.theme": "Theme",
   "settings.theme.dark": "Dark Mode",
-  "settings.theme.light": "Light Mode"
+  "settings.theme.light": "Light Mode",
+  "menu.coveraga": "Coverage Report"
 
 }
