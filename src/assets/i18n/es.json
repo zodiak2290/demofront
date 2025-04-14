@@ -50,5 +50,6 @@
   "settings.prefereces.language": "Idioma",
   "settings.theme": "Tema",
   "settings.theme.dark": "Modo oscuro",
-  "settings.theme.light": "Modo claro"
+  "settings.theme.light": "Modo claro",
+  "menu.coveraga": "Reporte de Cobertura",
 }
