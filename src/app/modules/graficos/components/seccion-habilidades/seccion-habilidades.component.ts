@@ -11,10 +11,11 @@ import { EmpresaService } from '../../../../services/empresa/empresa.service';
 @Component({
   selector: 'app-seccion-habilidades',
   templateUrl: './seccion-habilidades.component.html',
-  styleUrls: ['./seccion-habilidades.component.css']
+  styleUrls: ['./seccion-habilidades.component.css'],
 })
 export class SeccionHabilidadesComponent implements OnInit, AfterViewInit  {
   public data = {};
+  loading: boolean = true;
 
  processData(data) {
   let treeData = [];
@@ -55,6 +56,7 @@ export class SeccionHabilidadesComponent implements OnInit, AfterViewInit  {
     let querySnapshot = await this.empresaService.getHabilidades();
     querySnapshot.forEach((doc) => {
       this.data = doc.data();
+
       this.loadGrafica()
     });
   }
@@ -67,7 +69,7 @@ export class SeccionHabilidadesComponent implements OnInit, AfterViewInit  {
   }
 
   loadGrafica() {
-
+    this.loading = false;
     let chart = am4core.create("chartdiv", am4charts.TreeMap);
     chart.hiddenState.properties.opacity = 0;
 
