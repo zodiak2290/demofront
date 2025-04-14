@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import { UserService } from './services/user/user.service';
 import {  ActivatedRoute, NavigationEnd,Router } from '@angular/router';
 import * as $ from 'jquery';
@@ -6,6 +6,9 @@ import * as $ from 'jquery';
 //import { FacebookService, InitParams } from 'ngx-facebook';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
+import { LanguageService } from './services/language/language.service';
+import { ThemeService } from './services/theme/theme.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 declare global {
   interface Window {
     gtag: (...args: any[]) => void;
@@ -15,7 +18,22 @@ declare global {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [UserService]
+  providers: [UserService],
+  animations: [
+    trigger('toggleSidebar', [
+      state('open', style({
+        width: '250px',
+        opacity: 1
+      })),
+      state('closed', style({
+        width: '0px',
+        opacity: 0
+      })),
+      transition('open <=> closed', [
+        animate('300ms ease-in-out')
+      ])
+    ])
+  ]
 })
 export class AppComponent implements OnInit, DoCheck {
   public title:string;
@@ -28,7 +46,9 @@ export class AppComponent implements OnInit, DoCheck {
     private _route: ActivatedRoute,
     private _userService:UserService,
     private _router: Router,
-    //private facebookService: FacebookService
+    private languageService: LanguageService,
+    private themeService: ThemeService,
+    private renderer: Renderer2, private el: ElementRef
   ){
     if( environment.production ){
       this._router.events.subscribe(event => {
@@ -42,27 +62,44 @@ export class AppComponent implements OnInit, DoCheck {
       this.title = 'Demo';
   }
 
-  ngOnInit() {
-    //this.initFacebookService();
-    $("#sidebarToggle, #sidebarToggleTop").on("click", function (o) {
-          $("body").toggleClass("sidebar-toggled"),
-          $(".sidebar").toggleClass("toggled"),
-          $(".sidebar").hasClass("toggled") //&& $(".sidebar .collapse").collapse("hide")
-    }), $(window).resize(function () {
-      $(window).width() < 768 //&& $(".sidebar .collapse").collapse("hide")
-    }), $("body.fixed-nav .sidebar").on("mousewheel DOMMouseScroll wheel", function (o) {
-      if (768 < $(window).width()) {
-        /*var e = o.originalEvent, l = e.wheelDelta || -e.detail; this.scrollTop += 30 * (l < 0 ? 1 : -1), o.preventDefault()*/
-      }
-    }),
-      $(document).on("scroll", function () {
-        100 < $(this).scrollTop() ? $(".scroll-to-top").fadeIn() : $(".scroll-to-top").fadeOut()
-      }), $(document).on("click", "a.scroll-to-top", function (o) {
-        var e = $(this);
-        $("html, body").stop().animate({
-          scrollTop: $(e.attr("href")).offset().top
-        }, 1e3, "easeInOutExpo"), o.preventDefault()
+  initLanguage(){
+    this.languageService.init();
+  }
+
+  initTheme(){
+    this.themeService.init();
+  }
+
+  initToggleSidebar(){
+    const sidebarToggles = this.el.nativeElement.querySelectorAll('#sidebarToggle, #sidebarToggleTop');
+    const sidebar = this.el.nativeElement.querySelector('.sidebar');
+
+    sidebarToggles.forEach((btn: HTMLElement) => {
+      this.renderer.listen(btn, 'click', () => {
+        if (document.body.classList.contains('sidebar-toggled')) {
+          this.renderer.removeClass(document.body, 'sidebar-toggled');
+        } else {
+          this.renderer.addClass(document.body, 'sidebar-toggled');
+        }
+
+        // toggle 'toggled' en sidebar
+        if (sidebar.classList.contains('toggled')) {
+          this.renderer.removeClass(sidebar, 'toggled');
+        } else {
+          this.renderer.addClass(sidebar, 'toggled');
+        }
       });
+    });
+
+   }
+
+
+
+  ngOnInit() {
+    this.initLanguage();
+    this.initTheme();
+    this.initToggleSidebar();
+
 
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
@@ -70,10 +107,6 @@ export class AppComponent implements OnInit, DoCheck {
     this.year = moment().year();
   }
 
-  private initFacebookService(): void {
-    //const initParams: InitParams = { xfbml: true, version: 'v8.0', appId: "2946411025586049" };
-    //this.facebookService.init(initParams);
-  }
 
   ngDoCheck() {
     this.identity = this._userService.getIdentity();
@@ -81,9 +114,5 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
 
-  toggleSidebar(){
-    document.getElementById("mySidebar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-  }
 
 }

@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators, UntypedFormControl } from '@angular/forms';
-//import Validation from './utils/validation';
-import { initializeApp } from 'firebase/app';
-import { getDatabase ,set, ref } from "firebase/database";
-
-import { environment } from "../../../environments/environment";
-
-import { v4 as uuidv4 } from 'uuid';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
+import { ContactoService } from 'src/app/services/contacto/contacto.service';
 
 @Component({
   selector: 'app-contacto',
@@ -26,7 +20,10 @@ export class ContactoComponent implements OnInit {
   submitted = false;
   enviando = false;
 
-  constructor(private formBuilder: UntypedFormBuilder, private toastr: ToastrService) { }
+  constructor(private formBuilder: UntypedFormBuilder,
+    private toastr: ToastrService,
+    private contactoService: ContactoService
+  ) { }
 
   ngOnInit(): void {
 
@@ -61,18 +58,19 @@ export class ContactoComponent implements OnInit {
   onSubmit(){
 
     if (this.form.invalid) {
+      this.toastr.error("Formulario invalido", "Error");
       return;
     }
     this.enviando = true;
     this.submitted = true;
     this.form.value.fecha = moment().utc().format();
-    const app = initializeApp(environment.realtimefirebase, 'CVWEB');
-    const database = getDatabase(app);
-    set(ref(database, 'correos/' + uuidv4()), this.form.value).then((snapshot) => {
+
+
+    this.contactoService.enviarFormulario(this.form.value).then(() => {
       this.toastr.success("Mensaje enviado correctamente", "Aviso");
       this.onReset();
       this.enviando = false;
-    }).catch((error) => {
+    }).catch(() => {
       this.enviando = false;
       this.toastr.error("No fue posible enviar su mensaje", "Importante");
     });

@@ -1,145 +1,166 @@
-<!--Section: Contact v.2-->
-<section class="mb-4">
+<div class="card">
+  <div class="card-body">
+    <!--Section: Contact v.2-->
+    <section class="mb-4">
 
-    <!--Section heading-->
-    <h2 class="h1-responsive font-weight-bold text-center my-4"> {{ 'contacto.me' | translate }}</h2>
-    <!--Section description-->
+      <!--Section heading-->
+      <h2 class="h1-responsive font-weight-bold text-center my-4">
+        {{ 'contacto.me' | translate }}
+      </h2>
 
-    <div class="row">
-
+      <div class="row">
         <!--Grid column-->
         <div class="col-md-9 mb-md-0 mb-5">
-
-            <form id="contact-form" name="contact-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-
-                <!--Grid row-->
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        	<label for="name" class="">{{ 'contacto.name' | translate }}</label>
-                            <input type="text"formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted &&  f['name'].errors }">
-							<div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
-								<div *ngIf="f['name'].errors['required']">
-									{{ 'contacto.name.required' | translate }}
-								</div>
-							</div>
-                        </div>
+          <form id="contact-form" name="contact-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <!--Grid row-->
+            <div class="row">
+              <!--Grid column-->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="name" class="">
+                    {{ 'contacto.name' | translate }}
+                  </label>
+                  <input
+                    type="text"
+                    formControlName="name"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+                  />
+                  <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                    <div *ngIf="f['name'].errors['required']">
+                      {{ 'contacto.name.required' | translate }}
                     </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        	<label for="email" class="">{{ 'contacto.email' | translate }}</label>
-                            <input type="text" formControlName="email" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted &&  f['email'].errors }">
-							<div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-								<div *ngIf="f['email'].errors['required']">
-									{{ 'contacto.email.required' | translate }}
-								</div>
-								<div *ngIf="f['email'].errors['email']">
-									{{ 'contacto.email.email' | translate }}
-								</div>
-							</div>
-                        </div>
-                    </div>
-                    <!--Grid column-->
-
+                  </div>
                 </div>
-                <!--Grid row-->
+              </div>
+              <!--Grid column-->
 
-                <!--Grid row-->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                        	<label for="subject" class="">{{ 'contacto.subject' | translate }}</label>
-                            <input type="text"class="form-control"
-							formControlName="subject"
-                            [ngClass]="{ 'is-invalid': submitted &&  f['subject'].errors }">
-
-							<div *ngIf="submitted && f['subject'].errors" class="invalid-feedback">
-							    <div *ngIf="f['subject'].errors['required']">
-							    	{{ 'contacto.subject.required' | translate }}
-							    </div>
-							    <div *ngIf="f['subject'].errors['minlength']">
-							        {{ 'contacto.subject.minlength' | translate }}
-							    </div>
-							    <div *ngIf="f['subject'].errors['maxlength']">
-							        {{ 'contacto.subject.maxlength' | translate }}
-							    </div>
-							</div>
-                        </div>
+              <!--Grid column-->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="email" class="">
+                    {{ 'contacto.email' | translate }}
+                  </label>
+                  <input
+                    type="text"
+                    formControlName="email"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                  />
+                  <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors['required']">
+                      {{ 'contacto.email.required' | translate }}
                     </div>
+                    <div *ngIf="f['email'].errors['email']">
+                      {{ 'contacto.email.email' | translate }}
+                    </div>
+                  </div>
                 </div>
-                <!--Grid row-->
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
 
-                <!--Grid row-->
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-12">
-
-                        <div class="form-group">
-                        	<label for="message">{{ 'contacto.message' | translate }}</label>
-
-                            <textarea type="text" formControlName="message"
-                            [ngClass]="{ 'is-invalid': submitted &&  f['message'].errors }"  rows="3" class="form-control md-textarea"></textarea>
-
-							<div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
-							    <div *ngIf="f['message'].errors['required']">
-							    	{{ 'contacto.message.required' | translate }}
-							    </div>
-							    <div *ngIf="f['message'].errors['minlength']">
-							        {{ 'contacto.message.minlength' | translate }}
-							    </div>
-							    <div *ngIf="f['message'].errors['maxlength']">
-							        {{ 'contacto.message.maxlength' | translate }}
-							    </div>
-							</div>
-                        </div>
-
+            <!--Grid row-->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="subject" class="">
+                    {{ 'contacto.subject' | translate }}
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="subject"
+                    [ngClass]="{ 'is-invalid': submitted && f['subject'].errors }"
+                  />
+                  <div *ngIf="submitted && f['subject'].errors" class="invalid-feedback">
+                    <div *ngIf="f['subject'].errors['required']">
+                      {{ 'contacto.subject.required' | translate }}
                     </div>
+                    <div *ngIf="f['subject'].errors['minlength']">
+                      {{ 'contacto.subject.minlength' | translate }}
+                    </div>
+                    <div *ngIf="f['subject'].errors['maxlength']">
+                      {{ 'contacto.subject.maxlength' | translate }}
+                    </div>
+                  </div>
                 </div>
-                <!--Grid row-->
-	            <div class="text-center text-md-left">
-	                <button class="btn btn-primary"  type="submit">
-                    <div class="spinner-border float-right spinner-border-sm" role="status"  *ngIf="enviando">
-                        <span class="sr-only">Loading...</span>
-                      <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <!--Grid row-->
+
+            <!--Grid row-->
+            <div class="row">
+              <!--Grid column-->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="message">
+                    {{ 'contacto.message' | translate }}
+                  </label>
+                  <textarea
+                    type="text"
+                    formControlName="message"
+                    [ngClass]="{ 'is-invalid': submitted && f['message'].errors }"
+                    rows="3"
+                    class="form-control md-textarea"
+                  ></textarea>
+                  <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
+                    <div *ngIf="f['message'].errors['required']">
+                      {{ 'contacto.message.required' | translate }}
                     </div>
-                    <span *ngIf="!enviando">
-                      {{ 'contacto.send' | translate }}
-                    </span>
+                    <div *ngIf="f['message'].errors['minlength']">
+                      {{ 'contacto.message.minlength' | translate }}
+                    </div>
+                    <div *ngIf="f['message'].errors['maxlength']">
+                      {{ 'contacto.message.maxlength' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Grid row-->
 
-	                </button>
-	            </div>
-            </form>
+            <div class="text-center text-md-left">
+              <button class="btn btn-primary" type="submit">
+                <div
+                  class="spinner-border float-right spinner-border-sm"
+                  role="status"
+                  *ngIf="enviando"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <span *ngIf="!enviando">
+                  {{ 'contacto.send' | translate }}
+                </span>
+              </button>
+            </div>
+          </form>
 
-            <div class="status"></div>
+          <div class="status"></div>
         </div>
         <!--Grid column-->
 
         <!--Grid column-->
         <div class="col-md-3 text-center">
-            <ul class="list-unstyled mb-0">
-                <li><i class="fas fa-map-marker-alt fa-2x"></i>
-                    <p>Oaxaca de Juárez, Oax 68120, MX</p>
-                </li>
-
-                <li><i class="fas fa-phone mt-4 fa-2x"></i>
-                    <p>+ 951 194 21 11</p>
-                </li>
-
-                <li><i class="fas fa-envelope mt-4 fa-2x"></i>
-                    <p>albon_marvel&#64;hotmail.com</p>
-                </li>
-            </ul>
+          <ul class="list-unstyled mb-0">
+            <li>
+              <i class="fas fa-map-marker-alt fa-2x"></i>
+              <p>Oaxaca de Juárez, Oax 68120, MX</p>
+            </li>
+            <li>
+              <i class="fas fa-phone mt-4 fa-2x"></i>
+              <p>+ 951 194 21 11</p>
+            </li>
+            <li>
+              <i class="fas fa-envelope mt-4 fa-2x"></i>
+              <p>albon_marvel&#64;hotmail.com</p>
+            </li>
+          </ul>
         </div>
         <!--Grid column-->
-
-    </div>
-
-</section>
-<!--Section: Contact v.2-->
+      </div>
+    </section>
+    <!-- End Section: Contact v.2 -->
+  </div> <!-- end .card-body -->
+</div> <!-- end .card -->

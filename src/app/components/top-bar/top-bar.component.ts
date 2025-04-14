@@ -5,6 +5,7 @@ import { UserService } from '../../services/user/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FeedsService } from '../../services/externos/feeds.service';
 import { FeedVue } from '../../modelos/FeedVue/feed-vue';
+import { LANGUAGES } from 'src/app/enums/languages.enum';
 
 @Component({
   selector: 'app-top-bar',
@@ -14,7 +15,7 @@ import { FeedVue } from '../../modelos/FeedVue/feed-vue';
 export class TopBarComponent implements OnInit {
   public identity;
   private token;
-  public activeLang = 'es';
+  public activeLang = LANGUAGES.SPANISH;
 
   feed: FeedVue;
   items: any[];
@@ -32,11 +33,11 @@ export class TopBarComponent implements OnInit {
   ngOnInit() {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-
+/*
     this.feedsService.getNewsVUE().subscribe(resp => {
       this.feed = resp as FeedVue;
       this.items = this.feed.items;
-    });
+    });*/
   }
 
   logout(){

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SeccionHabilidadesComponent } from './components/seccion-habilidades/seccion-habilidades.component';
 
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClient} from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -20,6 +20,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [SeccionHabilidadesComponent],
   imports: [
+    CommonModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

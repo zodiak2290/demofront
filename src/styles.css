@@ -17,7 +17,7 @@
 /* 1) Forzar fondo y texto general */
 .dark-theme body {
   background-color: #121212 !important;
-  color: #ffffff !important;
+  color: #f8f9fa !important;
 }
 
 .dark-theme .bg-gradient-primary {
