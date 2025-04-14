@@ -76,4 +76,36 @@ describe('TimelineComponent', () => {
     expect(content).toContain('Angular');
     expect(content).toContain('Firebase');
   });
+
+  it('should sort companies by id in descending order', () => {
+    const sortedIds = component.empresas.map((empresa) => empresa.id);
+    expect(sortedIds).toEqual([...sortedIds].sort((a, b) => b - a));
+  });
+
+  it('should handle empty company list gracefully', async () => {
+    const mockService = TestBed.inject(EmpresaService) as MockEmpresaService;
+    spyOn(mockService, 'getEmpresasAsync').and.returnValue(Promise.resolve({ forEach: () => {} }));
+    component.empresas = [];
+    await component.getEmpresas();
+    expect(component.empresas.length).toBe(0);
+  });
+
+  it('should not break if a company has missing fields', async () => {
+    const mockService = TestBed.inject(EmpresaService) as MockEmpresaService;
+    spyOn(mockService, 'getEmpresasAsync').and.returnValue(
+      Promise.resolve({
+        forEach: (cb: Function) => {
+          cb({ data: () => ({ id: 3 }) }); // Missing other fields
+        }
+      })
+    );
+    component.empresas = [];
+    await component.getEmpresas();
+    expect(component.empresas.length).toBe(1);
+    expect(component.empresas[0].id).toBe(3);
+  });
+
+
+
+
 });

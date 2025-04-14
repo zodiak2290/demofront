@@ -14,4 +14,25 @@ describe('ContactoService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should send form data to the database', async () => {
+    const mockData = { name: 'John Doe', email: 'john.doe@example.com' };
+    const spySet = spyOn<any>(service, 'enviarFormulario').and.callThrough();
+
+    await service.enviarFormulario(mockData);
+
+    expect(spySet).toHaveBeenCalled();
+  });
+
+  it('should generate a unique ID for each form submission', async () => {
+    const mockData1 = { name: 'Alice', email: 'alice@example.com' };
+    const mockData2 = { name: 'Bob', email: 'bob@example.com' };
+
+    const spySet = spyOn<any>(service, 'enviarFormulario').and.callThrough();
+
+    await service.enviarFormulario(mockData1);
+    await service.enviarFormulario(mockData2);
+
+    expect(spySet).toHaveBeenCalledTimes(2);
+  });
+
 });

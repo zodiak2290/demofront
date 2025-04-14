@@ -28,5 +28,28 @@ describe('LocalizeDatePipe', () => {
     expect(pipe).toBeTruthy();
   });
 
+  it('should format the date according to the default pattern', () => {
+    const date = new Date('2023-01-01T12:00:00');;
+    const formattedDate = pipe.transform(date);
+    expect(formattedDate).toBe('Jan 1, 2023'); // Adjust based on your locale
+  });
+
+  it('should format the date according to the provided pattern', () => {
+    const date = new Date('2023-01-01T12:00:00');;
+    const pattern = 'fullDate';
+    const formattedDate = pipe.transform(date, pattern);
+    expect(formattedDate).toBe('Sunday, January 1, 2023'); // Adjust based on your locale
+  });
+
+  it('should return null if the value is null', () => {
+    const formattedDate = pipe.transform(null);
+    expect(formattedDate).toBeNull();
+  });
+
+  it('should return null if the value is undefined', () => {
+    const formattedDate = pipe.transform(undefined);
+    expect(formattedDate).toBeNull();
+  });
+
 
 });

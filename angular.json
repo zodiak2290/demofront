@@ -105,6 +105,14 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
+            ],
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "src/main.ts",
+              "src/environments/**",
+              "src/app/**/*.module.ts",
+              "app/components/login/login.component.ts",
+              "app/components/register/register.component.ts"
             ]
           }
         }
