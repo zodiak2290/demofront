@@ -53,7 +53,7 @@ export class AppComponent implements OnInit, DoCheck {
     if( environment.production ){
       this._router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
-          window.gtag('config', 'G-3EQPKRCKB0', {
+          window.gtag('config', environment.firebase.measurementId, {
             page_path: event.urlAfterRedirects
           });
         }
@@ -93,13 +93,29 @@ export class AppComponent implements OnInit, DoCheck {
 
    }
 
+   loadGoogleAnalytics(measurementId: string) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      function gtag(...args: any[]) {
+        (window as any).dataLayer.push(args);
+      }
+      gtag('js', new Date());
+      gtag('config', measurementId);
+    };
+  }
+
 
 
   ngOnInit() {
     this.initLanguage();
     this.initTheme();
     this.initToggleSidebar();
-
+    this.loadGoogleAnalytics(environment.firebase.measurementId);
 
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
