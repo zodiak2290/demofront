@@ -20,6 +20,11 @@ export class ThemeService {
     }
   }
 
+  init(){
+    this.setTheme(this.theme());
+  }
+
+
   toggleTheme() {
     const actual = this.theme();
     this.theme.set(actual === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK);

@@ -6,6 +6,8 @@ import * as $ from 'jquery';
 //import { FacebookService, InitParams } from 'ngx-facebook';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
+import { LanguageService } from './services/language/language.service';
+import { ThemeService } from './services/theme/theme.service';
 declare global {
   interface Window {
     gtag: (...args: any[]) => void;
@@ -28,6 +30,9 @@ export class AppComponent implements OnInit, DoCheck {
     private _route: ActivatedRoute,
     private _userService:UserService,
     private _router: Router,
+    private languageService: LanguageService,
+    private themeService: ThemeService,
+
     //private facebookService: FacebookService
   ){
     if( environment.production ){
@@ -42,7 +47,19 @@ export class AppComponent implements OnInit, DoCheck {
       this.title = 'Demo';
   }
 
+  initLanguage(){
+    this.languageService.init();
+  }
+
+  initTheme(){
+    this.themeService.init();
+  }
+
+
+
   ngOnInit() {
+    this.initLanguage();
+    this.initTheme();
     //this.initFacebookService();
     $("#sidebarToggle, #sidebarToggleTop").on("click", function (o) {
           $("body").toggleClass("sidebar-toggled"),

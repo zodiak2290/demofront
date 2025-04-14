@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LANGUAGES } from 'src/app/enums/languages.enum';
 import { THEMES } from 'src/app/enums/themes.enum';
+import { LanguageService } from 'src/app/services/language/language.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
@@ -14,14 +15,16 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
 })
 export class SettingsComponent {
   selectedLanguage = LANGUAGES.SPANISH;
-  selectedTheme = 'light';
+  selectedTheme = THEMES.LIGHT;
   LANGUAGES = LANGUAGES;
   THEMES = THEMES;
 
   constructor(
-    private translate: TranslateService,
-    private themeService: ThemeService) {
-    this.selectedTheme = this.themeService.getCurrentTheme() as string;
+    private themeService: ThemeService,
+    private languageService: LanguageService,
+  ) {
+    this.selectedTheme = this.themeService.getCurrentTheme();
+    this.selectedLanguage = this.languageService.getCurrentTheme();
 
   }
   saveSettings() {
@@ -34,7 +37,7 @@ export class SettingsComponent {
 
   cambiarLenguaje(lang) {
     this.selectedLanguage = lang;
-    this.translate.use(lang);
+    this.languageService.setLang(lang);
   }
 
   cambiarTema(tema) {
