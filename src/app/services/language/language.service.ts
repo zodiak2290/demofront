@@ -9,7 +9,7 @@ export class LanguageService {
 
   constructor(private translate: TranslateService) {
     const save = localStorage.getItem('language') as LANGUAGES | null;
-console.log('save', save);
+
     if (save && Object.values(LANGUAGES).includes(save)) {
       this.setLang(save as LANGUAGES);
     } else {
