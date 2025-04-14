@@ -31,4 +31,15 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render app-seccion-habilidades component', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('app-seccion-habilidades')).not.toBeNull();
+  });
+
+  it('should render app-seccion-idiomas component', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('app-seccion-idiomas')).not.toBeNull();
+  });
+
 });
