@@ -1,32 +1,55 @@
-name: Run Angular Tests
+name: CI/CD Angular App
 
 on:
-  # Ejecutar el workflow cuando haya push o pull request a main
   push:
-    branches: [ "master" ]
+    branches: [main]
   pull_request:
-    branches: [ "master" ]
+  workflow_dispatch:
 
 jobs:
-  test:
-    # El Job se ejecutará en un contenedor Ubuntu
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Check out (descargar) tu repositorio
-      - name: Check out repository
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # 2. Configurar la versión de Node.js que uses en tu proyecto
-      - name: Set up Node
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 22.14.0
+          node-version: 18
 
-      # 3. Instalar dependencias
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      # 4. Ejecutar pruebas unitarias
-      - name: Run tests
-        run: npm test -- --watch=false
+      - name: Run lint
+        run: npm run lint
+
+      - name: Run unit tests with coverage
+        run: npm test -- --code-coverage --watch=false --browsers=ChromeHeadless
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      - name: Copy coverage report into dist for Firebase
+        run: |
+          mkdir -p dist/demoFront/coverage
+          cp -r coverage/* dist/demoFront/coverage/
+
+      - name: Build Angular app
+        run: npm run build -- --configuration production
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ANGULARDEMO_68C02 }}
+          channelId: live
+          projectId: angulardemo-68c02
+
+      # (Opcional) Subir cobertura a Codecov
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     files: ./coverage/lcov.info
