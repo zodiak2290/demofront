@@ -7,7 +7,9 @@ export class ThemeService {
 
   readonly theme = signal<THEMES>(THEMES.LIGHT);
 
-  constructor() {
+  constructor() {}
+
+  init(){
     // Al iniciar, revisa si en localStorage hay un tema guardado
     const savedTheme = localStorage.getItem('theme') as THEMES | null;
 
@@ -18,10 +20,6 @@ export class ThemeService {
       // O aplica el default (light)
       this.setTheme(THEMES.LIGHT);
     }
-  }
-
-  init(){
-    this.setTheme(this.theme());
   }
 
 

@@ -24,7 +24,7 @@ export class SettingsComponent {
     private languageService: LanguageService,
   ) {
     this.selectedTheme = this.themeService.getCurrentTheme();
-    this.selectedLanguage = this.languageService.getCurrentTheme();
+    this.selectedLanguage = this.languageService.getLang();
 
   }
   saveSettings() {

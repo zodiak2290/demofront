@@ -7,7 +7,10 @@ export class LanguageService {
 
   readonly lang = signal<LANGUAGES>(LANGUAGES.SPANISH);
 
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService) {}
+
+
+  init(){
     const save = localStorage.getItem('language') as LANGUAGES | null;
 
     if (save && Object.values(LANGUAGES).includes(save)) {
@@ -15,10 +18,6 @@ export class LanguageService {
     } else {
       this.setLang(LANGUAGES.SPANISH);
     }
-  }
-
-  init(){
-    this.setLang(this.lang());
   }
 
   toggleLanguage() {
@@ -37,7 +36,7 @@ export class LanguageService {
     this.translate.use(lang);
   }
 
-  getCurrentTheme(): LANGUAGES {
+  getLang(): LANGUAGES {
     return this.lang();
   }
 }
