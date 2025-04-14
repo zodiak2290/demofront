@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LANGUAGES } from 'src/app/enums/languages.enum';
+import { THEMES } from 'src/app/enums/themes.enum';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   selector: 'app-settings',
@@ -10,11 +13,15 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   styleUrl: './settings.component.css'
 })
 export class SettingsComponent {
-  selectedLanguage = 'es';
+  selectedLanguage = LANGUAGES.SPANISH;
   selectedTheme = 'light';
-  public activeLang = 'es';
+  LANGUAGES = LANGUAGES;
+  THEMES = THEMES;
 
-  constructor(private translate: TranslateService) {
+  constructor(
+    private translate: TranslateService,
+    private themeService: ThemeService) {
+    this.selectedTheme = this.themeService.getCurrentTheme() as string;
 
   }
   saveSettings() {
@@ -31,11 +38,6 @@ export class SettingsComponent {
   }
 
   cambiarTema(tema) {
-    const isDarkMode = tema === 'dark';
-    if (isDarkMode) {
-      document.body.classList.add('dark-theme');
-    } else {
-      document.body.classList.remove('dark-theme');
-    }
+    this.themeService.setTheme(tema);
   }
 }

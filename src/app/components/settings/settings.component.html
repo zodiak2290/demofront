@@ -12,10 +12,10 @@
                type="radio"
                name="language"
                id="spanish"
-               value="es"
+               [value]=LANGUAGES.SPANISH
                [(ngModel)]="selectedLanguage"
-               [checked]="selectedLanguage === 'es'"
-               (change)="cambiarLenguaje('es')">
+               [checked]="selectedLanguage === LANGUAGES.SPANISH"
+               (change)="cambiarLenguaje(LANGUAGES.SPANISH)">
         <label class="form-check-label" for="themeLight">
           {{ 'lenguajes.es' | translate }}
         </label>
@@ -25,10 +25,10 @@
                type="radio"
                name="language"
                id="english"
-               value="en"
+               [value]=LANGUAGES.ENGLISH
                [(ngModel)]="selectedLanguage"
-               [checked]="selectedLanguage === 'en'"
-               (change)="cambiarLenguaje('en')">
+               [checked]="selectedLanguage === LANGUAGES.ENGLISH"
+               (change)="cambiarLenguaje(LANGUAGES.ENGLISH)">
         <label class="form-check-label" for="english">
           {{ 'lenguajes.en' | translate }}
         </label>
@@ -45,10 +45,10 @@
                type="radio"
                name="theme"
                id="themeLight"
-               value="light"
+               [value]="THEMES.LIGHT"
                [(ngModel)]="selectedTheme"
-               [checked]="selectedTheme === 'light'"
-               (change)="cambiarTema('light')">
+               [checked]="selectedTheme === THEMES.LIGHT"
+               (change)="cambiarTema(THEMES.LIGHT)">
         <label class="form-check-label" for="themeLight">
           {{'settings.theme.light' | translate}}
         </label>
@@ -58,10 +58,10 @@
                type="radio"
                name="theme"
                id="themeDark"
-               value="dark"
+               [value]="THEMES.DARK"
                [(ngModel)]="selectedTheme"
-               [checked]="selectedTheme === 'dark'"
-               (change)="cambiarTema('dark')">
+               [checked]="selectedTheme === THEMES.DARK"
+               (change)="cambiarTema(THEMES.DARK)">
         <label class="form-check-label" for="themeDark">
           {{'settings.theme.dark' | translate}}
         </label>
