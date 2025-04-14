@@ -33,11 +33,11 @@ export class TopBarComponent implements OnInit {
   ngOnInit() {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-
+/*
     this.feedsService.getNewsVUE().subscribe(resp => {
       this.feed = resp as FeedVue;
       this.items = this.feed.items;
-    });
+    });*/
   }
 
   logout(){

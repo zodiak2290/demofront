@@ -32,7 +32,6 @@ export class SettingsComponent {
       language: this.selectedLanguage,
       theme: this.selectedTheme
     });
-    // tu lógica de guardado
   }
 
   cambiarLenguaje(lang) {
@@ -41,6 +40,8 @@ export class SettingsComponent {
   }
 
   cambiarTema(tema) {
+    this.selectedTheme = tema;
     this.themeService.setTheme(tema);
   }
 }
+
