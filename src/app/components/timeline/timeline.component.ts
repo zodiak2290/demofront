@@ -10,12 +10,7 @@ export class TimelineComponent implements OnInit {
   public empresas: Array<any> = [];
   constructor(
     private empresaService: EmpresaService
-  ) {
-    //this.empresas = this.empresaService.getEmpresas();
-    //console.log(this.empresas);
-
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getEmpresas();
