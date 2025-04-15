@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { SeccionHabilidadesComponent } from './components/seccion-habilidades/seccion-habilidades.component';
 
 import { CommonModule, registerLocaleData } from '@angular/common';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import localeEn from '@angular/common/locales/en';

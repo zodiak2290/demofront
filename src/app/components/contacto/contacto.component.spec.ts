@@ -4,9 +4,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import * as firebaseDatabase from 'firebase/database';
 import { ContactoService } from 'src/app/services/contacto/contacto.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 describe('ContactoComponent', () => {
   let component: ContactoComponent;
   let fixture: ComponentFixture<ContactoComponent>;
@@ -17,22 +18,22 @@ describe('ContactoComponent', () => {
   const contactoServiceMock = jasmine.createSpyObj('ContactoService', ['enviarFormulario']);
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ContactoComponent],
-      imports: [
+    declarations: [ContactoComponent],
+    imports: [
         // Módulos de formularios (lo necesitas para los FormBuilders, etc.)
         FormsModule,
         ReactiveFormsModule,
         TranslateModule.forRoot(),
         // Toastr: Para que funcione sin error "No provider for ToastConfig!"
         BrowserAnimationsModule,
-        ToastrModule.forRoot(),
-        HttpClientTestingModule
-      ],
-      providers: [
+        ToastrModule.forRoot()],
+    providers: [
         { provide: ToastrService, useValue: toastrMock },
-        { provide: ContactoService, useValue: contactoServiceMock }
-      ]
-    }).compileComponents();
+        { provide: ContactoService, useValue: contactoServiceMock },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
   });
 
 
