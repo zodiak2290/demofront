@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AppRoutingModule } from './route/route-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -44,39 +44,32 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-    SidebarComponent,
-    TopBarComponent,
-    DatosPersonalesComponent,
-    SeccionIdiomasComponent,
-    RedesSocialesComponent,
-    ProfileComponent,
-    TimelineComponent,
-    LocalizeDatePipe,
-    //ContactoComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule, // required animations module
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      }
-    }),
-    //FacebookModule.forRoot(),
-    ToastrModule.forRoot(),
-    FormulariosModule,
-    GraficosModule
-  ],
-  providers: [RutaGuard, DatePipe],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        LoginComponent,
+        RegisterComponent,
+        HomeComponent,
+        SidebarComponent,
+        TopBarComponent,
+        DatosPersonalesComponent,
+        SeccionIdiomasComponent,
+        RedesSocialesComponent,
+        ProfileComponent,
+        TimelineComponent,
+        LocalizeDatePipe,
+        //ContactoComponent
+    ],
+    bootstrap: [AppComponent], imports: [AppRoutingModule,
+        BrowserAnimationsModule, // required animations module
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient],
+            }
+        }),
+        //FacebookModule.forRoot(),
+        ToastrModule.forRoot(),
+        FormulariosModule,
+        GraficosModule], providers: [RutaGuard, DatePipe, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

@@ -1,4 +1,4 @@
-export class User {
+export class UserModel {
     constructor(
       public id: string,
       public name: string,
@@ -9,4 +9,3 @@ export class User {
       public confirm: string
     ){}
   }
-  

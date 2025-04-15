@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiHeroku: 'https://proyectoestadisticas.herokuapp.com/api/',
   firebase: {
     apiKey: "AIzaSyBil8mss8fev_ntDGqEIuMMd4L9OmZAG1A",
     authDomain: "cvweb-17bce.firebaseapp.com",
@@ -11,7 +12,7 @@ export const environment = {
     storageBucket: "cvweb-17bce.appspot.com",
     messagingSenderId: "500684115567",
     appId: "1:500684115567:web:3bad5f613ba56e155d079a",
-    measurementId: "G-3EQPKRCKB0"  
+    measurementId: "G-3EQPKRCKB0"
   },
 
 

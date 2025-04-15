@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  apiHeroku: 'https://proyectoestadisticas.herokuapp.com/api/',
   firebase: {
     apiKey: "AIzaSyBil8mss8fev_ntDGqEIuMMd4L9OmZAG1A",
     authDomain: "cvweb-17bce.firebaseapp.com",

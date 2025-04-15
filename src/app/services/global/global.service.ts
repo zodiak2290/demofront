@@ -1,3 +1,5 @@
+import { environment } from 'src/environments/environment';
+
 export var GLOBAL = {
-  url: 'https://proyectoestadisticas.herokuapp.com/api/'
-}
+  url: environment.apiHeroku
+};

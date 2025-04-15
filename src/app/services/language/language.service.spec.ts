@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import { LanguageService } from './language.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { LANGUAGES } from 'src/app/enums/languages.enum';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('LanguageService', () => {
   let service: LanguageService;
@@ -11,16 +12,15 @@ describe('LanguageService', () => {
   beforeEach(() => {
     localStorage.clear();
     TestBed.configureTestingModule({
-      imports: [
-        // Módulo de testing HTTP
-        HttpClientTestingModule,
+    imports: [
         // Módulo de ngx-translate con forRoot
-        TranslateModule.forRoot()
-      ],
-      providers: [
-        LanguageService
-      ]
-    });
+        TranslateModule.forRoot()],
+    providers: [
+        LanguageService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.inject(LanguageService);
   });
 

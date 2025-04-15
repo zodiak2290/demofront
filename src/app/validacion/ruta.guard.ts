@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 export class RutaGuard  {
   constructor( public router: Router) {}
   canActivate(): boolean {
-    let token = localStorage.getItem('token');
-    if(token){
+    let identity = localStorage.getItem('identity');
+    if(identity){
       return true;
     } else {
       this.router.navigate(['login']);

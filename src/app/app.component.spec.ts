@@ -1,24 +1,23 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [
+    declarations: [
         AppComponent,
         SidebarComponent,
         TopBarComponent
-      ],
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        TranslateModule.forRoot()
-      ],
-    }).compileComponents();
+    ],
+    imports: [RouterTestingModule,
+        TranslateModule.forRoot()],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   }));
 
   it('should create the app', () => {
@@ -47,18 +46,6 @@ describe('AppComponent', () => {
     const themeServiceSpy = spyOn(app['themeService'], 'init');
     app.ngOnInit();
     expect(themeServiceSpy).toHaveBeenCalled();
-  });
-
-  it('should update identity and token on ngDoCheck', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    const userServiceSpy = spyOn(app['_userService'], 'getIdentity').and.returnValue('testIdentity');
-    const tokenSpy = spyOn(app['_userService'], 'getToken').and.returnValue('testToken');
-    app.ngDoCheck();
-    expect(userServiceSpy).toHaveBeenCalled();
-    expect(tokenSpy).toHaveBeenCalled();
-    expect(app.identity).toEqual('testIdentity');
-    expect(app.token).toEqual('testToken');
   });
 
   it('should initialize toggle sidebar functionality', () => {

@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { FeedsService } from './feeds.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpClient, HttpParams, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { of } from 'rxjs';
 
 describe('FeedsService', () => {
@@ -10,10 +10,9 @@ describe('FeedsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule  // <-- Se agrega al array de imports
-      ],
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(FeedsService);
   });
 
