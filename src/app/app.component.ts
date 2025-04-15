@@ -1,7 +1,7 @@
 import { Component, OnInit, DoCheck, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import { UserService } from './services/user/user.service';
 import {  ActivatedRoute, NavigationEnd,Router } from '@angular/router';
-import * as $ from 'jquery';
+//import * as $ from 'jquery';
 
 //import { FacebookService, InitParams } from 'ngx-facebook';
 import * as moment from 'moment';
@@ -35,11 +35,8 @@ declare global {
     ])
   ]
 })
-export class AppComponent implements OnInit, DoCheck {
+export class AppComponent implements OnInit {
   public title:string;
-  public identity;
-  private token;
-
   public year = 0;
 
   constructor(
@@ -117,17 +114,9 @@ export class AppComponent implements OnInit, DoCheck {
     this.initToggleSidebar();
     this.loadGoogleAnalytics(environment.firebase.measurementId);
 
-    this.identity = this._userService.getIdentity();
-    this.token = this._userService.getToken();
-
     this.year = moment().year();
   }
 
-
-  ngDoCheck() {
-    this.identity = this._userService.getIdentity();
-    this.token = this._userService.getToken();
-  }
 
 
 
