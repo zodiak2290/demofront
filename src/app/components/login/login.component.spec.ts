@@ -4,13 +4,17 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
     declarations: [LoginComponent],
-    imports: [RouterTestingModule,
-        FormsModule],
+    imports: [
+      RouterTestingModule,
+      TranslateModule.forRoot(),
+      FormsModule
+    ],
     providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 }).compileComponents();
   });

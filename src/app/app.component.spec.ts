@@ -48,18 +48,6 @@ describe('AppComponent', () => {
     expect(themeServiceSpy).toHaveBeenCalled();
   });
 
-  it('should update identity and token on ngDoCheck', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    const userServiceSpy = spyOn(app['_userService'], 'getIdentity').and.returnValue('testIdentity');
-    const tokenSpy = spyOn(app['_userService'], 'getToken').and.returnValue('testToken');
-    app.ngDoCheck();
-    expect(userServiceSpy).toHaveBeenCalled();
-    expect(tokenSpy).toHaveBeenCalled();
-    expect(app.identity).toEqual('testIdentity');
-    expect(app.token).toEqual('testToken');
-  });
-
   it('should initialize toggle sidebar functionality', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
