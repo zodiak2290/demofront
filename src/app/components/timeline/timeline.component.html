@@ -1,8 +1,12 @@
-<div class="container">
+<div class="container" style="height: 65vh; overflow-y: auto;">
   <div class="row">
     <div class="col-md-12">
       <div class="main-timeline8">
-        <div class="timeline" *ngFor="let empresa of empresas;">
+        <div class="timeline" *ngFor="let empresa of empresas;  let i = index"
+        #timelineEl
+        [ngClass]="{ 'fade-up-delay': true, 'visible': visibleItems[i] }"
+        [style.transitionDelay]="(50) + 'ms'"
+        >
           <span class="timeline-icon"></span>
           <span class="year">
             {{ empresa.fechaInicial.toDate() | localizeDate }} - {{ empresa.fechaFin.toDate() | localizeDate}}
