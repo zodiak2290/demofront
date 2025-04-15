@@ -12,8 +12,6 @@ export class RegisterComponent implements OnInit {
   public user: UserModel;
 
   constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
     private _userService: UserService
   ) {
       this.user = new UserModel("", "", "", "", "", "", "");

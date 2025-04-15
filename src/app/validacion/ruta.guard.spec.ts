@@ -36,7 +36,7 @@ describe('RutaGuard', () => {
       expect(guard.canActivate()).toBeTrue();
     }));
 
-    it('should block activation and navigate to login if token does not exist', inject([RutaGuard], (guard: RutaGuard) => {
+    it('should block activation and navigate to login if identity does not exist', inject([RutaGuard], (guard: RutaGuard) => {
       spyOn(localStorage, 'getItem').and.returnValue(null);
       expect(guard.canActivate()).toBeFalse();
       expect(mockRouter.navigate).toHaveBeenCalledWith(['login']);
