@@ -1,72 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { User } from '../../modelos/user';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserModel } from '../../modelos/user';
 import { UserService } from '../../services/user/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [UserService]
 })
 export class LoginComponent implements OnInit {
   private mensaje:string;
-  private status:string;
-  public user: User;
-  private identity: any;
-  private token: string;
+  public user: UserModel;
+  ingresando: boolean = false;
+
+  private toastr = inject(ToastrService);
+  private _userService = inject(UserService);
+
   constructor(
-    private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService
   ) {
-      this.user = new User("", "", "", "", "", "", "");
+      this.user = new UserModel("", "", "", "", "", "", "");
   }
 
   ngOnInit() {}
 
-  onSubmit() {
-    this._userService.signUp(this.user)
-    .subscribe(
-      response => {
-        this.identity = response.user;
-        if(this.identity && this.identity._id){
-            localStorage.setItem('identity', JSON.stringify(this.identity));
-
-            this.getToken();
-
-        } else {
-          //persistit
-          this.status = "error";
-          this.mensaje = response.message;
-        }
-      }, error => {
-          var errorMessage = <any>error;
-          if(errorMessage) {
-            this.mensaje = errorMessage.error.message;
-            this.status = "warning";
-          }
+  async onSubmit() {
+    this.ingresando = true;
+    try {
+      const result = await this._userService.login(this.user.email, this.user.pass);
+      this.ingresando = false;
+      if(result.user && result.user.uid){
+        this._router.navigate(['/home']);
       }
-    )
+    } catch (error) {
+      this.mensaje = "Error al iniciar sesión, verifique sus credenciales";
+      this.ingresando = false;
+      this.toastr.error(this.mensaje, "Importante");
+    }
+
   }
 
-  getToken() {
-    this._userService.signUp(this.user, true)
-    .subscribe(
-      response => {
-          if(response.token.length >= 0){
-            this.token = response.token;
-            localStorage.setItem('token', this.token);
-            this._router.navigate(['/home']);
-          }
-      }, error => {
-          var errorMessage = <any>error;
-          if(errorMessage) {
-            this.mensaje = errorMessage.error.message;
-            this.status = "warning";
-          }
-      }
-    )
-  }
 
 }
