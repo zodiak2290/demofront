@@ -1,22 +1,64 @@
-# DemoFront
+# DemoFront - Personal Portfolio Web Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.1.
+DemoFront is a modern and responsive web application built with Angular, designed to showcase a personal portfolio. This application allows users to present their skills, projects, contact information, and social media links in an engaging and user-friendly manner.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+*   **Dynamic Content:** Displays personal information, skills, projects, and contact details dynamically.
+*   **Multi-language Support:** Supports multiple languages, allowing users to switch between different language versions of the content.
+*   **Theming:** Offers multiple theme options for a personalized user experience.
+*   **Social Media Integration:** Integrates links to various social media platforms.
+*   **Responsive Design:** Adapts seamlessly to different screen sizes and devices.
+* **Timeline:** Shows a timeline of events.
+* **Settings:** The user can modify the language and the theme.
 
-## Code scaffolding
+## Project Structure
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The project follows a modular structure, typical of Angular applications. Here's a breakdown:
 
-## Build
+*   **`src/`**: Contains the source code of the application.
+    *   **`app/`**: Contains the core modules, components, services, and other application-specific files.
+        *   **`app.component.*`**: The root component of the application.
+        *   **`app.module.ts`**: The root module of the application.
+        *   **`components/`**: Contains all the components of the application like `home`, `login`, `profile` etc...
+        * **`modelos/`**: Contains the application models
+        * **`modules/`**: Contains all the feature modules of the application
+        *   **`enums/`**: Contains the enumeration types.
+        * **`pipes/`**: Contains the pipes.
+        *   **`route/`**: Contains the routing logic.
+        *   **`validacion/`**: Contains the guards.
+        *   **`services/`**: Contains the services.
+    *   **`assets/`**: Contains static assets like images, internationalization files (`i18n/`), and other static content.
+    *   **`environments/`**: Contains environment-specific configuration files.
+    *   **`main.ts`**: The main entry point of the application.
+    * **`styles.css`**: Contains the general styles of the project.
+    *   **`index.html`**: The main HTML file.
+*   **`e2e/`**: Contains end-to-end (e2e) test files.
+*   **`angular.json`**: Angular CLI configuration file.
+*   **`package.json`**: Node.js project file that lists the packages and dependencies.
+*   **`tsconfig.json`**: TypeScript configuration file.
+*   **`tslint.json`**: TSLint configuration file.
+* **`firebase.json`**: Firebase configuration file.
+* **`.vscode/`**: Contains settings for visual studio code.
+* **`src/browserslist`**: Configures the browsers.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Technologies Used
 
-## Running unit tests
+*   Angular (version 7.1.1)
+*   TypeScript
+*   HTML5
+*   CSS3
+*   Angular CLI
+*   Firebase
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation and Setup
+
+1.  **Prerequisites:**
+    *   Node.js (v10 or higher) and npm installed.
+    *   Angular CLI installed globally (`npm install -g @angular/cli`).
+
+2.  **Clone the repository:**
+    
 
 ## Running end-to-end tests
 
