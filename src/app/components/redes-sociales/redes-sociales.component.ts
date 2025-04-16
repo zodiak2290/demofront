@@ -15,7 +15,6 @@ export class RedesSocialesComponent implements OnInit {
   constructor() {
     effect(() => {
       this.data = this.userService.infoUser();
-      console.log("infoUser3", this.data);
     });
   }
 
