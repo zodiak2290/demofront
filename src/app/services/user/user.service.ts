@@ -116,8 +116,11 @@ export class UserService {
     const q = query(infoUserRef, orderBy('nombre'), limit(1));
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
-      this.infoUserSignal.set(querySnapshot.docs[0].data());
-      return querySnapshot.docs[0].data();
+      const doc = querySnapshot.docs[0];
+      const data = doc.data();
+      const id = doc.id;
+      this.infoUserSignal.set({ id, ...data });
+      return { id, ...data };
     } else {
       return null;
     }

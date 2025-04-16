@@ -98,7 +98,7 @@ export class InfoCardComponent {
       }
 
       const identity = this.userService.getIdentity();
-      this.isOwner = identity?.uid === this.uid;
+      this.isOwner = identity?.uid === data.id;
 
       if (!this.isOwner) {
         this.form.disable();
