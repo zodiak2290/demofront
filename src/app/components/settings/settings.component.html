@@ -1,76 +1,8 @@
-<div class="card" style="max-width: 400px;">
-  <div class="card-header">
-    {{'settings.prefereces' | translate}}
+<div class="container p-4" style="display: flex; gap: 24px;">
+  <div style="flex: 1;">
+    <app-user-preferences></app-user-preferences>
   </div>
-  <div class="card-body">
-
-
-    <div class="mb-3">
-      <label class="form-label fw-semibold d-block">{{'settings.prefereces.language' | translate}}</label>
-      <div class="form-check">
-        <input class="form-check-input"
-               type="radio"
-               name="language"
-               id="spanish"
-               [value]=LANGUAGES.SPANISH
-               [(ngModel)]="selectedLanguage"
-               [checked]="selectedLanguage === LANGUAGES.SPANISH"
-               (change)="cambiarLenguaje(LANGUAGES.SPANISH)">
-        <label class="form-check-label" for="themeLight">
-          {{ 'lenguajes.es' | translate }}
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input"
-               type="radio"
-               name="language"
-               id="english"
-               [value]=LANGUAGES.ENGLISH
-               [(ngModel)]="selectedLanguage"
-               [checked]="selectedLanguage === LANGUAGES.ENGLISH"
-               (change)="cambiarLenguaje(LANGUAGES.ENGLISH)">
-        <label class="form-check-label" for="english">
-          {{ 'lenguajes.en' | translate }}
-        </label>
-      </div>
-    </div>
-
-    <!-- Selección de Tema -->
-    <div class="mb-3">
-      <label class="form-label fw-semibold d-block">
-        {{'settings.theme' | translate}}
-      </label>
-      <div class="form-check">
-        <input class="form-check-input"
-               type="radio"
-               name="theme"
-               id="themeLight"
-               [value]="THEMES.LIGHT"
-               [(ngModel)]="selectedTheme"
-               [checked]="selectedTheme === THEMES.LIGHT"
-               (change)="cambiarTema(THEMES.LIGHT)">
-        <label class="form-check-label" for="themeLight">
-          {{'settings.theme.light' | translate}}
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input"
-               type="radio"
-               name="theme"
-               id="themeDark"
-               [value]="THEMES.DARK"
-               [(ngModel)]="selectedTheme"
-               [checked]="selectedTheme === THEMES.DARK"
-               (change)="cambiarTema(THEMES.DARK)">
-        <label class="form-check-label" for="themeDark">
-          {{'settings.theme.dark' | translate}}
-        </label>
-      </div>
-    </div>
-<!--
-    <button class="btn btn-primary" (click)="saveSettings()">
-      Guardar
-    </button>
--->
+  <div style="flex: 1;">
+    <app-info-card></app-info-card>
   </div>
 </div>

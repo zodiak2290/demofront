@@ -1,6 +1,6 @@
 import { effect, Injectable, signal } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, limit, orderBy, query } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
 import {
   getAuth,
@@ -107,10 +107,31 @@ export class UserService {
     }
   }
 
-  obtenerDatosSignal() {
+  async getFirstInfoUser(): Promise<any | null> {
+    const infoUserRef = collection(this.db, 'infoUser');
+    const q = query(infoUserRef, orderBy('nombre'), limit(1));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      return querySnapshot.docs[0].data();
+    } else {
+      return null;
+    }
+  }
 
-    return this.userSignal;
+  async getInfoUser(uid: string): Promise<any | null> {
+    const ref = doc(this.db, `infoUser/${uid}`);
+    const snap = await getDoc(ref);
+    return snap.exists() ? snap.data() : null;
+  }
 
+
+  async saveInfoUser(uid: string, data: any): Promise<void> {
+    if (!data || typeof data !== 'object') {
+      throw new Error('Datos inválidos para guardar');
+    }
+
+    const ref = doc(this.db, `infoUser/${uid}`);
+    return setDoc(ref, data, { merge: true });
   }
 
 }

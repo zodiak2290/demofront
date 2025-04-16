@@ -1,0 +1,81 @@
+<div class="card p-4 rounded shadow bg-white" style="height: 70vh; overflow-y: auto;">
+  <div class="card-header">
+    <h5 class="card-title">Información Personal</h5>
+  </div>
+  <div class="card-body"  style="height: 60vh; overflow-y: auto;">
+    <div class="text-center" *ngIf="isLoading" style="margin-top: 45%;">
+      <div class="spinner-grow" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div *ngIf="!isLoading">
+      <form [formGroup]="form">
+
+        <div *ngFor="let field of fields" class="mb-3">
+          <strong>{{ field.label }}:</strong>
+          <ng-container *ngIf="editing() === field.key; else displayMode">
+            <input
+              type="text"
+              class="border p-1 rounded w-full mt-1"
+              [formControlName]="field.key"
+              (blur)="editing.set(null)"
+              autofocus
+              [readonly]="!isOwner"
+            />
+          </ng-container>
+          <ng-template #displayMode>
+            <span (click)="isOwner && editing.set(field.key)" class="cursor-pointer text-gray-800 ml-2 hover:underline">
+              {{ form.get(field.key)?.value }}
+            </span>
+          </ng-template>
+        </div>
+        <div>
+          <label class="font-bold block mb-2">Redes sociales:</label>
+          <div formArrayName="socialLinks">
+            <div *ngFor="let control of socialLinks.controls; let i = index" [formGroupName]="i" class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  <fa-icon [icon]="getIcon(control.value.url)"></fa-icon>
+                </span>
+              </div>
+              <input
+                type="text"
+                class="border form-control"
+                placeholder=""
+                formControlName="url"
+                (blur)="editing.set(null)"
+                [readonly]="!isOwner"
+              />
+              <div class="input-group-append">
+                <button type="button"
+                  class="btn btn-danger"
+                  *ngIf="isOwner"
+                  (click)="removeSocialLink(i)">
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button *ngIf="isOwner"
+            type="button"
+            class="btn btn-light"
+            (click)="addSocialLink()">
+            + Agregar enlace
+          </button>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+  <div class="card-footer text-muted text-right">
+      <button *ngIf="isOwner"
+      type="button"
+      (click)="save()"
+      class="btn btn-primary">
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="guardando"></span>
+        Guardar cambios
+      </button>
+  </div>
+</div>
