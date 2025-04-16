@@ -112,8 +112,11 @@ export class InfoCardComponent {
     }
   }
 
+
   loadSocialLinks(links: any[] = []) {
-    const arr = links.map(link => this.fb.group({ url: [link.url || link] }));
+    const arr = (links ?? []).map(link =>
+      this.fb.group({ url: [link?.url || link] })
+    );
     this.form.setControl('socialLinks', this.fb.array(arr));
   }
 

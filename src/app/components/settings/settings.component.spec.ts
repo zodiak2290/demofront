@@ -2,10 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SettingsComponent } from './settings.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { LANGUAGES } from 'src/app/enums/languages.enum';
-import { THEMES } from 'src/app/enums/themes.enum';
-import { LanguageService } from 'src/app/services/language/language.service';
-import { ThemeService } from 'src/app/services/theme/theme.service';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
@@ -13,7 +10,7 @@ describe('SettingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SettingsComponent, TranslateModule.forRoot()]
+      imports: [SettingsComponent, TranslateModule.forRoot(), ToastrModule.forRoot()]
     })
     .compileComponents();
 

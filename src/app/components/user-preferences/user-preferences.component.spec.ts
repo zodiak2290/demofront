@@ -5,6 +5,7 @@ import { LANGUAGES } from 'src/app/enums/languages.enum';
 import { THEMES } from 'src/app/enums/themes.enum';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('UserPreferencesComponent', () => {
   let component: UserPreferencesComponent;
@@ -12,7 +13,7 @@ describe('UserPreferencesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserPreferencesComponent]
+      imports: [UserPreferencesComponent, TranslateModule.forRoot()]
     })
     .compileComponents();
 
