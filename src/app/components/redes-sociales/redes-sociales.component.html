@@ -1,4 +1,5 @@
 <div>
+  <!--
   <a href="https://www.linkedin.com/in/albonmarvel/" class="btn btn-primary btn-sm">
     <i class="fab fa-linkedin fa-fw"></i>
   </a>
@@ -12,5 +13,19 @@
   </a>
   <a class="btn btn-sm" rel="publisher" href="https://github.com/zodiak2290">
     <i class="fab fa-github fa-fw"></i>
-  </a>
+  </a>-->
+  <div *ngIf="data">
+    <div class="desc" *ngIf="getSocialLinks().length">
+      <strong>
+        Redes sociales:
+      </strong>
+      <ng-container *ngFor="let link of getSocialLinks(); let i = index">
+        <a [href]="link" target="_blank">
+          <fa-icon [icon]="getIcon(link)"></fa-icon>
+        </a>
+        <span *ngIf="i < getSocialLinks().length - 1"> | </span>
+
+      </ng-container>
+    </div>
+  </div>
 </div>

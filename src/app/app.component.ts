@@ -1,9 +1,6 @@
 import { Component, OnInit, DoCheck, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import { UserService } from './services/user/user.service';
 import {  ActivatedRoute, NavigationEnd,Router } from '@angular/router';
-//import * as $ from 'jquery';
-
-//import { FacebookService, InitParams } from 'ngx-facebook';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { LanguageService } from './services/language/language.service';
@@ -18,7 +15,6 @@ declare global {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [UserService],
   animations: [
     trigger('toggleSidebar', [
       state('open', style({
@@ -40,7 +36,6 @@ export class AppComponent implements OnInit {
   public year = 0;
 
   constructor(
-    private _route: ActivatedRoute,
     private _userService:UserService,
     private _router: Router,
     private languageService: LanguageService,
@@ -107,13 +102,25 @@ export class AppComponent implements OnInit {
   }
 
 
+  async loadInfoUser() {
+      try {
+        const data = await this._userService.getFirstInfoUser();
+        if (data) {
+          console.log(data);
+        }
+
+      } catch (err) {
+      }
+  }
+
+
 
   ngOnInit() {
     this.initLanguage();
     this.initTheme();
     this.initToggleSidebar();
     this.loadGoogleAnalytics(environment.firebase.measurementId);
-
+    this.loadInfoUser();
     this.year = moment().year();
   }
 

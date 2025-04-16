@@ -1,31 +1,41 @@
-<div>
-  <div class="title">
-    <a target="_blank">Martínez Velasco Alberto Bonifacio</a>
+<div style="height: 20vh;">
+  <div>
+    <div class="text-center" *ngIf="!data" style="margin-top: 10%;">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
   </div>
-  <div class="desc">Desarrollador FullStack.</div>
-  <div class="desc">
-    <strong>Hobbies: </strong>
-    Leer, Gym, Cine, Escuhar Música.
-  </div>
-  <div class="desc">
-    <strong>Fecha y lugar de nacimiento:</strong>
-    22 de febrero de 1990. Oaxaca de Juárez, Oax
-  </div>
-  <div class="desc">
-    <strong>Email:</strong>
-    albon_marvel&#64;hotmail.com
-  </div>
-  <div class="desc">
-    <strong>Teléfono:</strong>
-    951 194 21 11
+  <div *ngIf="data">
+    <ng-container *ngFor="let key of (data | keyvalue)">
+      <div class="desc" *ngIf="isFieldVisible(key.key)">
+        <ng-container [ngSwitch]="key.key">
+          <!-- WhatsApp -->
+          <ng-container *ngSwitchCase="'whatsapp'">
+            <strong>Whatsapp: </strong>
+            <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer">
+              {{ key.value }}
+            </a>
+          </ng-container>
 
-    <strong>Whatsapp:</strong>
-    <a
-      href="https://wa.me/529511942111"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      951 194 21 11
-    </a>
+          <!-- Email -->
+          <ng-container *ngSwitchCase="'email'">
+            <strong>Email: </strong>
+            <span [innerHTML]="emailEscaped"></span>
+          </ng-container>
+
+          <!-- Otros -->
+          <ng-container *ngSwitchDefault>
+            <strong>{{ formatKey(key.key) }}: </strong>
+            <span *ngIf="isPrimitive(key.value)">{{ key.value }}</span>
+          </ng-container>
+
+        </ng-container>
+      </div>
+    </ng-container>
+
+
   </div>
+
 </div>
+
