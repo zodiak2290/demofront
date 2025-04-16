@@ -5,7 +5,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrService } from 'ngx-toastr';
 import { SocialIconService } from 'src/app/services/social-icon/social-icon.service';
 import { UserService } from 'src/app/services/user/user.service';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-info-card',
   standalone: true,
@@ -13,7 +14,8 @@ import { UserService } from 'src/app/services/user/user.service';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    DragDropModule
   ],
   templateUrl: './info-card.component.html',
   styleUrl: './info-card.component.css'
@@ -27,15 +29,17 @@ export class InfoCardComponent {
 
   private toastr = inject(ToastrService);
   private socialIconService = inject(SocialIconService);
-  fields = [
-    { key: 'nombre', label: 'Nombre completo' },
-    { key: 'rol', label: 'Rol profesional' },
-    { key: 'hobbies', label: 'Hobbies' },
-    { key: 'nacimiento', label: 'Fecha y lugar de nacimiento' },
-    { key: 'email', label: 'Email' },
-    { key: 'telefono', label: 'Teléfono' },
-    { key: 'whatsapp', label: 'Whatsapp' }
-  ];
+  fields: { key: string; label: string }[] = [];
+
+  readonly FIELD_LABELS: Record<string, string> = {
+    nombre: 'Nombre completo',
+    rol: 'Rol profesional',
+    hobbies: 'Hobbies',
+    nacimiento: 'Fecha y lugar de nacimiento',
+    email: 'Email',
+    telefono: 'Teléfono',
+    whatsapp: 'Whatsapp'
+  };
 
   form: FormGroup;
 
@@ -77,7 +81,10 @@ export class InfoCardComponent {
     this.form.disable();
 
     try {
-      const data = this.form.value;
+      const data = {
+        ...this.form.value,
+        fieldOrder: this.fields.map(f => f.key) // ⬅️ Guardamos el orden
+      };
       await this.userService.saveInfoUser(this.uid, data);
       this.toastr.success('Información guardada correctamente', 'Éxito', { timeOut: 3000 });
     } catch (err) {
@@ -95,6 +102,12 @@ export class InfoCardComponent {
       if (data) {
         this.form.patchValue(data);
         this.loadSocialLinks(data.socialLinks);
+
+        const fieldOrder = data.fieldOrder ?? Object.keys(this.FIELD_LABELS);
+        this.fields = fieldOrder.map(key => ({
+          key,
+          label: this.FIELD_LABELS[key]
+        }));
       }
 
       const identity = this.userService.getIdentity();
@@ -119,6 +132,21 @@ export class InfoCardComponent {
 
   getIcon(url: string) {
     return this.socialIconService.getIcon(url);
+  }
+
+  drop(event: CdkDragDrop<FormGroup[]>) {
+    if (!this.isOwner) return;
+
+    moveItemInArray(this.socialLinks.controls, event.previousIndex, event.currentIndex);
+    const reorderedLinks = this.socialLinks.controls.map(ctrl =>
+      this.fb.group({ url: [ctrl.get('url')?.value || ''] })
+    );
+    this.form.setControl('socialLinks', this.fb.array(reorderedLinks));
+  }
+
+  dropField(event: CdkDragDrop<any[]>) {
+    if (!this.isOwner) return;
+    moveItemInArray(this.fields, event.previousIndex, event.currentIndex);
   }
 
 
