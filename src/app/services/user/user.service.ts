@@ -22,6 +22,10 @@ export class UserService {
   private _userSignal = signal<User | null>(null);
   readonly userSignal = this._userSignal.asReadonly();
 
+
+  private infoUserSignal = signal<any | null>(null);
+  readonly infoUser = this.infoUserSignal.asReadonly();
+
   constructor() {
     const storedUser = localStorage.getItem('identity');
     if (storedUser) {
@@ -112,6 +116,7 @@ export class UserService {
     const q = query(infoUserRef, orderBy('nombre'), limit(1));
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
+      this.infoUserSignal.set(querySnapshot.docs[0].data());
       return querySnapshot.docs[0].data();
     } else {
       return null;

@@ -36,28 +36,36 @@ describe('RedesSocialesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render 4 social media links', () => {
-    const links = fixture.debugElement.queryAll(By.css('a'));
-    expect(links.length).toBe(4);
+  it('should return correct social links', () => {
+    component.data = {
+      socialLinks: [
+        { url: 'https://linkedin.com/in/example' },
+        { url: 'https://twitter.com/example' },
+        { url: 'https://github.com/example' }
+      ]
+    };
+    const socialLinks = component.getSocialLinks();
+    expect(socialLinks).toEqual([
+      'https://linkedin.com/in/example',
+      'https://twitter.com/example',
+      'https://github.com/example'
+    ]);
   });
 
-  it('should have a LinkedIn link', () => {
-    const link = fixture.debugElement.query(By.css('a[href*="linkedin.com"]'));
-    expect(link).toBeTruthy();
+  it('should return correct social name for a given URL', () => {
+    expect(component.getSocialName('https://linkedin.com/in/example')).toBe('LinkedIn');
+    expect(component.getSocialName('https://twitter.com/example')).toBe('Twitter');
+    expect(component.getSocialName('https://facebook.com/example')).toBe('Facebook');
+    expect(component.getSocialName('https://github.com/example')).toBe('GitHub');
+    expect(component.getSocialName('https://example.com')).toBe('Link');
   });
 
-  it('should have a Twitter link', () => {
-    const link = fixture.debugElement.query(By.css('a[href*="twitter.com"]'));
-    expect(link).toBeTruthy();
+  it('should call getIcon from SocialIconService with correct URL', () => {
+    const fakeIcon = {} as any;
+    const socialIconServiceSpy = spyOn(component['socialIconService'], 'getIcon').and.returnValue(fakeIcon);
+    const icon = component.getIcon('https://linkedin.com/in/example');
+    expect(socialIconServiceSpy).toHaveBeenCalledWith('https://linkedin.com/in/example');
+    expect(icon).toBe(fakeIcon);
   });
 
-  it('should have a Facebook link', () => {
-    const link = fixture.debugElement.query(By.css('a[href*="facebook.com"]'));
-    expect(link).toBeTruthy();
-  });
-
-  it('should have a GitHub link', () => {
-    const link = fixture.debugElement.query(By.css('a[href*="github.com"]'));
-    expect(link).toBeTruthy();
-  });
 });

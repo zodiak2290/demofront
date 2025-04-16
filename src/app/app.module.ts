@@ -35,6 +35,7 @@ import localeEs from '@angular/common/locales/es';
 import { ToastrModule } from 'ngx-toastr';
 import {  FormulariosModule } from "./modules/formularios/formularios.module";
 import {  GraficosModule } from "./modules/graficos/graficos.module";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 registerLocaleData(localeEn, 'en');
 registerLocaleData(localeEs, 'es');
@@ -68,7 +69,7 @@ export function HttpLoaderFactory(http: HttpClient) {
                 deps: [HttpClient],
             }
         }),
-        //FacebookModule.forRoot(),
+        FontAwesomeModule,
         ToastrModule.forRoot(),
         FormulariosModule,
         GraficosModule], providers: [RutaGuard, DatePipe, provideHttpClient(withInterceptorsFromDi())] })

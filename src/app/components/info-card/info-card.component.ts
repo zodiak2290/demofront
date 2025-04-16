@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faFacebook, faTwitter, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { ToastrService } from 'ngx-toastr';
+import { SocialIconService } from 'src/app/services/social-icon/social-icon.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -25,11 +25,8 @@ export class InfoCardComponent {
   isLoading = true;
   guardando = false;
 
-  faFacebook = faFacebook;
-  faTwitter = faTwitter;
-  faLinkedin = faLinkedin;
-  faGithub = faGithub;
   private toastr = inject(ToastrService);
+  private socialIconService = inject(SocialIconService);
   fields = [
     { key: 'nombre', label: 'Nombre completo' },
     { key: 'rol', label: 'Rol profesional' },
@@ -121,17 +118,7 @@ export class InfoCardComponent {
   }
 
   getIcon(url: string) {
-    if (url.includes('facebook.com')) {
-      return this.faFacebook;
-    } else if (url.includes('twitter.com')) {
-      return this.faTwitter;
-    } else if (url.includes('linkedin.com')) {
-      return this.faLinkedin;
-    } else if( url.includes('github.com') ){
-      return this.faGithub;
-    }
-
-    return null;
+    return this.socialIconService.getIcon(url);
   }
 
 

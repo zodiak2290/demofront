@@ -116,13 +116,6 @@ describe('InfoCardComponent', () => {
     expect(component.form.value).toEqual(mockData);
   });
 
-  it('should return the correct icon for a given URL', () => {
-    expect(component.getIcon('https://facebook.com')).toBe(component.faFacebook);
-    expect(component.getIcon('https://twitter.com')).toBe(component.faTwitter);
-    expect(component.getIcon('https://linkedin.com')).toBe(component.faLinkedin);
-    expect(component.getIcon('https://github.com')).toBe(component.faGithub);
-    expect(component.getIcon('https://example.com')).toBeNull();
-  });
 
   it('should not disable the form when save is called and isOwner is false', async () => {
     component.isOwner = false;
