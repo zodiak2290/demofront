@@ -1,23 +1,33 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InfoCardComponent } from './info-card.component';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from 'src/app/services/user/user.service';
 
 describe('InfoCardComponent', () => {
   let component: InfoCardComponent;
   let fixture: ComponentFixture<InfoCardComponent>;
-
+  let userServiceSpy: jasmine.SpyObj<UserService>;
+  let toastrSpy: jasmine.SpyObj<ToastrService>;
   beforeEach(async () => {
+    const userServiceMock = jasmine.createSpyObj('UserService', ['getFirstInfoUser', 'getIdentity', 'saveInfoUser']);
+    toastrSpy = jasmine.createSpyObj('ToastrService', ['success', 'error'])
     await TestBed.configureTestingModule({
-      imports: [InfoCardComponent, ToastrModule.forRoot(), TranslateModule.forRoot(), BrowserAnimationsModule],
+      imports: [InfoCardComponent, ToastrModule.forRoot(), TranslateModule.forRoot(), BrowserAnimationsModule, ReactiveFormsModule],
+      providers: [
+        { provide: UserService, useValue: userServiceMock },
+        { provide: ToastrService, useValue: toastrSpy  }
+      ],
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(InfoCardComponent);
     component = fixture.componentInstance;
+    userServiceSpy = TestBed.inject(UserService) as jasmine.SpyObj<UserService>;
+    userServiceSpy.getFirstInfoUser.calls.reset();
     fixture.detectChanges();
   });
 
@@ -78,22 +88,23 @@ describe('InfoCardComponent', () => {
 
   it('should call toastr success on successful save', async () => {
     component.isOwner = true;
-    spyOn(component['toastr'], 'success');
-    spyOn(component['userService'], 'saveInfoUser').and.resolveTo();
+    userServiceSpy.saveInfoUser.and.resolveTo();
     await component.save();
-    expect(component['toastr'].success).toHaveBeenCalledWith(
+    expect(toastrSpy.success).toHaveBeenCalledWith(
       'Información guardada correctamente',
       'Éxito',
       { timeOut: 3000 }
     );
+
   });
 
   it('should call toastr error on save failure', async () => {
     component.isOwner = true;
-    spyOn(component['toastr'], 'error');
-    spyOn(component['userService'], 'saveInfoUser').and.rejectWith(new Error('Error'));
+
+    userServiceSpy.saveInfoUser.and.returnValue(Promise.reject(new Error('Error')));
+
     await component.save();
-    expect(component['toastr'].error).toHaveBeenCalledWith(
+    expect(toastrSpy.error).toHaveBeenCalledWith(
       'Error al guardar la información',
       'Error',
       { timeOut: 3000 }
@@ -111,7 +122,7 @@ describe('InfoCardComponent', () => {
       whatsapp: '987654321',
       socialLinks: [{ url: 'https://facebook.com/johndoe' }]
     };
-    spyOn(component['userService'], 'getFirstInfoUser').and.resolveTo(mockData);
+    userServiceSpy.getFirstInfoUser.and.resolveTo(mockData);
     await component.loadInfoUser();
     expect(component.form.value).toEqual(mockData);
   });
@@ -129,9 +140,11 @@ describe('InfoCardComponent', () => {
   });
 
   it('should disable the form if the user is not the owner', async () => {
+
     const mockIdentity = { uid: '123' };
-    spyOn(component['userService'], 'getIdentity').and.returnValue(mockIdentity);
-    component.uid = '456';
+    userServiceSpy.getIdentity.and.returnValue(mockIdentity);
+    userServiceSpy.getFirstInfoUser.and.resolveTo({ id: '456' });
+
     spyOn(component.form, 'disable');
     await component.loadInfoUser();
     expect(component.form.disable).toHaveBeenCalled();
@@ -140,7 +153,7 @@ describe('InfoCardComponent', () => {
   it('should enable the form after save is completed', async () => {
     component.isOwner = true;
     spyOn(component.form, 'enable');
-    spyOn(component['userService'], 'saveInfoUser').and.resolveTo();
+    userServiceSpy.getFirstInfoUser.and.resolveTo();
     await component.save();
     expect(component.form.enable).toHaveBeenCalled();
   });
@@ -149,7 +162,7 @@ describe('InfoCardComponent', () => {
     const mockData = {
       socialLinks: [{ url: 'https://facebook.com/johndoe' }]
     };
-    spyOn(component['userService'], 'getFirstInfoUser').and.resolveTo(mockData);
+    userServiceSpy.getFirstInfoUser.and.resolveTo(mockData);
     spyOn(component, 'loadSocialLinks');
     await component.loadInfoUser();
     expect(component.loadSocialLinks).toHaveBeenCalledWith(mockData.socialLinks);
@@ -159,7 +172,7 @@ describe('InfoCardComponent', () => {
     const mockData = {
       socialLinks: []
     };
-    spyOn(component['userService'], 'getFirstInfoUser').and.resolveTo(mockData);
+    userServiceSpy.getFirstInfoUser.and.resolveTo(mockData);
     spyOn(component, 'loadSocialLinks');
     await component.loadInfoUser();
     expect(component.loadSocialLinks).toHaveBeenCalledWith([]);
@@ -180,4 +193,55 @@ describe('InfoCardComponent', () => {
     component.loadSocialLinks(undefined);
     expect(component.socialLinks.length).toBe(0);
   });
+
+  it('should patch form and set isOwner correctly if data is returned', async () => {
+    const mockData = {
+      id: 'user-123',
+      nombre: 'Alberto',
+      rol: 'Desarrollador',
+      hobbies: 'Leer',
+      nacimiento: '1990-02-22',
+      email: 'test@example.com',
+      telefono: '1234567890',
+      whatsapp: '1234567890',
+      socialLinks: [{ url: 'https://github.com/user' }]
+    };
+
+    const mockIdentity = { uid: 'user-123' };
+
+    userServiceSpy.getFirstInfoUser.and.resolveTo(mockData);
+    userServiceSpy.getIdentity.and.returnValue(mockIdentity);
+
+    await component.loadInfoUser();
+
+    expect(component.form.value.nombre).toBe('Alberto');
+    expect(component.socialLinks.length).toBe(1);
+    expect(component.isOwner).toBeTrue();
+    expect(component.form.enabled).toBeTrue();
+    expect(component.isLoading).toBeFalse();
+  });
+
+  it('should disable form if user is not owner', async () => {
+    const mockData = { id: 'otro-usuario', nombre: 'Otro' };
+    userServiceSpy.getFirstInfoUser.and.resolveTo(mockData);
+    userServiceSpy.getIdentity.and.returnValue({ uid: 'yo-mismo' }); // ✅ así
+
+    await component.loadInfoUser();
+
+    expect(component.isOwner).toBeFalse();
+    expect(component.form.disabled).toBeTrue();
+  });
+
+  it('should not patch form if no data returned', async () => {
+    userServiceSpy.getFirstInfoUser.and.resolveTo(null);
+    userServiceSpy.getIdentity.and.returnValue({ uid: 'user-123' });
+
+    const patchSpy = spyOn(component.form, 'patchValue');
+
+    await component.loadInfoUser();
+
+    expect(patchSpy).not.toHaveBeenCalled();
+    expect(component.isLoading).toBeFalse();
+  });
+
 });
