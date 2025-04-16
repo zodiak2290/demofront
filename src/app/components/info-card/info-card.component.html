@@ -10,29 +10,30 @@
     </div>
     <div *ngIf="!isLoading">
       <form [formGroup]="form">
-
-        <div *ngFor="let field of fields" class="mb-3">
-          <strong>{{ field.label }}:</strong>
-          <ng-container *ngIf="editing() === field.key; else displayMode">
-            <input
-              type="text"
-              class="border p-1 rounded w-full mt-1"
-              [formControlName]="field.key"
-              (blur)="editing.set(null)"
-              autofocus
-              [readonly]="!isOwner"
-            />
-          </ng-container>
-          <ng-template #displayMode>
-            <span (click)="isOwner && editing.set(field.key)" class="cursor-pointer text-gray-800 ml-2 hover:underline">
-              {{ form.get(field.key)?.value }}
-            </span>
-          </ng-template>
+        <div cdkDropList (cdkDropListDropped)="dropField($event)">
+          <div *ngFor="let field of fields" class="mb-3" cdkDrag>
+            <strong>{{ field.label }}:</strong>
+            <ng-container *ngIf="editing() === field.key; else displayMode">
+              <input
+                type="text"
+                class="border p-1 rounded w-full mt-1"
+                [formControlName]="field.key"
+                (blur)="editing.set(null)"
+                autofocus
+                [readonly]="!isOwner"
+              />
+            </ng-container>
+            <ng-template #displayMode>
+              <span (click)="isOwner && editing.set(field.key)" class="cursor-pointer text-gray-800 ml-2 hover:underline">
+                {{ form.get(field.key)?.value }}
+              </span>
+            </ng-template>
+          </div>
         </div>
         <div>
           <label class="font-bold block mb-2">Redes sociales:</label>
-          <div formArrayName="socialLinks">
-            <div *ngFor="let control of socialLinks.controls; let i = index" [formGroupName]="i" class="input-group mb-3">
+          <div formArrayName="socialLinks" cdkDropList (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let control of socialLinks.controls; let i = index" [formGroupName]="i" class="input-group mb-3" cdkDrag>
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">
                   <fa-icon [icon]="getIcon(control.value.url)"></fa-icon>

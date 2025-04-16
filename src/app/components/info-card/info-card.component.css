@@ -1,0 +1,28 @@
+/* Lo que ves mientras arrastras */
+.cdk-drag-preview {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px dashed #aaa;
+  background: white;
+  padding: 8px;
+  opacity: 0.9;
+  border-radius: 5px;
+}
+
+/* Espacio reservado donde estaba el ítem */
+.cdk-drag-placeholder {
+  opacity: 0.3;
+  border: 2px dashed #ccc;
+  min-height: 40px;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+/* Suaviza la transición */
+.cdk-drag-animating {
+  transition: transform 0.2s ease;
+}
+
+/* Cursor de mover */
+[cdkDrag] {
+  cursor: move;
+}
