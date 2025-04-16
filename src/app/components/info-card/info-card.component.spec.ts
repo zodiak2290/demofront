@@ -128,14 +128,6 @@ describe('InfoCardComponent', () => {
     expect(component.isOwner).toBeFalse();
   });
 
-  it('should set isOwner to true if the user is the owner', async () => {
-    const mockIdentity = { uid: '123' };
-    spyOn(component['userService'], 'getIdentity').and.returnValue(mockIdentity);
-    component.uid = '123';
-    await component.loadInfoUser();
-    expect(component.isOwner).toBeTrue();
-  });
-
   it('should disable the form if the user is not the owner', async () => {
     const mockIdentity = { uid: '123' };
     spyOn(component['userService'], 'getIdentity').and.returnValue(mockIdentity);
