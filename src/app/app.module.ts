@@ -57,7 +57,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ProfileComponent,
         TimelineComponent,
         LocalizeDatePipe,
-        //ContactoComponent
+        //InfoCardComponent
     ],
     bootstrap: [AppComponent], imports: [AppRoutingModule,
         BrowserAnimationsModule, // required animations module
