@@ -103,14 +103,7 @@ export class AppComponent implements OnInit {
 
 
   async loadInfoUser() {
-      try {
-        const data = await this._userService.getFirstInfoUser();
-        if (data) {
-          console.log(data);
-        }
-
-      } catch (err) {
-      }
+    this._userService.getFirstInfoUser();
   }
 
 
