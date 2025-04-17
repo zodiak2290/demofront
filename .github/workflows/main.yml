@@ -28,7 +28,7 @@ jobs:
         run: npm run check:duplicates
 
       - name: Upload jscpd HTML report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: jscpd-report
           path: report/
