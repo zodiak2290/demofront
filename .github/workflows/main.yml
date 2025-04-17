@@ -57,6 +57,7 @@ jobs:
           name: jscpd-report
           path: report/
 
+
       - name: Run unit tests with coverage
         run: npm test -- --code-coverage --watch=false --browsers=ChromeHeadless
 
