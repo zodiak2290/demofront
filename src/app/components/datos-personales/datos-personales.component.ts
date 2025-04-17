@@ -9,14 +9,36 @@ import { UserService } from 'src/app/services/user/user.service';
 export class DatosPersonalesComponent implements OnInit {
   data!: Record<string, any>;
   private userService = inject(UserService);
+  orderedFields: { key: string; label: string; value: string }[] = [];
+
+  readonly FIELD_LABELS: Record<string, string> = {
+    nombre: 'Nombre',
+    rol: 'Rol',
+    hobbies: 'Hobbies',
+    nacimiento: 'Fecha y lugar de nacimiento',
+    email: 'Email',
+    telefono: 'Teléfono',
+    whatsapp: 'Whatsapp'
+  };
 
   constructor() {
     effect(() => {
       this.data = this.userService.infoUser();
+      this.showData();
     });
   }
 
   ngOnInit() {}
+
+  showData() {
+    if (this.data) {
+      this.orderedFields = (this.data.fieldOrder || []).map((key: string) => ({
+        key,
+        label: this.FIELD_LABELS[key] || key,
+        value: this.data[key] || ''
+      }));
+    }
+  }
 
 
   isPrimitive(value: any): boolean {
@@ -30,10 +52,6 @@ export class DatosPersonalesComponent implements OnInit {
   get whatsappUrl(): string | null {
     const num = this.data?.whatsapp?.replace(/\s+/g, '');
     return num ? `https://wa.me/52${num}` : null;
-  }
-
-  get emailEscaped(): string {
-    return this.data?.email?.replace('@', '&#64;') ?? '';
   }
 
 

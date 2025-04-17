@@ -1,40 +1,30 @@
-<div style="height: 20vh;">
+<div style="height: 30vh;">
   <div>
-    <div class="text-center" *ngIf="!data" style="margin-top: 10%;">
+    <div class="text-center" *ngIf="!orderedFields" style="margin-top: 10%;">
       <div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
       </div>
     </div>
   </div>
-  <div *ngIf="data">
-    <ng-container *ngFor="let key of (data | keyvalue)">
-      <div class="desc" *ngIf="isFieldVisible(key.key)">
-        <ng-container [ngSwitch]="key.key">
-          <!-- WhatsApp -->
-          <ng-container *ngSwitchCase="'whatsapp'">
-            <strong>Whatsapp: </strong>
-            <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer">
-              {{ key.value }}
-            </a>
-          </ng-container>
-
-          <!-- Email -->
-          <ng-container *ngSwitchCase="'email'">
-            <strong>Email: </strong>
-            <span [innerHTML]="emailEscaped"></span>
-          </ng-container>
-
-          <!-- Otros -->
-          <ng-container *ngSwitchDefault>
-            <strong>{{ formatKey(key.key) }}: </strong>
-            <span *ngIf="isPrimitive(key.value)">{{ key.value }}</span>
-          </ng-container>
-
+  <div *ngIf="orderedFields" class="container">
+    <div *ngFor="let field of orderedFields" class="m-0">
+      <ng-container [ngSwitch]="field.key">
+        <ng-container *ngSwitchCase="'whatsapp'">
+          <strong>Whatsapp: </strong>
+          <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer">
+            {{ field.value }}
+          </a>
         </ng-container>
-      </div>
-    </ng-container>
-
-
+        <ng-container *ngSwitchCase="'email'">
+          <strong>Email: </strong>
+          <span *ngIf="field.key === 'email'" class="text-muted" [innerHTML]="field.value.replace('@', '&#64;')"></span>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <strong>{{ field.label }}: </strong>
+          <span class="text-muted mb-0">{{ field.value }}</span>
+        </ng-container>
+      </ng-container>
+    </div>
   </div>
 
 </div>
