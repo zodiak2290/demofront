@@ -16,7 +16,9 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{ts,html,css}": ["prettier --write"]
+    "*.{ts,html,css}": [
+      "prettier --write"
+    ]
   },
   "private": true,
   "dependencies": {
