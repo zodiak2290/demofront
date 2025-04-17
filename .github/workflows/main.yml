@@ -39,11 +39,16 @@ jobs:
           path: report/jscpd-report.txt
           header: jscpd-duplicate-warning
 
-      - name: Run jscpd and save console output
+      - name: Run jscpd and fail if duplicates are found
         run: |
           mkdir -p report
           npx jscpd src --config .jscpd > report/jscpd-report.txt
           cat report/jscpd-report.txt
+          DUPLICATES=$(grep -c "Clone found" report/jscpd-report.txt || true)
+          if [ "$DUPLICATES" -gt 0 ]; then
+            echo "❌ Se detectó duplicación de código. Cancelando workflow."
+            exit 1
+          fi
 
       - name: Upload jscpd HTML report
         uses: actions/upload-artifact@v4
