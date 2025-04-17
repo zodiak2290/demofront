@@ -9,6 +9,7 @@
     "ng": "ng",
     "build": "ng build --configuration production",
     "test": "ng test",
+    "lint": "ng lint demoFront",
     "lint:project": "ng lint demoFront --",
     "e2e": "ng e2e",
     "check:duplicates": "jscpd src",
