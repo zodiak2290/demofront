@@ -29,34 +29,46 @@ jobs:
 
       - name: Run lint
         run: npm run lint
-      - name: Check for duplicated code (jscpd)
-        run: npm run check:duplicates
 
-
-      - name: Run jscpd and fail if duplicates are found
+      - name: Run jscpd y generar comentario markdown
         run: |
           mkdir -p report
-          npx jscpd src --config .jscpd > report/jscpd-report.txt
-          cat report/jscpd-report.txt
+          npx jscpd src --config .jscpd --reporters console > report/jscpd-report.txt
+
+          echo "## 🔁 Código duplicado detectado" > report/jscpd-comment.md
+          echo "**🚨 Se encontraron bloques duplicados en el análisis de código.**" >> report/jscpd-comment.md
+          echo "" >> report/jscpd-comment.md
+          echo "<details><summary>📋 Ver duplicaciones detectadas</summary>" >> report/jscpd-comment.md
+          echo "" >> report/jscpd-comment.md
+          cat report/jscpd-report.txt >> report/jscpd-comment.md
+          echo "" >> report/jscpd-comment.md
+          echo "</details>" >> report/jscpd-comment.md
+          echo "" >> report/jscpd-comment.md
+          echo "📎 [Ver reporte HTML completo](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> report/jscpd-comment.md
+          echo "_Actualizado: $(date -u) UTC_" >> report/jscpd-comment.md
+
+          # Marcar duplicaciones como variable de entorno
           DUPLICATES=$(grep -c "Clone found" report/jscpd-report.txt || true)
-          if [ "$DUPLICATES" -gt 0 ]; then
-            echo "❌ Se detectó duplicación de código. Cancelando workflow."
-            exit 1
-          fi
+          echo "jscpd_has_duplicates=$DUPLICATES" >> $GITHUB_ENV
 
       - name: Comentar duplicación en el PR (si existe)
-        if: ${{ github.event_name == 'pull_request' && failure() }}
+        if: ${{ github.event_name == 'pull_request' }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          path: report/jscpd-report.txt
+          path: report/jscpd-comment.md
           header: jscpd-duplicate-warning
 
-      - name: Upload jscpd HTML report
+      - name: Subir reporte HTML de jscpd
         uses: actions/upload-artifact@v4
         with:
           name: jscpd-report
           path: report/
 
+      - name: Cancelar workflow si hay duplicados
+        if: ${{ env.jscpd_has_duplicates != '0' }}
+        run: |
+          echo "❌ Se detectó código duplicado. Cancelando build..."
+          exit 1
 
       - name: Run unit tests with coverage
         run: npm test -- --code-coverage --watch=false --browsers=ChromeHeadless
