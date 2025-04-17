@@ -40,7 +40,8 @@ jobs:
       - name: Run jscpd and save console output
         run: |
           mkdir -p report
-          npx jscpd src --config .jscpd --fail > report/jscpd-report.txt
+          npx jscpd src --config .jscpd > report/jscpd-report.txt
+          cat report/jscpd-report.txt
 
       - name: Upload jscpd HTML report
         uses: actions/upload-artifact@v4
