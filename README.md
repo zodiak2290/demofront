@@ -2,6 +2,27 @@
 
 DemoFront is a modern and responsive web application built with Angular, designed to showcase a personal portfolio. This application allows users to present their skills, projects, contact information, and social media links in an engaging and user-friendly manner.
 
+## ⚙️ CI/CD y Calidad del Código
+
+Este proyecto cuenta con un flujo CI/CD automatizado mediante **GitHub Actions**.
+
+### ✔️ Controles implementados
+
+- 🔍 **Linting**: Validación de estilo y errores comunes
+- 🔁 **jscpd**: Análisis de código duplicado
+- ✅ **Unit tests** con reporte de cobertura
+- 💬 Comentarios automáticos en PRs con duplicados detectados
+- 🏷️ Etiqueta automática `needs-refactor` si hay clones
+- ⛔ Bloqueo de merge si hay duplicación o errores
+- 📊 **Codecov** para visualizar cobertura por archivo
+- 🚀 Deploy automático a Firebase Hosting
+
+### 📎 Enlaces
+
+- 🔗 [Ver reporte de cobertura en Codecov](https://app.codecov.io/gh/zodiak2290/demofront)
+- 🧪 [Ver historial de acciones (GitHub Actions)](https://github.com/zodiak2290/demofront/actions)
+
+
 ## Features
 
 *   **Dynamic Content:** Displays personal information, skills, projects, and contact details dynamically.
