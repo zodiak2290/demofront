@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormArray,
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrService } from 'ngx-toastr';
 import { SocialIconService } from 'src/app/services/social-icon/social-icon.service';
@@ -11,15 +17,9 @@ import { FIELD_LABELS } from 'src/app/shared/constants/field-labels';
 @Component({
   selector: 'app-info-card',
   standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    FontAwesomeModule,
-    DragDropModule
-  ],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, FontAwesomeModule, DragDropModule],
   templateUrl: './info-card.component.html',
-  styleUrl: './info-card.component.css'
+  styleUrl: './info-card.component.css',
 })
 export class InfoCardComponent {
   uid!: string;
@@ -40,7 +40,10 @@ export class InfoCardComponent {
     return this.form.get('socialLinks') as FormArray;
   }
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+  ) {
     this.form = this.fb.group({
       nombre: [''],
       rol: [''],
@@ -49,7 +52,7 @@ export class InfoCardComponent {
       email: [''],
       telefono: [''],
       whatsapp: [''],
-      socialLinks: this.fb.array([])
+      socialLinks: this.fb.array([]),
     });
 
     this.uid = this.userService.getIdentity()?.uid || '';
@@ -76,7 +79,7 @@ export class InfoCardComponent {
     try {
       const data = {
         ...this.form.value,
-        fieldOrder: this.fields.map(f => f.key) // ⬅️ Guardamos el orden
+        fieldOrder: this.fields.map((f) => f.key), // ⬅️ Guardamos el orden
       };
       await this.userService.saveInfoUser(this.uid, data);
       this.toastr.success('Información guardada correctamente', 'Éxito', { timeOut: 3000 });
@@ -86,7 +89,6 @@ export class InfoCardComponent {
       this.guardando = false;
       this.form.enable();
     }
-
   }
 
   async loadInfoUser() {
@@ -97,9 +99,9 @@ export class InfoCardComponent {
         this.loadSocialLinks(data.socialLinks);
 
         const fieldOrder = data.fieldOrder ?? Object.keys(this.FIELD_LABELS);
-        this.fields = fieldOrder.map(key => ({
+        this.fields = fieldOrder.map((key) => ({
           key,
-          label: this.FIELD_LABELS[key]
+          label: this.FIELD_LABELS[key],
         }));
       }
 
@@ -115,7 +117,6 @@ export class InfoCardComponent {
     }
   }
 
-
   loadSocialLinks(links: any[] = []) {
     this.updateSocialLinks(links ?? []);
   }
@@ -128,16 +129,14 @@ export class InfoCardComponent {
     if (!this.isOwner) return;
 
     moveItemInArray(this.socialLinks.controls, event.previousIndex, event.currentIndex);
-    const reorderedLinks = this.socialLinks.controls.map(ctrl =>
-      this.fb.group({ url: [ctrl.get('url')?.value || ''] })
+    const reorderedLinks = this.socialLinks.controls.map((ctrl) =>
+      this.fb.group({ url: [ctrl.get('url')?.value || ''] }),
     );
     this.updateSocialLinks(reorderedLinks);
   }
 
   private updateSocialLinks(links: any[]) {
-    const arr = links.map(link =>
-      this.fb.group({ url: [link?.url || link] })
-    );
+    const arr = links.map((link) => this.fb.group({ url: [link?.url || link] }));
     this.form.setControl('socialLinks', this.fb.array(arr));
   }
 
@@ -146,5 +145,9 @@ export class InfoCardComponent {
     moveItemInArray(this.fields, event.previousIndex, event.currentIndex);
   }
 
-
+  duplicatedCode() {
+    console.log('Hola mundo');
+    console.log('Hola mundo');
+    console.log('Hola mundo');
+  }
 }
