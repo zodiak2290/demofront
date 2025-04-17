@@ -1,25 +1,18 @@
 import { Component, effect, inject, input, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
+import { FIELD_LABELS } from 'src/app/shared/constants/field-labels';
 
 @Component({
   selector: 'app-datos-personales',
   templateUrl: './datos-personales.component.html',
   styleUrls: ['./datos-personales.component.css']
 })
-export class DatosPersonalesComponent implements OnInit {
+export class DatosPersonalesComponent {
   data!: Record<string, any>;
   private userService = inject(UserService);
   orderedFields: { key: string; label: string; value: string }[] = [];
 
-  readonly FIELD_LABELS: Record<string, string> = {
-    nombre: 'Nombre',
-    rol: 'Rol',
-    hobbies: 'Hobbies',
-    nacimiento: 'Fecha y lugar de nacimiento',
-    email: 'Email',
-    telefono: 'Teléfono',
-    whatsapp: 'Whatsapp'
-  };
+  readonly FIELD_LABELS = FIELD_LABELS;
 
   constructor() {
     effect(() => {
@@ -27,8 +20,6 @@ export class DatosPersonalesComponent implements OnInit {
       this.showData();
     });
   }
-
-  ngOnInit() {}
 
   showData() {
     if (this.data) {

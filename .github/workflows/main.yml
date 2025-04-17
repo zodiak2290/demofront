@@ -22,8 +22,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      #- name: Run lint
-      #  run: npm run lint
+      - name: Run lint
+        run: npm run lint
+      - name: Check for duplicated code (jscpd)
+        run: npm run check:duplicates
+
+      - name: Upload jscpd HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jscpd-report
+          path: report/
 
       - name: Run unit tests with coverage
         run: npm test -- --code-coverage --watch=false --browsers=ChromeHeadless

@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './redes-sociales.component.html',
   styleUrls: ['./redes-sociales.component.css']
 })
-export class RedesSocialesComponent implements OnInit {
+export class RedesSocialesComponent {
   data!: Record<string, any>;
   private userService = inject(UserService);
   private socialIconService = inject(SocialIconService);
@@ -17,8 +17,6 @@ export class RedesSocialesComponent implements OnInit {
       this.data = this.userService.infoUser();
     });
   }
-
-  ngOnInit() {}
 
   getSocialLinks(): string[] {
     return Array.isArray(this.data.socialLinks)

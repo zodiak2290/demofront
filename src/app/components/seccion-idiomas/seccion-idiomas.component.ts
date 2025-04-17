@@ -5,11 +5,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './seccion-idiomas.component.html',
   styleUrls: ['./seccion-idiomas.component.css']
 })
-export class SeccionIdiomasComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class SeccionIdiomasComponent {}

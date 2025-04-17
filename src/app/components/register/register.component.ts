@@ -8,7 +8,7 @@ import { UserService } from '../../services/user/user.service';
   styleUrls: ['./register.component.css'],
   providers: [UserService]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   public user: UserModel;
 
   constructor(
@@ -16,8 +16,6 @@ export class RegisterComponent implements OnInit {
   ) {
       this.user = new UserModel("", "", "", "", "", "", "");
    }
-
-  ngOnInit() {}
 
   async onSubmit(registerForm){
     try {

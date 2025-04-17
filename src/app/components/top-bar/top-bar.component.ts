@@ -10,7 +10,7 @@ import { LANGUAGES } from 'src/app/enums/languages.enum';
   templateUrl: './top-bar.component.html',
   styleUrls: ['./top-bar.component.css']
 })
-export class TopBarComponent implements OnInit  {
+export class TopBarComponent {
 
   public activeLang = LANGUAGES.SPANISH;
   feed: FeedVue;
@@ -34,9 +34,6 @@ export class TopBarComponent implements OnInit  {
       }
     });
   }
-
-
-  ngOnInit() {}
 
   async logout() {
     await this.userService.logout();

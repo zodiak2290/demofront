@@ -1,0 +1,8 @@
+{
+  "threshold": 1,
+  "reporters": ["html"],
+  "ignore": [
+    "**/*.spec.ts",
+    "**/environments/**"
+  ]
+}
