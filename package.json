@@ -12,7 +12,7 @@
     "lint": "ng lint demoFront",
     "lint:project": "ng lint demoFront --",
     "e2e": "ng e2e",
-    "check:duplicates": "jscpd --config .jscpd",
+    "check:duplicates": "jscpd src --config .jscpd",
     "prepare": "husky install"
   },
   "lint-staged": {

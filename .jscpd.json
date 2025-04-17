@@ -6,7 +6,6 @@
   "ignore": [
     "**/*.spec.ts",
     "**/environments/**",
-    "**/node_modules/**",
-    "node_modules/**"
+    "**/node_modules/**"
   ]
 }
