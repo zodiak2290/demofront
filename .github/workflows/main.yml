@@ -32,12 +32,6 @@ jobs:
       - name: Check for duplicated code (jscpd)
         run: npm run check:duplicates
 
-      - name: Comentar duplicación en el PR (si existe)
-        if: ${{ github.event_name == 'pull_request' && failure() }}
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          path: report/jscpd-report.txt
-          header: jscpd-duplicate-warning
 
       - name: Run jscpd and fail if duplicates are found
         run: |
@@ -49,6 +43,13 @@ jobs:
             echo "❌ Se detectó duplicación de código. Cancelando workflow."
             exit 1
           fi
+
+      - name: Comentar duplicación en el PR (si existe)
+        if: ${{ github.event_name == 'pull_request' && failure() }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          path: report/jscpd-report.txt
+          header: jscpd-duplicate-warning
 
       - name: Upload jscpd HTML report
         uses: actions/upload-artifact@v4
