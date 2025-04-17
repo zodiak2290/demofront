@@ -41,7 +41,7 @@ export class RedesSocialesComponent {
       console.log(mensaje);
     }
 
-    const resultado = mensaje.length + i;
+    const resultado = mensaje;
     console.log('Resultado:', resultado);
   }
 }
