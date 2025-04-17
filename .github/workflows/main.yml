@@ -33,7 +33,7 @@ jobs:
       - name: Run jscpd y generar comentario markdown
         run: |
           mkdir -p report
-          npx jscpd src --config .jscpd --reporters console > report/jscpd-report.txt
+          npx jscpd --config .jscpd.json src --reporters console > report/jscpd-report.txt
 
           echo "## 🔁 Código duplicado detectado" > report/jscpd-comment.md
           echo "**🚨 Se encontraron bloques duplicados en el análisis de código.**" >> report/jscpd-comment.md
