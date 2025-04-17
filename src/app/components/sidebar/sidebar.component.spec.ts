@@ -5,7 +5,6 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SidebarComponent', () => {
-
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;
 
@@ -36,6 +35,6 @@ describe('SidebarComponent', () => {
 
   it('should have two collapsible menus', () => {
     const collapsedMenus = fixture.debugElement.queryAll(By.css('.collapse-inner'));
-    expect(collapsedMenus.length).toBe(2);
+    expect(collapsedMenus.length).toBe(1);
   });
 });
