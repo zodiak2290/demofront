@@ -34,6 +34,11 @@ jobs:
           path: report/jscpd-report.txt
           header: jscpd-duplicate-warning
 
+      - name: Run jscpd and save console output
+        run: |
+          mkdir -p report
+          npx jscpd src --config .jscpd --fail > report/jscpd-report.txt
+
       - name: Upload jscpd HTML report
         uses: actions/upload-artifact@v4
         with:
