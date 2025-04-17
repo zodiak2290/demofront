@@ -34,16 +34,10 @@ jobs:
           path: report/jscpd-report.txt
           header: jscpd-duplicate-warning
 
-      - name: Run jscpd and fail on duplication
+      - name: Run jscpd and save console output
         run: |
           mkdir -p report
           npx jscpd src --config .jscpd --fail > report/jscpd-report.txt
-          EXIT_CODE=$?
-          cat report/jscpd-report.txt
-          if [ $EXIT_CODE -ne 0 ]; then
-            echo "❌ Código duplicado detectado. Fallando workflow..."
-            exit 1
-          fi
 
       - name: Upload jscpd HTML report
         uses: actions/upload-artifact@v4
