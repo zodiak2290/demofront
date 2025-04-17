@@ -33,15 +33,4 @@ export class RedesSocialesComponent {
   getIcon(url: string) {
     return this.socialIconService.getIcon(url);
   }
-
-  duplicatedSampleBlock() {
-    const saludo = 'Hola mundo';
-    const mensaje = `${saludo} desde jscpd`;
-    for (let i = 0; i < 3; i++) {
-      console.log(mensaje);
-    }
-
-    const resultado = mensaje;
-    console.log('Resultado:', resultado);
-  }
 }

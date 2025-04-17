@@ -144,15 +144,4 @@ export class InfoCardComponent {
     if (!this.isOwner) return;
     moveItemInArray(this.fields, event.previousIndex, event.currentIndex);
   }
-
-  duplicatedSampleBlock() {
-    const saludo = 'Hola mundo';
-    const mensaje = `${saludo} desde jscpd`;
-    for (let i = 0; i < 3; i++) {
-      console.log(mensaje);
-    }
-
-    const resultado = mensaje;
-    console.log('Resultado:', resultado);
-  }
 }
