@@ -1,15 +1,10 @@
 import { NgModule } from '@angular/core';
 import { SeccionHabilidadesComponent } from './components/seccion-habilidades/seccion-habilidades.component';
 
-import { CommonModule, registerLocaleData } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import localeEn from '@angular/common/locales/en';
-import localeEs from '@angular/common/locales/es';
-
-registerLocaleData(localeEn, 'en');
-registerLocaleData(localeEs, 'es');
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
