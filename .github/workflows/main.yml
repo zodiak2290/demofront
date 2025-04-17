@@ -12,47 +12,7 @@ permissions:
   checks: write
 
 jobs:
-  jscpd-check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.11.1
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run jscpd and fail if duplicates are found
-        run: |
-          mkdir -p report
-          npx jscpd src --config .jscpd > report/jscpd-report.txt
-          cat report/jscpd-report.txt
-          DUPLICATES=$(grep -c "Clone found" report/jscpd-report.txt || true)
-          echo "duplicates=$DUPLICATES" >> $GITHUB_ENV
-          if [ "$DUPLICATES" -gt 0 ]; then
-            echo "❌ Se detectó duplicación de código."
-            exit 1
-          fi
-
-      - name: Comentar duplicación en el PR (si existe)
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          path: report/jscpd-report.txt
-          header: jscpd-duplicate-warning
-
-      - name: Upload jscpd HTML report
-        uses: actions/upload-artifact@v4
-        with:
-          name: jscpd-report
-          path: report/
-
   build-and-test:
-    needs: jscpd-check
     runs-on: ubuntu-latest
 
     steps:
@@ -69,6 +29,33 @@ jobs:
 
       - name: Run lint
         run: npm run lint
+      - name: Check for duplicated code (jscpd)
+        run: npm run check:duplicates
+
+
+      - name: Run jscpd and fail if duplicates are found
+        run: |
+          mkdir -p report
+          npx jscpd src --config .jscpd > report/jscpd-report.txt
+          cat report/jscpd-report.txt
+          DUPLICATES=$(grep -c "Clone found" report/jscpd-report.txt || true)
+          if [ "$DUPLICATES" -gt 0 ]; then
+            echo "❌ Se detectó duplicación de código. Cancelando workflow."
+            exit 1
+          fi
+
+      - name: Comentar duplicación en el PR (si existe)
+        if: ${{ github.event_name == 'pull_request' && failure() }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          path: report/jscpd-report.txt
+          header: jscpd-duplicate-warning
+
+      - name: Upload jscpd HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jscpd-report
+          path: report/
 
       - name: Run unit tests with coverage
         run: npm test -- --code-coverage --watch=false --browsers=ChromeHeadless
@@ -91,3 +78,10 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ANGULARDEMO_68C02 }}
           channelId: live
           projectId: angulardemo-68c02
+
+      # (Opcional) Subir cobertura a Codecov
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     files: ./coverage/lcov.info
