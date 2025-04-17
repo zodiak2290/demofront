@@ -5,7 +5,7 @@ import { UserService } from 'src/app/services/user/user.service';
 @Component({
   selector: 'app-redes-sociales',
   templateUrl: './redes-sociales.component.html',
-  styleUrls: ['./redes-sociales.component.css']
+  styleUrls: ['./redes-sociales.component.css'],
 })
 export class RedesSocialesComponent {
   data!: Record<string, any>;
@@ -19,9 +19,7 @@ export class RedesSocialesComponent {
   }
 
   getSocialLinks(): string[] {
-    return Array.isArray(this.data.socialLinks)
-      ? this.data.socialLinks.map((s: any) => s.url)
-      : [];
+    return Array.isArray(this.data.socialLinks) ? this.data.socialLinks.map((s: any) => s.url) : [];
   }
 
   getSocialName(url: string): string {
@@ -35,7 +33,4 @@ export class RedesSocialesComponent {
   getIcon(url: string) {
     return this.socialIconService.getIcon(url);
   }
-
-
 }
-

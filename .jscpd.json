@@ -1,6 +1,7 @@
 {
   "threshold": 1,
-  "reporters": ["html"],
+  "reporters": ["html", "console"],
+  "output": "report",
   "ignore": [
     "**/*.spec.ts",
     "**/environments/**"
