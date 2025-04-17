@@ -34,11 +34,14 @@ export class RedesSocialesComponent {
     return this.socialIconService.getIcon(url);
   }
 
-  duplicatedCode() {
-    console.log('Hola mundo');
-    console.log('Hola mundo');
-    console.log('Hola mundo');
-    console.log('Hola mundo');
-    console.log('Hola mundo');
+  duplicatedSampleBlock() {
+    const saludo = 'Hola mundo';
+    const mensaje = `${saludo} desde jscpd`;
+    for (let i = 0; i < 3; i++) {
+      console.log(mensaje);
+    }
+
+    const resultado = mensaje.length + i;
+    console.log('Resultado:', resultado);
   }
 }

@@ -5,6 +5,8 @@
   "failOnMatch": true,
   "ignore": [
     "**/*.spec.ts",
-    "**/environments/**"
+    "**/environments/**",
+    "**/node_modules/**",
+    "node_modules/**"
   ]
 }
