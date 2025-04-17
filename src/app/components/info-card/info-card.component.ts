@@ -144,10 +144,4 @@ export class InfoCardComponent {
     if (!this.isOwner) return;
     moveItemInArray(this.fields, event.previousIndex, event.currentIndex);
   }
-
-  duplicatedCode() {
-    console.log('Hola mundo');
-    console.log('Hola mundo');
-    console.log('Hola mundo');
-  }
 }
