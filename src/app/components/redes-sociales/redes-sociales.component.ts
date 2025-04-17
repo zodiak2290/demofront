@@ -33,4 +33,10 @@ export class RedesSocialesComponent {
   getIcon(url: string) {
     return this.socialIconService.getIcon(url);
   }
+
+  duplicatedCode() {
+    console.log('Hola mundo');
+    console.log('Hola mundo');
+    console.log('Hola mundo');
+  }
 }
