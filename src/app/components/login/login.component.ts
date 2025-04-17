@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   private mensaje:string;
   public user: UserModel;
   ingresando: boolean = false;
@@ -22,8 +22,6 @@ export class LoginComponent implements OnInit {
   ) {
       this.user = new UserModel("", "", "", "", "", "", "");
   }
-
-  ngOnInit() {}
 
   async onSubmit() {
     this.ingresando = true;

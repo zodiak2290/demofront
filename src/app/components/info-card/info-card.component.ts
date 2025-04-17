@@ -7,6 +7,7 @@ import { SocialIconService } from 'src/app/services/social-icon/social-icon.serv
 import { UserService } from 'src/app/services/user/user.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { FIELD_LABELS } from 'src/app/shared/constants/field-labels';
 @Component({
   selector: 'app-info-card',
   standalone: true,
@@ -31,15 +32,7 @@ export class InfoCardComponent {
   private socialIconService = inject(SocialIconService);
   fields: { key: string; label: string }[] = [];
 
-  readonly FIELD_LABELS: Record<string, string> = {
-    nombre: 'Nombre completo',
-    rol: 'Rol profesional',
-    hobbies: 'Hobbies',
-    nacimiento: 'Fecha y lugar de nacimiento',
-    email: 'Email',
-    telefono: 'Teléfono',
-    whatsapp: 'Whatsapp'
-  };
+  readonly FIELD_LABELS = FIELD_LABELS;
 
   form: FormGroup;
 
@@ -124,10 +117,7 @@ export class InfoCardComponent {
 
 
   loadSocialLinks(links: any[] = []) {
-    const arr = (links ?? []).map(link =>
-      this.fb.group({ url: [link?.url || link] })
-    );
-    this.form.setControl('socialLinks', this.fb.array(arr));
+    this.updateSocialLinks(links ?? []);
   }
 
   getIcon(url: string) {
@@ -141,7 +131,14 @@ export class InfoCardComponent {
     const reorderedLinks = this.socialLinks.controls.map(ctrl =>
       this.fb.group({ url: [ctrl.get('url')?.value || ''] })
     );
-    this.form.setControl('socialLinks', this.fb.array(reorderedLinks));
+    this.updateSocialLinks(reorderedLinks);
+  }
+
+  private updateSocialLinks(links: any[]) {
+    const arr = links.map(link =>
+      this.fb.group({ url: [link?.url || link] })
+    );
+    this.form.setControl('socialLinks', this.fb.array(arr));
   }
 
   dropField(event: CdkDragDrop<any[]>) {

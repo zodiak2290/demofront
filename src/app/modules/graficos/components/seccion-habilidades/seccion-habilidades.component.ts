@@ -13,7 +13,7 @@ import { EmpresaService } from '../../../../services/empresa/empresa.service';
   templateUrl: './seccion-habilidades.component.html',
   styleUrls: ['./seccion-habilidades.component.css'],
 })
-export class SeccionHabilidadesComponent implements OnInit, AfterViewInit  {
+export class SeccionHabilidadesComponent implements AfterViewInit  {
   public data = {};
   loading: boolean = true;
 
@@ -59,9 +59,6 @@ export class SeccionHabilidadesComponent implements OnInit, AfterViewInit  {
 
       this.loadGrafica()
     });
-  }
-
-  ngOnInit(){
   }
 
   ngAfterViewInit() {
