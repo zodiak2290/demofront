@@ -2,6 +2,7 @@
   "threshold": 1,
   "reporters": ["html", "console"],
   "output": "report",
+  "failOnMatch": true,
   "ignore": [
     "**/*.spec.ts",
     "**/environments/**"
