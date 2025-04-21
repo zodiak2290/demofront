@@ -1,0 +1,9 @@
+.element {
+  cursor: move;
+  user-select: none;
+}
+
+.btn-group-sm .btn {
+  padding: 0.25rem 0.5rem;
+  margin-left: 1px;
+}

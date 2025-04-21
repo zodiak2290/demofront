@@ -4,29 +4,26 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormField } from '../../interfaces/form.-field.interface';
 import { FormFieldType } from '../../enums/form-field-type';
+import { FormFieldPaletteComponent } from '../form-field-palette/form-field-palette.component';
+import { FormElementComponent } from '../form-element/form-element.component';
+import { DEFAULT_FORM_FIELDS } from '../../constants/form-field-palette.data';
 
 @Component({
   selector: 'app-dinamyc-form-builder',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, DragDropModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DragDropModule,
+    FormFieldPaletteComponent,
+    FormElementComponent,
+  ],
   templateUrl: './dinamyc-form-builder.component.html',
   styleUrls: ['./dinamyc-form-builder.component.css'],
 })
 export class DinamycFormBuilderComponent {
-  elements: FormField[] = [
-    { type: FormFieldType.Text, label: 'Texto' },
-    { type: FormFieldType.Textarea, label: 'Área de texto' },
-    { type: FormFieldType.Select, label: 'Seleccionar', options: ['Opción 1', 'Opción 2'] },
-    { type: FormFieldType.Button, label: 'Botón' },
-    { type: FormFieldType.Checkbox, label: 'Casilla de verificación' },
-    { type: FormFieldType.Radio, label: 'Opción múltiple', options: ['Opción A', 'Opción B'] },
-    { type: FormFieldType.Date, label: 'Fecha' },
-    { type: FormFieldType.Email, label: 'Correo electrónico' },
-    { type: FormFieldType.Number, label: 'Número' },
-    { type: FormFieldType.Tel, label: 'Teléfono' },
-    { type: FormFieldType.Url, label: 'Sitio web' },
-    { type: FormFieldType.Submit, label: 'Enviar formulario' },
-  ];
+  elements: FormField[] = [...DEFAULT_FORM_FIELDS];
 
   formElements: FormField[] = [];
 

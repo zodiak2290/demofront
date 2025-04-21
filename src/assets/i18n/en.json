@@ -57,6 +57,21 @@
   "settings.theme": "Theme",
   "settings.theme.dark": "Dark Mode",
   "settings.theme.light": "Light Mode",
-  "menu.coverage": "Coverage Report"
+  "menu.coverage": "Coverage Report",
+
+  "form": {
+    "text": "Text",
+    "textarea": "Textarea",
+    "select": "Select",
+    "button": "Button",
+    "checkbox": "Checkbox",
+    "radio": "Radio options",
+    "date": "Date",
+    "email": "Email",
+    "number": "Number",
+    "tel": "Phone",
+    "url": "Website",
+    "submit": "Submit form"
+  }
 
 }
