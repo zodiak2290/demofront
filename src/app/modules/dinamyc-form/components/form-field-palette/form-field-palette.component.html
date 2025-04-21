@@ -1,0 +1,16 @@
+<div class="card shadow-sm" style="width: 250px">
+  <div class="card-header bg-primary text-white">
+    <i class="fas fa-toolbox me-2"></i> Elementos disponibles
+  </div>
+  <div
+    class="card-body"
+    cdkDropList
+    id="source"
+    [cdkDropListData]="elements"
+    [cdkDropListConnectedTo]="['target']"
+  >
+    <div class="element border rounded p-2 mb-2 bg-light" *ngFor="let element of elements" cdkDrag>
+      <i class="fas fa-grip-vertical me-2 text-muted"></i> {{ element.label | translate }}
+    </div>
+  </div>
+</div>

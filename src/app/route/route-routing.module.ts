@@ -14,14 +14,20 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'experience', component: TimelineComponent},
-  { path: 'contacto', component: ContactoComponent},
-  { path: 'settings', component: SettingsComponent},
+  { path: 'experience', component: TimelineComponent },
+  { path: 'contacto', component: ContactoComponent },
+  { path: 'settings', component: SettingsComponent },
+  {
+    path: 'dinamycFormView',
+    loadComponent: () =>
+      import('../components/views/dinamyc-form-view/dinamyc-form-view.component').then(
+        (m) => m.DinamycFormViewComponent,
+      ),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
-
+export class AppRoutingModule {}

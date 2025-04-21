@@ -7,6 +7,7 @@
   "home.habilidades": "Habilidades",
   "menu.contacto":"Contacto",
   "menu.components":"Componentes",
+  "menu.formBuilder": "Constructor de formularios",
   "lenguajes.en": "Inglés",
   "lenguajes.es": "Español",
 
@@ -52,5 +53,28 @@
   "settings.theme": "Tema",
   "settings.theme.dark": "Modo oscuro",
   "settings.theme.light": "Modo claro",
-  "menu.coverage": "Reporte de Cobertura"
+  "menu.coverage": "Reporte de Cobertura",
+
+  "form": {
+    "text": "Texto",
+    "textarea": "Área de texto",
+    "select": "Seleccionar",
+    "button": "Botón",
+    "checkbox": "Casilla de verificación",
+    "radio": "Opción múltiple",
+    "date": "Fecha",
+    "email": "Correo electrónico",
+    "number": "Número",
+    "tel": "Teléfono",
+    "url": "Sitio web",
+    "submit": "Enviar formulario"
+  },
+  "editor": {
+    "title": "Editar campo",
+    "label": "Etiqueta",
+    "placeholder": "Texto de sugerencia",
+    "options": "Opciones (separadas por coma)",
+    "cancel": "Cancelar",
+    "save": "Guardar"
+  }
 }

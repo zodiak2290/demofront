@@ -1,0 +1,37 @@
+<div class="container-fluid d-flex" style="min-height: 60vh">
+  <!-- Panel fijo: Elementos disponibles -->
+  <app-form-field-palette [elements]="elements"> </app-form-field-palette>
+
+  <!-- Panel flexible: Formulario construido -->
+  <div class="card shadow-sm flex-grow-1">
+    <div class="card-header bg-success text-white">
+      <i class="fas fa-list me-2"></i> Formulario construido
+    </div>
+    <div
+      class="card-body"
+      cdkDropList
+      id="target"
+      [cdkDropListData]="formElements"
+      [cdkDropListConnectedTo]="['source']"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div *ngFor="let element of formElements; let i = index; trackBy: trackByFn" cdkDrag>
+        <app-form-element
+          [element]="element"
+          [index]="i"
+          (edit)="editField($event)"
+          (remove)="removeElement($event)"
+        >
+        </app-form-element>
+      </div>
+    </div>
+  </div>
+
+  <app-field-editor
+    *ngIf="selectedField"
+    [field]="selectedField"
+    (save)="saveField($event)"
+    (cancel)="cancelEdit()"
+  >
+  </app-field-editor>
+</div>
