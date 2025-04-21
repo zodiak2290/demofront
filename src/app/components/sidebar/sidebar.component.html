@@ -1,18 +1,15 @@
 <!-- Sidebar -->
 <span>
-
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="profile">
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="far fa-grin"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">
-      CV <sup>Web</sup>
-    </div>
+    <div class="sidebar-brand-text mx-3">CV <sup>Web</sup></div>
   </a>
 
   <!-- Divider -->
-  <hr class="sidebar-divider my-0">
+  <hr class="sidebar-divider my-0" />
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
@@ -32,21 +29,33 @@
     </a>
   </li>
   <!-- Divider -->
-  <hr class="sidebar-divider">
+  <hr class="sidebar-divider" />
   <!-- Nav Item - Utilities Collapse Menu -->
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComponents" aria-expanded="true" aria-controls="collapseComponents">
+    <a
+      class="nav-link collapsed"
+      href="#"
+      data-toggle="collapse"
+      data-target="#collapseComponents"
+      aria-expanded="true"
+      aria-controls="collapseComponents"
+    >
       <i class="fas fa-fw fa-university"></i>
       <span>
         {{ 'menu.components' | translate }}
       </span>
     </a>
-    <div id="collapseComponents" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+    <div
+      id="collapseComponents"
+      class="collapse"
+      aria-labelledby="headingUtilities"
+      data-parent="#accordionSidebar"
+    >
       <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">
-          {{ 'menu.inproress' | translate }}:
-        </h6>
+        <a class="collapse-item nav-link" routerLink="dinamycFormView">
+          {{ 'menu.formBuilder' | translate }}
+        </a>
       </div>
     </div>
   </li>
@@ -59,7 +68,7 @@
     </a>
   </li>
   <!-- Divider -->
-  <hr class="sidebar-divider d-none d-md-block">
+  <hr class="sidebar-divider d-none d-md-block" />
   <li class="nav-item active">
     <a class="nav-link" routerLink="contacto">
       <i class="fas fa-fw fa-envelope"></i>

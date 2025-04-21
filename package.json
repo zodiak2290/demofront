@@ -12,11 +12,13 @@
     "lint": "ng lint demoFront",
     "lint:project": "ng lint demoFront --",
     "e2e": "ng e2e",
-    "check:duplicates": "jscpd src",
+    "check:duplicates": "jscpd src --config .jscpd",
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{ts,html,css}": ["prettier --write"]
+    "*.{ts,html,css}": [
+      "prettier --write"
+    ]
   },
   "private": true,
   "dependencies": {

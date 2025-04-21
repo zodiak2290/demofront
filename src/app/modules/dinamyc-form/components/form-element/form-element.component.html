@@ -1,0 +1,80 @@
+<div class="element border rounded p-3 mb-3 bg-white" cdkDrag>
+  <div class="d-flex align-items-start justify-content-between">
+    <div class="flex-grow-1 me-3">
+      <ng-container [ngSwitch]="element.type">
+        <input
+          *ngSwitchCase="'text'"
+          class="form-control"
+          type="text"
+          [placeholder]="element.placeholder"
+        />
+        <textarea
+          *ngSwitchCase="'textarea'"
+          class="form-control"
+          [placeholder]="element.placeholder"
+        ></textarea>
+        <select *ngSwitchCase="'select'" class="form-select">
+          <option *ngFor="let opt of element.options">{{ opt }}</option>
+        </select>
+        <button *ngSwitchCase="'button'" class="btn btn-outline-primary">
+          {{ element.label }}
+        </button>
+        <input
+          *ngSwitchCase="'date'"
+          class="form-control"
+          type="date"
+          [placeholder]="element.placeholder"
+        />
+        <input
+          *ngSwitchCase="'email'"
+          class="form-control"
+          type="email"
+          [placeholder]="element.placeholder"
+        />
+        <input
+          *ngSwitchCase="'number'"
+          class="form-control"
+          type="number"
+          [placeholder]="element.placeholder"
+        />
+        <input
+          *ngSwitchCase="'tel'"
+          class="form-control"
+          type="tel"
+          [placeholder]="element.placeholder"
+        />
+        <input
+          *ngSwitchCase="'url'"
+          class="form-control"
+          type="url"
+          [placeholder]="element.placeholder"
+        />
+
+        <div *ngSwitchCase="'checkbox'" class="form-check">
+          <input type="checkbox" class="form-check-input" [id]="element.id" />
+          <label class="form-check-label" [for]="element.id">{{ element.label | translate }}</label>
+        </div>
+
+        <div *ngSwitchCase="'radio'">
+          <div class="form-check" *ngFor="let opt of element.options">
+            <input type="radio" class="form-check-input" [name]="element.id" [id]="opt" />
+            <label class="form-check-label" [for]="opt">{{ opt }}</label>
+          </div>
+        </div>
+
+        <button *ngSwitchCase="'submit'" class="btn btn-success" type="submit">
+          {{ element.label | translate }}
+        </button>
+      </ng-container>
+    </div>
+
+    <div class="btn-group btn-group-sm mt-1" role="group">
+      <button class="btn btn-secondary" (click)="edit.emit(element)">
+        <i class="fas fa-cog"></i>
+      </button>
+      <button class="btn btn-danger" (click)="remove.emit(index)">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </div>
+  </div>
+</div>

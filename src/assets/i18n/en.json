@@ -7,7 +7,7 @@
   "home.habilidades": "Skills",
   "menu.contacto":"Contact",
   "menu.components":"Components",
-
+  "menu.formBuilder": "Form Builder",
   "lenguajes.en": "English",
   "lenguajes.es": "Spanish",
 
@@ -57,6 +57,29 @@
   "settings.theme": "Theme",
   "settings.theme.dark": "Dark Mode",
   "settings.theme.light": "Light Mode",
-  "menu.coverage": "Coverage Report"
+  "menu.coverage": "Coverage Report",
+
+  "form": {
+    "text": "Text",
+    "textarea": "Textarea",
+    "select": "Select",
+    "button": "Button",
+    "checkbox": "Checkbox",
+    "radio": "Radio options",
+    "date": "Date",
+    "email": "Email",
+    "number": "Number",
+    "tel": "Phone",
+    "url": "Website",
+    "submit": "Submit form"
+  },
+  "editor": {
+    "title": "Edit field",
+    "label": "Label",
+    "placeholder": "Placeholder",
+    "options": "Options (comma separated)",
+    "cancel": "Cancel",
+    "save": "Save"
+  }
 
 }

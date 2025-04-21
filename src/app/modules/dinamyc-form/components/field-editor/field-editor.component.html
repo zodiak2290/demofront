@@ -1,0 +1,37 @@
+<div class="modal-backdrop show"></div>
+<div class="modal d-block" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ 'editor.title' | translate }}</h5>
+        <button type="button" class="btn-close" (click)="onCancel()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">{{ 'editor.label' | translate }}</label>
+          <input class="form-control" [(ngModel)]="editedField.label" />
+        </div>
+
+        <div class="mb-3" *ngIf="editedField.type === 'select' || editedField.type === 'radio'">
+          <label class="form-label">{{ 'editor.options' | translate }}</label>
+          <input
+            class="form-control"
+            [ngModel]="editedField.options?.join(', ')"
+            (ngModelChange)="updateOptions($event)"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">{{ 'editor.placeholder' | translate }}</label>
+          <input class="form-control" [(ngModel)]="editedField.placeholder" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="onCancel()">
+          {{ 'editor.cancel' | translate }}
+        </button>
+        <button class="btn btn-primary" (click)="onSave()">{{ 'editor.save' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
