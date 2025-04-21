@@ -2,26 +2,8 @@ import { Component } from '@angular/core';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-interface FormField {
-  id?: string;
-  type:
-    | 'text'
-    | 'select'
-    | 'textarea'
-    | 'button'
-    | 'checkbox'
-    | 'radio'
-    | 'date'
-    | 'email'
-    | 'number'
-    | 'tel'
-    | 'url';
-  label: string;
-  clases?: string[];
-  placeholder?: string;
-  options?: string[];
-}
+import { FormField } from '../../interfaces/form.-field.interface';
+import { FormFieldType } from '../../enums/form-field-type';
 
 @Component({
   selector: 'app-dinamyc-form-builder',
@@ -32,10 +14,17 @@ interface FormField {
 })
 export class DinamycFormBuilderComponent {
   elements: FormField[] = [
-    { type: 'text', label: 'Texto' },
-    { type: 'textarea', label: 'Textarea' },
-    { type: 'select', label: 'Select' },
-    { type: 'button', label: 'Botón' },
+    { type: FormFieldType.Text, label: 'Texto' },
+    { type: FormFieldType.Textarea, label: 'Área de texto' },
+    { type: FormFieldType.Select, label: 'Seleccionar', options: ['Opción 1', 'Opción 2'] },
+    { type: FormFieldType.Button, label: 'Botón' },
+    { type: FormFieldType.Checkbox, label: 'Casilla de verificación' },
+    { type: FormFieldType.Radio, label: 'Opción múltiple', options: ['Opción A', 'Opción B'] },
+    { type: FormFieldType.Date, label: 'Fecha' },
+    { type: FormFieldType.Email, label: 'Correo electrónico' },
+    { type: FormFieldType.Number, label: 'Número' },
+    { type: FormFieldType.Tel, label: 'Teléfono' },
+    { type: FormFieldType.Url, label: 'Sitio web' },
   ];
 
   formElements: FormField[] = [];
