@@ -21,7 +21,11 @@ export class FieldEditorComponent implements OnInit, OnChanges {
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
-    this.editedField.label = this.translate.instant(this.editedField.label);
+    if (this.editedField?.label) {
+      this.editedField.label = this.translate.instant(this.editedField.label);
+    } else {
+      this.editedField.label = '';
+    }
   }
 
   ngOnChanges() {
