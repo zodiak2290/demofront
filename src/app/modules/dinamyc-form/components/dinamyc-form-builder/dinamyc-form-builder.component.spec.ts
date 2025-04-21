@@ -130,4 +130,22 @@ describe('DinamycFormBuilderComponent', () => {
 
     expect(component.selectedField).toBeNull();
   });
+
+  it('should clone an element when dropping from another container', () => {
+    const mockElement = { id: 'x', label: 'Clonable Field' } as FormField;
+
+    component.formElements = [];
+
+    const event = {
+      previousIndex: 0,
+      currentIndex: 0,
+      previousContainer: { data: [mockElement] },
+      container: { data: component.formElements },
+    } as CdkDragDrop<FormField[]>;
+
+    component.drop(event);
+
+    expect(component.formElements.length).toBe(1);
+    expect(component.formElements[0].id).not.toBe('x');
+  });
 });
