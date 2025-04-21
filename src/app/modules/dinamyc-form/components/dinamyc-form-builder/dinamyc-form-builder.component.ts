@@ -25,6 +25,7 @@ export class DinamycFormBuilderComponent {
     { type: FormFieldType.Number, label: 'Número' },
     { type: FormFieldType.Tel, label: 'Teléfono' },
     { type: FormFieldType.Url, label: 'Sitio web' },
+    { type: FormFieldType.Submit, label: 'Enviar formulario' },
   ];
 
   formElements: FormField[] = [];

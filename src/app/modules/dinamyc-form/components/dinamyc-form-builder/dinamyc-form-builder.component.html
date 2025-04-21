@@ -2,7 +2,7 @@
   <!-- Panel fijo: Elementos disponibles -->
   <div class="card shadow-sm" style="width: 250px">
     <div class="card-header bg-primary text-white">
-      <i class="fas fa-toolbox me-2"></i>Elementos disponibles
+      <i class="fas fa-toolbox me-2"></i> Elementos disponibles
     </div>
     <div
       class="card-body"
@@ -25,7 +25,7 @@
   <!-- Panel flexible: Formulario construido -->
   <div class="card shadow-sm flex-grow-1">
     <div class="card-header bg-success text-white">
-      <i class="fas fa-list me-2"></i>Formulario construido
+      <i class="fas fa-list me-2"></i> Formulario construido
     </div>
     <div
       class="card-body"
@@ -127,6 +127,9 @@
                 type="url"
                 [placeholder]="element.placeholder || element.label"
               />
+              <button *ngSwitchCase="'submit'" class="btn btn-success" type="submit">
+                {{ element.label }}
+              </button>
             </ng-container>
           </div>
 

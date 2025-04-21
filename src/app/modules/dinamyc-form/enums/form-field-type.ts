@@ -10,4 +10,6 @@ export enum FormFieldType {
   Number = 'number',
   Tel = 'tel',
   Url = 'url',
+  Submit = 'submit',
+  File = 'file',
 }
