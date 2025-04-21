@@ -1,0 +1,73 @@
+<div class="container-fluid d-flex" style="min-height: 60vh">
+  <!-- Panel fijo: Elementos disponibles -->
+  <div class="card shadow-sm" style="width: 250px">
+    <div class="card-header bg-primary text-white">
+      <i class="fas fa-toolbox me-2"></i>Elementos disponibles
+    </div>
+    <div
+      class="card-body"
+      cdkDropList
+      id="source"
+      [cdkDropListData]="elements"
+      [cdkDropListConnectedTo]="['target']"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div
+        class="element border rounded p-2 mb-2 bg-light"
+        *ngFor="let element of elements"
+        cdkDrag
+      >
+        <i class="fas fa-grip-vertical me-2 text-muted"></i>{{ element.label }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel flexible: Formulario construido -->
+  <div class="card shadow-sm flex-grow-1">
+    <div class="card-header bg-success text-white">
+      <i class="fas fa-list me-2"></i>Formulario construido
+    </div>
+    <div
+      class="card-body"
+      cdkDropList
+      id="target"
+      [cdkDropListData]="formElements"
+      [cdkDropListConnectedTo]="['source']"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div
+        class="element border rounded p-3 mb-3 bg-white"
+        *ngFor="let element of formElements; let i = index; trackBy: trackByFn"
+        cdkDrag
+      >
+        <div class="d-flex align-items-start justify-content-between">
+          <div class="flex-grow-1 me-3">
+            <ng-container [ngSwitch]="element.type">
+              <input *ngSwitchCase="'text'" class="form-control" [placeholder]="element.label" />
+              <textarea
+                *ngSwitchCase="'textarea'"
+                class="form-control"
+                [placeholder]="element.label"
+              ></textarea>
+              <select *ngSwitchCase="'select'" class="form-select">
+                <option>{{ element.label }}</option>
+              </select>
+              <button *ngSwitchCase="'button'" class="btn btn-outline-primary">
+                {{ element.label }}
+              </button>
+            </ng-container>
+          </div>
+
+          <div class="btn-group btn-group-sm mt-1" role="group">
+            <button class="btn btn-secondary" (click)="editField(element)" title="Configurar campo">
+              <i class="fas fa-cog"></i>
+            </button>
+            <button class="btn btn-danger" (click)="removeElement(i)" title="Eliminar campo">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

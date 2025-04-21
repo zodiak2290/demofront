@@ -9,7 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 //guards
-import { RutaGuard }  from './validacion/ruta.guard';
+import { RutaGuard } from './validacion/ruta.guard';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 
@@ -26,15 +26,11 @@ import { LocalizeDatePipe } from './pipes/localize-date.pipe';
 
 import { DatePipe } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
-
 import localeEn from '@angular/common/locales/en';
 import localeEs from '@angular/common/locales/es';
-
-//import { FacebookModule } from 'ngx-facebook';
-//import { ContactoComponent } from './components/contacto/contacto.component';
 import { ToastrModule } from 'ngx-toastr';
-import {  FormulariosModule } from "./modules/formularios/formularios.module";
-import {  GraficosModule } from "./modules/graficos/graficos.module";
+import { FormulariosModule } from './modules/formularios/formularios.module';
+import { GraficosModule } from './modules/graficos/graficos.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 registerLocaleData(localeEn, 'en');
@@ -45,32 +41,37 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
-@NgModule({ declarations: [
-        AppComponent,
-        LoginComponent,
-        RegisterComponent,
-        HomeComponent,
-        SidebarComponent,
-        TopBarComponent,
-        DatosPersonalesComponent,
-        SeccionIdiomasComponent,
-        RedesSocialesComponent,
-        ProfileComponent,
-        TimelineComponent,
-        LocalizeDatePipe,
-        //InfoCardComponent
-    ],
-    bootstrap: [AppComponent], imports: [AppRoutingModule,
-        BrowserAnimationsModule, // required animations module
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient],
-            }
-        }),
-        FontAwesomeModule,
-        ToastrModule.forRoot(),
-        FormulariosModule,
-        GraficosModule], providers: [RutaGuard, DatePipe, provideHttpClient(withInterceptorsFromDi())] })
-export class AppModule { }
+@NgModule({
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    SidebarComponent,
+    TopBarComponent,
+    DatosPersonalesComponent,
+    SeccionIdiomasComponent,
+    RedesSocialesComponent,
+    ProfileComponent,
+    TimelineComponent,
+    LocalizeDatePipe,
+  ],
+  bootstrap: [AppComponent],
+  imports: [
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+    FontAwesomeModule,
+    ToastrModule.forRoot(),
+    FormulariosModule,
+    GraficosModule,
+  ],
+  providers: [RutaGuard, DatePipe, provideHttpClient(withInterceptorsFromDi())],
+})
+export class AppModule {}
