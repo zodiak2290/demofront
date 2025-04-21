@@ -15,14 +15,23 @@
       [cdkDropListConnectedTo]="['source']"
       (cdkDropListDropped)="drop($event)"
     >
-      <app-form-element
-        *ngFor="let element of formElements; let i = index; trackBy: trackByFn"
-        [element]="element"
-        [index]="i"
-        (edit)="editField($event)"
-        (remove)="removeElement($event)"
-      >
-      </app-form-element>
+      <div *ngFor="let element of formElements; let i = index; trackBy: trackByFn" cdkDrag>
+        <app-form-element
+          [element]="element"
+          [index]="i"
+          (edit)="editField($event)"
+          (remove)="removeElement($event)"
+        >
+        </app-form-element>
+      </div>
     </div>
   </div>
+
+  <app-field-editor
+    *ngIf="selectedField"
+    [field]="selectedField"
+    (save)="saveField($event)"
+    (cancel)="cancelEdit()"
+  >
+  </app-field-editor>
 </div>

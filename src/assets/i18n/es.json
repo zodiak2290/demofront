@@ -68,5 +68,13 @@
     "tel": "Teléfono",
     "url": "Sitio web",
     "submit": "Enviar formulario"
+  },
+  "editor": {
+    "title": "Editar campo",
+    "label": "Etiqueta",
+    "placeholder": "Texto de sugerencia",
+    "options": "Opciones (separadas por coma)",
+    "cancel": "Cancelar",
+    "save": "Guardar"
   }
 }

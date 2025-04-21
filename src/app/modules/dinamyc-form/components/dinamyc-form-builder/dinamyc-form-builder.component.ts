@@ -3,10 +3,10 @@ import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormField } from '../../interfaces/form.-field.interface';
-import { FormFieldType } from '../../enums/form-field-type';
 import { FormFieldPaletteComponent } from '../form-field-palette/form-field-palette.component';
 import { FormElementComponent } from '../form-element/form-element.component';
 import { DEFAULT_FORM_FIELDS } from '../../constants/form-field-palette.data';
+import { FieldEditorComponent } from '../field-editor/field-editor.component';
 
 @Component({
   selector: 'app-dinamyc-form-builder',
@@ -18,13 +18,14 @@ import { DEFAULT_FORM_FIELDS } from '../../constants/form-field-palette.data';
     DragDropModule,
     FormFieldPaletteComponent,
     FormElementComponent,
+    FieldEditorComponent,
   ],
   templateUrl: './dinamyc-form-builder.component.html',
   styleUrls: ['./dinamyc-form-builder.component.css'],
 })
 export class DinamycFormBuilderComponent {
   elements: FormField[] = [...DEFAULT_FORM_FIELDS];
-
+  selectedField: FormField | null = null;
   formElements: FormField[] = [];
 
   drop(event: CdkDragDrop<FormField[]>) {
@@ -47,18 +48,13 @@ export class DinamycFormBuilderComponent {
     this.formElements.splice(index, 1);
   }
 
-  selectedField: FormField | null = null;
-
   editField(field: FormField) {
-    this.selectedField = { ...field };
+    this.selectedField = field;
   }
 
-  saveFieldConfig() {
-    if (!this.selectedField) return;
-    const index = this.formElements.findIndex((el) => el.id === this.selectedField!.id);
-    if (index !== -1) {
-      this.formElements[index] = { ...this.selectedField };
-    }
+  saveField(field: FormField) {
+    const index = this.formElements.findIndex((f) => f.id === field.id);
+    if (index !== -1) this.formElements[index] = { ...field };
     this.selectedField = null;
   }
 

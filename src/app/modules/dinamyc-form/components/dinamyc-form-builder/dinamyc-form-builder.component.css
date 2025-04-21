@@ -39,3 +39,6 @@
   padding: 1rem;
   border-radius: 0 0 0.375rem 0.375rem;
 }
+[cdkDrag] {
+  border: 1px dashed #888;
+}

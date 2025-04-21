@@ -72,6 +72,14 @@
     "tel": "Phone",
     "url": "Website",
     "submit": "Submit form"
+  },
+  "editor": {
+    "title": "Edit field",
+    "label": "Label",
+    "placeholder": "Placeholder",
+    "options": "Options (comma separated)",
+    "cancel": "Cancel",
+    "save": "Save"
   }
 
 }
