@@ -12,6 +12,7 @@ import { FormFieldPaletteComponent } from '../form-field-palette/form-field-pale
 import { FormElementComponent } from '../form-element/form-element.component';
 import { DEFAULT_FORM_FIELDS } from '../../constants/form-field-palette.data';
 import { FieldEditorComponent } from '../field-editor/field-editor.component';
+import { DinamycFormComponent } from '../dinamyc-form/dinamyc-form.component';
 
 export interface FormRow {
   id: string;
@@ -36,6 +37,7 @@ export interface FormSection {
     FormFieldPaletteComponent,
     FormElementComponent,
     FieldEditorComponent,
+    DinamycFormComponent,
   ],
   templateUrl: './dinamyc-form-builder.component.html',
   styleUrls: ['./dinamyc-form-builder.component.css'],
@@ -44,7 +46,7 @@ export class DinamycFormBuilderComponent {
   elements: FormField[] = [...DEFAULT_FORM_FIELDS];
   selectedField: FormField | null = null;
   formElements: FormField[] = [];
-
+  showPreview = false;
   sections: FormSection[] = [{ id: 'section1', title: 'Sección 1', rows: [] }];
 
   selectedFieldLocation: {
@@ -174,5 +176,9 @@ export class DinamycFormBuilderComponent {
 
   removeRow(sectionIndex: number, rowIndex: number) {
     this.sections[sectionIndex].rows.splice(rowIndex, 1);
+  }
+
+  previewForm(showPreview: boolean) {
+    this.showPreview = showPreview;
   }
 }
