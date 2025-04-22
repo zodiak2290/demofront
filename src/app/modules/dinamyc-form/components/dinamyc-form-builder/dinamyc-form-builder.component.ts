@@ -13,18 +13,8 @@ import { FormElementComponent } from '../form-element/form-element.component';
 import { DEFAULT_FORM_FIELDS } from '../../constants/form-field-palette.data';
 import { FieldEditorComponent } from '../field-editor/field-editor.component';
 import { DinamycFormComponent } from '../dinamyc-form/dinamyc-form.component';
-
-export interface FormRow {
-  id: string;
-  columnCount: number;
-  columns: FormField[][];
-}
-
-export interface FormSection {
-  id: string;
-  title: string;
-  rows: FormRow[];
-}
+import { FormSection } from '../../interfaces/form-section.interface';
+import { FormRow } from '../../interfaces/form-row.interface';
 
 @Component({
   selector: 'app-dinamyc-form-builder',
