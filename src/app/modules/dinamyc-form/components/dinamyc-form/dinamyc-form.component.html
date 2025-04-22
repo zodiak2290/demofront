@@ -3,11 +3,11 @@
     <div *ngFor="let section of sections" class="mb-4">
       <h5 class="mb-3">{{ section.title }}</h5>
 
-      <div *ngFor="let row of section.rows" class="row mb-3">
+      <div *ngFor="let row of section.rows" class="row g-3 mb-3">
         <div
           *ngFor="let column of row.columns; let colIndex = index"
           class="col"
-          [ngClass]="'col-' + 12 / row.columnCount"
+          [ngClass]="getResponsiveColumnClass(row.columnCount)"
         >
           <div *ngFor="let field of column" class="mb-3">
             <label [for]="field.id" class="form-label">{{ field.label }}</label>

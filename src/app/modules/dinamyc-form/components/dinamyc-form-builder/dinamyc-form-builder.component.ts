@@ -47,6 +47,7 @@ export class DinamycFormBuilderComponent {
   } | null = null;
 
   idCounter = 0;
+  isMobile = window.innerWidth < 768;
 
   get connectedDropListIds(): string[] {
     const ids = ['toolbox-list'];
