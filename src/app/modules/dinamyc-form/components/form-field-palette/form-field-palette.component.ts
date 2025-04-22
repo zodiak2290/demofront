@@ -13,5 +13,6 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class FormFieldPaletteComponent {
   @Input() elements: FormField[] = [];
+  @Input() connectedDropListIds: string[] = [];
   @Output() dropped = new EventEmitter<CdkDragDrop<FormField[]>>();
 }

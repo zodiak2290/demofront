@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  DragDropModule,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormField } from '../../interfaces/form.-field.interface';
@@ -7,6 +12,18 @@ import { FormFieldPaletteComponent } from '../form-field-palette/form-field-pale
 import { FormElementComponent } from '../form-element/form-element.component';
 import { DEFAULT_FORM_FIELDS } from '../../constants/form-field-palette.data';
 import { FieldEditorComponent } from '../field-editor/field-editor.component';
+
+export interface FormRow {
+  id: string;
+  columnCount: number;
+  columns: FormField[][];
+}
+
+export interface FormSection {
+  id: string;
+  title: string;
+  rows: FormRow[];
+}
 
 @Component({
   selector: 'app-dinamyc-form-builder',
@@ -28,6 +45,29 @@ export class DinamycFormBuilderComponent {
   selectedField: FormField | null = null;
   formElements: FormField[] = [];
 
+  sections: FormSection[] = [{ id: 'section1', title: 'Sección 1', rows: [] }];
+
+  selectedFieldLocation: {
+    sectionIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    fieldIndex: number;
+  } | null = null;
+
+  idCounter = 0;
+
+  get connectedDropListIds(): string[] {
+    const ids = ['toolbox-list'];
+    this.sections.forEach((section) => {
+      section.rows.forEach((row) => {
+        row.columns.forEach((_, i) => {
+          ids.push(`${row.id}-col${i}`);
+        });
+      });
+    });
+    return ids;
+  }
+
   drop(event: CdkDragDrop<FormField[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(this.formElements, event.previousIndex, event.currentIndex);
@@ -44,21 +84,95 @@ export class DinamycFormBuilderComponent {
     return item.id || index;
   }
 
-  removeElement(index: number): void {
-    this.formElements.splice(index, 1);
+  removeElement(
+    sectionIndex: number,
+    rowIndex: number,
+    columnIndex: number,
+    fieldIndex: number,
+  ): void {
+    this.sections[sectionIndex].rows[rowIndex].columns[columnIndex].splice(fieldIndex, 1);
   }
 
-  editField(field: FormField) {
+  editField(
+    field: FormField,
+    sectionIndex: number,
+    rowIndex: number,
+    columnIndex: number,
+    fieldIndex: number,
+  ) {
     this.selectedField = field;
+    this.selectedFieldLocation = { sectionIndex, rowIndex, columnIndex, fieldIndex };
   }
 
-  saveField(field: FormField) {
-    const index = this.formElements.findIndex((f) => f.id === field.id);
-    if (index !== -1) this.formElements[index] = { ...field };
+  saveField(updatedField: FormField) {
+    if (!this.selectedFieldLocation) return;
+
+    const { sectionIndex, rowIndex, columnIndex, fieldIndex } = this.selectedFieldLocation;
+    this.sections[sectionIndex].rows[rowIndex].columns[columnIndex][fieldIndex] = {
+      ...updatedField,
+    };
+
     this.selectedField = null;
+    this.selectedFieldLocation = null;
   }
 
   cancelEdit() {
     this.selectedField = null;
+    this.selectedFieldLocation = null;
+  }
+
+  addRow(sectionIndex: number, columnCount: number): void {
+    const section = this.sections[sectionIndex];
+    const rowId = `row${++this.idCounter}`;
+    const columns: FormField[][] = Array.from({ length: columnCount }, () => []);
+
+    const newRow: FormRow = {
+      id: rowId,
+      columnCount,
+      columns,
+    };
+
+    section.rows.push(newRow);
+  }
+
+  addSection() {
+    const id = 'section' + ++this.idCounter;
+    this.sections.push({ id, title: 'Sección ' + this.sections.length, rows: [] });
+  }
+
+  changeColumnCount(sectionIndex: number, rowIndex: number, newCount: number) {
+    const row = this.sections[sectionIndex].rows[rowIndex];
+    const currentFields = row.columns.flat();
+    const newColumns: FormField[][] = Array.from({ length: newCount }, () => []);
+    currentFields.forEach((f, i) => newColumns[i % newCount].push(f));
+
+    row.columns = newColumns;
+    row.columnCount = newCount;
+  }
+
+  onDropField(
+    event: CdkDragDrop<FormField[]>,
+    secIndex: number,
+    rowIndex: number,
+    colIndex: number,
+  ) {
+    const row = this.sections[secIndex].rows[rowIndex];
+    const target = row.columns[colIndex];
+    const prev = event.previousContainer.data;
+    if (event.previousContainer === event.container) {
+      moveItemInArray(target, event.previousIndex, event.currentIndex);
+    } else if (event.previousContainer.id === 'toolbox-list') {
+      const cloned = {
+        ...event.item.data,
+        id: 'field' + ++this.idCounter,
+      };
+      target.splice(event.currentIndex, 0, cloned);
+    } else {
+      transferArrayItem(prev, target, event.previousIndex, event.currentIndex);
+    }
+  }
+
+  removeRow(sectionIndex: number, rowIndex: number) {
+    this.sections[sectionIndex].rows.splice(rowIndex, 1);
   }
 }

@@ -1,4 +1,4 @@
-<div class="element border rounded p-3 mb-3 bg-white" cdkDrag>
+<div class="element" cdkDrag>
   <div class="d-flex align-items-start justify-content-between">
     <div class="flex-grow-1 me-3">
       <ng-container [ngSwitch]="element.type">
@@ -13,7 +13,7 @@
           class="form-control"
           [placeholder]="element.placeholder"
         ></textarea>
-        <select *ngSwitchCase="'select'" class="form-select">
+        <select *ngSwitchCase="'select'" class="form-control form-select">
           <option *ngFor="let opt of element.options">{{ opt }}</option>
         </select>
         <button *ngSwitchCase="'button'" class="btn btn-outline-primary">
