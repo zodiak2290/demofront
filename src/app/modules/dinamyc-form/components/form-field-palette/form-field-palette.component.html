@@ -1,34 +1,36 @@
-<!--
-<div class="card shadow-sm" style="width: 250px">
-  <div class="card-header bg-primary text-white">
-    <i class="fas fa-toolbox me-2"></i> Elementos disponibles
-  </div>
-  <div
-    class="card-body"
-    cdkDropList
-    id="source"
-    [cdkDropListData]="elements"
-    [cdkDropListConnectedTo]="['target']"
-  >
-    <div class="element border rounded p-2 mb-2 bg-light" *ngFor="let element of elements" cdkDrag>
-      <i class="fas fa-grip-vertical me-2 text-muted"></i> {{ element.label | translate }}
+<div id="accordion">
+  <div class="card shadow-sm mb-3" style="width: 250px; min-width: 100%; max-width: 100%">
+    <div class="card-header bg-primary" id="headingOne">
+      <h5 class="mb-0">
+        <button
+          class="btn"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+          [disabled]="!isMobile"
+        >
+          <i class="fas fa-toolbox me-2"></i> Elementos disponibles
+        </button>
+      </h5>
     </div>
-  </div>
-</div>
--->
 
-<div class="card shadow-sm mb-3" style="width: 250px; min-width: 100%; max-width: 100%">
-  <div class="card-header bg-primary text-white">
-    <i class="fas fa-toolbox me-2"></i> Elementos disponibles
-  </div>
-  <div class="card-body">
     <div
-      class="element border rounded p-2 mb-2 bg-light"
-      *ngFor="let element of elements"
-      cdkDrag
-      [cdkDragData]="element"
+      id="collapseOne"
+      aria-labelledby="headingOne"
+      data-parent="#accordion"
+      [ngClass]="isMobile"
     >
-      <i class="fas fa-grip-vertical me-2 text-muted"></i> {{ element.label | translate }}
+      <div class="card-body">
+        <div
+          class="element border rounded p-2 mb-2 bg-light"
+          *ngFor="let element of elements"
+          cdkDrag
+          [cdkDragData]="element"
+        >
+          <i class="fas fa-grip-vertical me-2 text-muted"></i> {{ element.label | translate }}
+        </div>
+      </div>
     </div>
   </div>
 </div>

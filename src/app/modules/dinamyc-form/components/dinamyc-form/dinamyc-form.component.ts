@@ -61,4 +61,8 @@ export class DinamycFormComponent {
         return 'col-12'; // fallback
     }
   }
+
+  onButtonClick(field) {
+    console.log(field);
+  }
 }
