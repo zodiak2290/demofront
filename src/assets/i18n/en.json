@@ -78,8 +78,11 @@
     "label": "Label",
     "placeholder": "Placeholder",
     "options": "Options (comma separated)",
+    "required": "Required field",
+    "disabled": "Disabled field",
     "cancel": "Cancel",
     "save": "Save"
   }
+
 
 }

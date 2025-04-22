@@ -74,7 +74,10 @@
     "label": "Etiqueta",
     "placeholder": "Texto de sugerencia",
     "options": "Opciones (separadas por coma)",
+    "required": "Campo obligatorio",
+    "disabled": "Campo deshabilitado",
     "cancel": "Cancelar",
     "save": "Guardar"
   }
+
 }
