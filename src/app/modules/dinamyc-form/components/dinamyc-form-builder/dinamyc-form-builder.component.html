@@ -16,7 +16,13 @@
       <i class="fas fa-list me-2"></i> Formulario construido
     </div>
 
-    <div class="card-body" style="height: 65vh; overflow-y: auto">
+    <div class="card-body" style="height: 65vh; overflow-y: auto" *ngIf="showPreview">
+      <div class="mb-4">
+        <app-dinamyc-form [sections]="sections"></app-dinamyc-form>
+      </div>
+    </div>
+
+    <div class="card-body" style="height: 65vh; overflow-y: auto" *ngIf="!showPreview">
       <!-- Iteramos secciones -->
       <div
         *ngFor="let section of sections; let s = index"
@@ -102,6 +108,12 @@
       <button class="btn btn-secondary" (click)="addSection()" disabled="true">
         + Agregar sección
       </button>
+      <button class="btn btn-primary ms-2" (click)="previewForm(true)" *ngIf="!showPreview">
+        Vista previa
+      </button>
+      <button class="btn btn-primary ms-2" (click)="previewForm(false)" *ngIf="showPreview">
+        Regresar
+      </button>
       <!---
       <button class="btn btn-primary" (click)="saveForm()">Guardar formulario</button>
       <button class="btn btn-danger" (click)="resetForm()">Restablecer formulario</button>
@@ -116,3 +128,4 @@
     (cancelReq)="cancelEdit()"
   ></app-field-editor>
 </div>
+{{ sections | json }}
