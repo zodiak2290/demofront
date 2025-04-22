@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FormSection } from '../../interfaces/form-section.interface';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dinamyc-form.component.html',
   styleUrls: ['./dinamyc-form.component.css'],
 })
-export class DinamycFormComponent {
+export class DinamycFormComponent implements OnChanges {
   @Input() sections: FormSection[] = [];
   form: FormGroup;
 
