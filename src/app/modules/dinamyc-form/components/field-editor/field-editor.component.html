@@ -21,9 +21,33 @@
           />
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3" *ngIf="editedField.type !== 'submit' && editedField.type !== 'button'">
           <label class="form-label">{{ 'editor.placeholder' | translate }}</label>
           <input class="form-control" [(ngModel)]="editedField.placeholder" />
+        </div>
+
+        <div class="form-check form-switch mb-2">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="requiredSwitch"
+            [(ngModel)]="editedField.required"
+          />
+          <label class="form-check-label" for="requiredSwitch">
+            {{ 'editor.required' | translate }}
+          </label>
+        </div>
+
+        <div class="form-check form-switch mb-2">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="disabledSwitch"
+            [(ngModel)]="editedField.disabled"
+          />
+          <label class="form-check-label" for="disabledSwitch">
+            {{ 'editor.disabled' | translate }}
+          </label>
         </div>
       </div>
       <div class="modal-footer">

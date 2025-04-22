@@ -1,37 +1,118 @@
 <div class="container-fluid d-flex" style="min-height: 60vh">
   <!-- Panel fijo: Elementos disponibles -->
-  <app-form-field-palette [elements]="elements"> </app-form-field-palette>
+  <app-form-field-palette
+    [elements]="elements"
+    cdkDropList
+    id="toolbox-list"
+    [cdkDropListData]="elements"
+    [cdkDropListConnectedTo]="connectedDropListIds"
+  >
+    <!-- Dentro del componente, asegúrate que los elementos tengan cdkDrag y [cdkDragData] -->
+  </app-form-field-palette>
 
   <!-- Panel flexible: Formulario construido -->
   <div class="card shadow-sm flex-grow-1">
     <div class="card-header bg-success text-white">
       <i class="fas fa-list me-2"></i> Formulario construido
     </div>
-    <div
-      class="card-body"
-      cdkDropList
-      id="target"
-      [cdkDropListData]="formElements"
-      [cdkDropListConnectedTo]="['source']"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <div *ngFor="let element of formElements; let i = index; trackBy: trackByFn" cdkDrag>
-        <app-form-element
-          [element]="element"
-          [index]="i"
-          (edit)="editField($event)"
-          (remove)="removeElement($event)"
-        >
-        </app-form-element>
+
+    <div class="card-body" style="height: 65vh; overflow-y: auto">
+      <!-- Iteramos secciones -->
+      <div
+        *ngFor="let section of sections; let s = index"
+        class="mb-4"
+        style="height: 100px; margin-bottom: 5px"
+      >
+        <h5>{{ section.title }}</h5>
+
+        <!-- Botones para añadir filas -->
+        <div class="mb-2 btn-group">
+          <button (click)="addRow(s, 1)" class="btn btn-sm btn-secondary me-1">
+            + Fila (1 col)
+          </button>
+          <button (click)="addRow(s, 2)" class="btn btn-sm btn-secondary me-1">
+            + Fila (2 col)
+          </button>
+          <button (click)="addRow(s, 3)" class="btn btn-sm btn-secondary me-1">
+            + Fila (3 col)
+          </button>
+        </div>
+
+        <!-- Iteramos filas -->
+        <div *ngFor="let row of section.rows; let r = index" class="row mb-3 section-new">
+          <!-- Iteramos columnas -->
+          <div
+            *ngFor="let column of row.columns; let c = index"
+            class="col"
+            [ngClass]="{
+              'col-12': row.columnCount === 1,
+              'col-6': row.columnCount === 2,
+              'col-4': row.columnCount === 3,
+              'col-3': row.columnCount === 4,
+            }"
+            cdkDropList
+            [id]="row.id + '-col' + c"
+            [cdkDropListData]="column"
+            [cdkDropListConnectedTo]="connectedDropListIds"
+            (cdkDropListDropped)="onDropField($event, s, r, c)"
+            style="min-height: 40px; padding: 5px; border: 1px dotted #ccc"
+          >
+            <div
+              *ngFor="let field of column; let i = index; trackBy: trackByFn"
+              class="card p-2 mb-2 bg-light"
+              cdkDrag
+            >
+              <app-form-element
+                [element]="field"
+                [index]="i"
+                (edit)="editField(field, s, r, c, i)"
+                (remove)="removeElement(s, r, c, i)"
+              ></app-form-element>
+            </div>
+          </div>
+
+          <!-- Selector de columnas -->
+          <div class="col-12 d-flex justify-content-end mt-2">
+            <div class="d-flex align-items-center">
+              <div class="form-group mb-0">
+                <label for="columnCount-{{ row.id }}" class="form-label mb-0 me-2">Columnas:</label>
+                <select
+                  id="columnCount-{{ row.id }}"
+                  class="form-control form-control-sm w-auto d-inline-block"
+                  [ngModel]="row.columnCount"
+                  (ngModelChange)="changeColumnCount(s, r, $event)"
+                >
+                  <option *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]" [value]="n">{{ n }}</option>
+                </select>
+              </div>
+
+              <button
+                class="btn btn-outline-danger btn-sm"
+                (click)="removeRow(s, r)"
+                title="Eliminar esta fila del formulario"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="card-footer text-muted d-flex justify-content-end align-items-center">
+      <button class="btn btn-secondary" (click)="addSection()" disabled="true">
+        + Agregar sección
+      </button>
+      <!---
+      <button class="btn btn-primary" (click)="saveForm()">Guardar formulario</button>
+      <button class="btn btn-danger" (click)="resetForm()">Restablecer formulario</button>
+    --></div>
   </div>
 
+  <!-- Editor flotante -->
   <app-field-editor
     *ngIf="selectedField"
     [field]="selectedField"
-    (save)="saveField($event)"
-    (cancel)="cancelEdit()"
-  >
-  </app-field-editor>
+    (saveChanges)="saveField($event)"
+    (cancelReq)="cancelEdit()"
+  ></app-field-editor>
 </div>

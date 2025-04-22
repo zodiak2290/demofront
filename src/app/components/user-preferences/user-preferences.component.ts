@@ -9,12 +9,9 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
 @Component({
   selector: 'app-user-preferences',
   standalone: true,
-  imports: [
-    FormsModule,
-    TranslateModule
-  ],
+  imports: [FormsModule, TranslateModule],
   templateUrl: './user-preferences.component.html',
-  styleUrl: './user-preferences.component.css'
+  styleUrl: './user-preferences.component.css',
 })
 export class UserPreferencesComponent {
   selectedLanguage = LANGUAGES.SPANISH;
@@ -28,13 +25,6 @@ export class UserPreferencesComponent {
   ) {
     this.selectedTheme = this.themeService.getCurrentTheme();
     this.selectedLanguage = this.languageService.getLang();
-
-  }
-  saveSettings() {
-    console.log('Guardando configuración:', {
-      language: this.selectedLanguage,
-      theme: this.selectedTheme
-    });
   }
 
   cambiarLenguaje(lang) {
