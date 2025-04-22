@@ -1,6 +1,6 @@
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormField } from '../../interfaces/form.-field.interface';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -16,9 +16,21 @@ export class FormFieldPaletteComponent implements OnInit {
   @Input() connectedDropListIds: string[] = [];
   @Output() dropped = new EventEmitter<CdkDragDrop<FormField[]>>();
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    const width = (event.target as Window).innerWidth;
+    const height = (event.target as Window).innerHeight;
+    console.log(`Window size: ${width}x${height}`);
+    this.setMobile();
+  }
+
   isMobile = false;
 
   ngOnInit() {
-    this.isMobile = window.innerWidth < 768;
+    this.setMobile();
+  }
+
+  setMobile() {
+    this.isMobile = window.innerWidth < 1300;
   }
 }

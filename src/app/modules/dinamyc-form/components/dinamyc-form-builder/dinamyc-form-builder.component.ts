@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import {
   CdkDragDrop,
   DragDropModule,
@@ -32,13 +32,12 @@ import { FormRow } from '../../interfaces/form-row.interface';
   templateUrl: './dinamyc-form-builder.component.html',
   styleUrls: ['./dinamyc-form-builder.component.css'],
 })
-export class DinamycFormBuilderComponent {
+export class DinamycFormBuilderComponent implements OnInit {
   elements: FormField[] = [...DEFAULT_FORM_FIELDS];
   selectedField: FormField | null = null;
   formElements: FormField[] = [];
   showPreview = false;
   sections: FormSection[] = [{ id: 'section1', title: 'Sección 1', rows: [] }];
-
   selectedFieldLocation: {
     sectionIndex: number;
     rowIndex: number;
@@ -47,7 +46,23 @@ export class DinamycFormBuilderComponent {
   } | null = null;
 
   idCounter = 0;
-  isMobile = window.innerWidth < 768;
+  isMobile = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    const width = (event.target as Window).innerWidth;
+    const height = (event.target as Window).innerHeight;
+    console.log(`Window size: ${width}x${height}`);
+    this.setMobile();
+  }
+
+  ngOnInit() {
+    this.setMobile();
+  }
+
+  setMobile() {
+    this.isMobile = window.innerWidth < 1300;
+  }
 
   get connectedDropListIds(): string[] {
     const ids = ['toolbox-list'];
