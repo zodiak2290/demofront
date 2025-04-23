@@ -35,37 +35,39 @@ describe('FormFieldPaletteComponent', () => {
     expect(component.dropped.emit).toHaveBeenCalledWith(mockEvent);
   });
 
-  it('should set isMobile to true if window width is less than 1300', () => {
-    spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1200);
-
-    component.setMobile();
-
+  it('should return true for isMobile when MobileDetectorService indicates mobile', () => {
+    const mobileServiceSpy = spyOnProperty(
+      component['mobileService'],
+      'isMobile',
+      'get',
+    ).and.returnValue(true);
     expect(component.isMobile).toBeTrue();
+    expect(mobileServiceSpy).toHaveBeenCalled();
   });
 
-  it('should set isMobile to false if window width is greater than or equal to 1300', () => {
-    spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1300);
-
-    component.setMobile();
-
+  it('should return false for isMobile when MobileDetectorService indicates not mobile', () => {
+    const mobileServiceSpy = spyOnProperty(
+      component['mobileService'],
+      'isMobile',
+      'get',
+    ).and.returnValue(false);
     expect(component.isMobile).toBeFalse();
+    expect(mobileServiceSpy).toHaveBeenCalled();
   });
 
-  it('should update isMobile on window resize', () => {
-    spyOn(component, 'setMobile');
-    const resizeEvent = new Event('resize');
-
-    window.dispatchEvent(resizeEvent);
-
-    expect(component.setMobile).toHaveBeenCalled();
+  it('should have an empty connectedDropListIds array by default', () => {
+    expect(component.connectedDropListIds).toEqual([]);
   });
 
-  it('should log window size on resize', () => {
-    spyOn(console, 'log');
-    const mockEvent = { target: { innerWidth: 1024, innerHeight: 768 } } as unknown as Event;
+  it('should update elements when @Input elements is set', () => {
+    const mockElements: FormField[] = [{ id: '1', label: 'Field 1', type: 'text' } as FormField];
+    component.elements = mockElements;
+    expect(component.elements).toEqual(mockElements);
+  });
 
-    component.onResize(mockEvent);
-
-    expect(console.log).toHaveBeenCalledWith('Window size: 1024x768');
+  it('should update connectedDropListIds when @Input connectedDropListIds is set', () => {
+    const mockIds = ['list1', 'list2'];
+    component.connectedDropListIds = mockIds;
+    expect(component.connectedDropListIds).toEqual(mockIds);
   });
 });

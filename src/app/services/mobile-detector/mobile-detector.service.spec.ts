@@ -14,30 +14,33 @@ describe('MobileDetectorService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should detect mobile when window width is less than the breakpoint', () => {
-    spyOnProperty(window, 'innerWidth').and.returnValue(1200);
+  it('should detect mobile when window width is less than or equal to 768', () => {
+    spyOnProperty(window, 'innerWidth').and.returnValue(768);
+    window.dispatchEvent(new Event('resize'));
+    expect(service.isMobile).toBeTrue();
+  });
+
+  it('should detect non-mobile when window width is greater than 768', () => {
+    spyOnProperty(window, 'innerWidth').and.returnValue(769);
+    window.dispatchEvent(new Event('resize'));
+    expect(service.isMobile).toBeFalse();
+  });
+
+  it('should emit true on isMobile$ when window width is less than or equal to 768', (done) => {
+    spyOnProperty(window, 'innerWidth').and.returnValue(768);
+    window.dispatchEvent(new Event('resize'));
     service.isMobile$.subscribe((isMobile) => {
       expect(isMobile).toBeTrue();
+      done();
     });
-    window.dispatchEvent(new Event('resize'));
   });
 
-  it('should detect desktop when window width is greater than or equal to the breakpoint', () => {
-    spyOnProperty(window, 'innerWidth').and.returnValue(1400);
+  it('should emit false on isMobile$ when window width is greater than 768', (done) => {
+    spyOnProperty(window, 'innerWidth').and.returnValue(769);
+    window.dispatchEvent(new Event('resize'));
     service.isMobile$.subscribe((isMobile) => {
       expect(isMobile).toBeFalse();
+      done();
     });
-    window.dispatchEvent(new Event('resize'));
-  });
-
-  it('should update isMobile$ when window is resized', () => {
-    const spy = spyOn(service.isMobile$, 'next').and.callThrough();
-    spyOnProperty(window, 'innerWidth').and.returnValue(1200);
-    window.dispatchEvent(new Event('resize'));
-    expect(spy).toHaveBeenCalledWith(true);
-
-    spyOnProperty(window, 'innerWidth').and.returnValue(1400);
-    window.dispatchEvent(new Event('resize'));
-    expect(spy).toHaveBeenCalledWith(false);
   });
 });
