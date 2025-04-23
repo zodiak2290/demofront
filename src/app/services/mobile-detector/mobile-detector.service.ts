@@ -3,15 +3,20 @@ import { BehaviorSubject, fromEvent } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MobileDetectorService {
-  private readonly mobileBreakpoint = 1300;
-  isMobile$ = new BehaviorSubject<boolean>(window.innerWidth < this.mobileBreakpoint);
+  private readonly mobileSubject = new BehaviorSubject<boolean>(this.checkIsMobile());
+  public readonly isMobile$ = this.mobileSubject.asObservable();
 
-  constructor(private ngZone: NgZone) {
-    this.ngZone.runOutsideAngular(() => {
-      fromEvent(window, 'resize').subscribe(() => {
-        const isMobile = window.innerWidth < this.mobileBreakpoint;
-        this.ngZone.run(() => this.isMobile$.next(isMobile));
-      });
+  constructor() {
+    window.addEventListener('resize', () => {
+      this.mobileSubject.next(this.checkIsMobile());
     });
+  }
+
+  private checkIsMobile(): boolean {
+    return window.innerWidth <= 768;
+  }
+
+  public get isMobile(): boolean {
+    return this.mobileSubject.value;
   }
 }

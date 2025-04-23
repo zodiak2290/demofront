@@ -12,20 +12,14 @@ import { MobileDetectorService } from 'src/app/services/mobile-detector/mobile-d
   templateUrl: './form-field-palette.component.html',
   styleUrls: ['./form-field-palette.component.css'],
 })
-export class FormFieldPaletteComponent implements OnInit {
+export class FormFieldPaletteComponent {
   @Input() elements: FormField[] = [];
   @Input() connectedDropListIds: string[] = [];
   @Output() dropped = new EventEmitter<CdkDragDrop<FormField[]>>();
 
-  isMobile = false;
+  get isMobile(): boolean {
+    return this.mobileService.isMobile;
+  }
 
   constructor(private mobileService: MobileDetectorService) {}
-
-  ngOnInit() {
-    this.setMobile();
-  }
-
-  setMobile() {
-    this.mobileService.isMobile$.subscribe((isMobile) => (this.isMobile = isMobile));
-  }
 }

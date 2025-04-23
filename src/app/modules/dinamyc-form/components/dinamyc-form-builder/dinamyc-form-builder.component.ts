@@ -33,7 +33,7 @@ import { MobileDetectorService } from 'src/app/services/mobile-detector/mobile-d
   templateUrl: './dinamyc-form-builder.component.html',
   styleUrls: ['./dinamyc-form-builder.component.css'],
 })
-export class DinamycFormBuilderComponent implements OnInit {
+export class DinamycFormBuilderComponent {
   elements: FormField[] = [...DEFAULT_FORM_FIELDS];
   selectedField: FormField | null = null;
   formElements: FormField[] = [];
@@ -47,17 +47,12 @@ export class DinamycFormBuilderComponent implements OnInit {
   } | null = null;
 
   idCounter = 0;
-  isMobile = false;
+
+  get isMobile(): boolean {
+    return this.mobileService.isMobile;
+  }
 
   constructor(private mobileService: MobileDetectorService) {}
-
-  ngOnInit() {
-    this.setMobile();
-  }
-
-  setMobile() {
-    this.mobileService.isMobile$.subscribe((isMobile) => (this.isMobile = isMobile));
-  }
 
   get connectedDropListIds(): string[] {
     const ids = ['toolbox-list'];
