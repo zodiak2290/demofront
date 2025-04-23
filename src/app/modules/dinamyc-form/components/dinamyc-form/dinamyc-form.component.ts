@@ -12,30 +12,42 @@ import { CommonModule } from '@angular/common';
 })
 export class DinamycFormComponent implements OnChanges {
   @Input() sections: FormSection[] = [];
-  form: FormGroup;
+  form: FormGroup = this.fb.group({});
 
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({});
-  }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnChanges() {
-    this.buildForm();
+  ngOnChanges(): void {
+    if (this.sections && this.sections.length > 0) {
+      this.buildForm();
+    }
   }
 
   private buildForm() {
-    const controls: { [key: string]: any } = {};
-
-    this.sections.forEach((section) => {
-      section.rows.forEach((row) => {
-        row.columns.forEach((column) => {
-          column.forEach((field) => {
-            controls[field.id] = [{ value: '', disabled: field.disabled }]; // por ahora sin validaciones
-          });
-        });
-      });
-    });
+    const controls = this.sections.reduce(
+      (acc, section) => {
+        this.processSection(section, acc);
+        return acc;
+      },
+      {} as { [key: string]: any },
+    );
 
     this.form = this.fb.group(controls);
+  }
+
+  private processSection(section: FormSection, controls: { [key: string]: any }) {
+    section.rows.forEach((row) => {
+      this.processRow(row, controls);
+    });
+  }
+
+  private processRow(row: any, controls: { [key: string]: any }) {
+    row.columns.flat().forEach((field) => {
+      this.addFieldToControls(field, controls);
+    });
+  }
+
+  private addFieldToControls(field: any, controls: { [key: string]: any }) {
+    controls[field.id] = [{ value: '', disabled: field.disabled }];
   }
 
   getValue(id: string) {
