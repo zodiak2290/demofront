@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormField } from '../../interfaces/form.-field.interface';
 import { TranslateModule } from '@ngx-translate/core';
+import { MobileDetectorService } from 'src/app/services/mobile-detector/mobile-detector.service';
 
 @Component({
   selector: 'app-form-field-palette',
@@ -16,21 +17,15 @@ export class FormFieldPaletteComponent implements OnInit {
   @Input() connectedDropListIds: string[] = [];
   @Output() dropped = new EventEmitter<CdkDragDrop<FormField[]>>();
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    const width = (event.target as Window).innerWidth;
-    const height = (event.target as Window).innerHeight;
-    console.log(`Window size: ${width}x${height}`);
-    this.setMobile();
-  }
-
   isMobile = false;
+
+  constructor(private mobileService: MobileDetectorService) {}
 
   ngOnInit() {
     this.setMobile();
   }
 
   setMobile() {
-    this.isMobile = window.innerWidth < 1300;
+    this.mobileService.isMobile$.subscribe((isMobile) => (this.isMobile = isMobile));
   }
 }

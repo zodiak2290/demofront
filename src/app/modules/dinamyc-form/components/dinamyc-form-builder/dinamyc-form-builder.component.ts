@@ -15,6 +15,7 @@ import { FieldEditorComponent } from '../field-editor/field-editor.component';
 import { DinamycFormComponent } from '../dinamyc-form/dinamyc-form.component';
 import { FormSection } from '../../interfaces/form-section.interface';
 import { FormRow } from '../../interfaces/form-row.interface';
+import { MobileDetectorService } from 'src/app/services/mobile-detector/mobile-detector.service';
 
 @Component({
   selector: 'app-dinamyc-form-builder',
@@ -48,20 +49,14 @@ export class DinamycFormBuilderComponent implements OnInit {
   idCounter = 0;
   isMobile = false;
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    const width = (event.target as Window).innerWidth;
-    const height = (event.target as Window).innerHeight;
-    console.log(`Window size: ${width}x${height}`);
-    this.setMobile();
-  }
+  constructor(private mobileService: MobileDetectorService) {}
 
   ngOnInit() {
     this.setMobile();
   }
 
   setMobile() {
-    this.isMobile = window.innerWidth < 1300;
+    this.mobileService.isMobile$.subscribe((isMobile) => (this.isMobile = isMobile));
   }
 
   get connectedDropListIds(): string[] {
