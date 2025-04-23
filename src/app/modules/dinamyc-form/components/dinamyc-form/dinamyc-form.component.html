@@ -1,4 +1,4 @@
-<div class="container py-3">
+<div class="container py-3" *ngIf="form">
   <form [formGroup]="form">
     <div *ngFor="let section of sections" class="mb-4">
       <h5 class="mb-3">{{ section.title }}</h5>
