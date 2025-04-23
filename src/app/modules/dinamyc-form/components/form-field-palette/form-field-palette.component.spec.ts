@@ -34,4 +34,40 @@ describe('FormFieldPaletteComponent', () => {
 
     expect(component.dropped.emit).toHaveBeenCalledWith(mockEvent);
   });
+
+  it('should return true for isMobile when MobileDetectorService indicates mobile', () => {
+    const mobileServiceSpy = spyOnProperty(
+      component['mobileService'],
+      'isMobile',
+      'get',
+    ).and.returnValue(true);
+    expect(component.isMobile).toBeTrue();
+    expect(mobileServiceSpy).toHaveBeenCalled();
+  });
+
+  it('should return false for isMobile when MobileDetectorService indicates not mobile', () => {
+    const mobileServiceSpy = spyOnProperty(
+      component['mobileService'],
+      'isMobile',
+      'get',
+    ).and.returnValue(false);
+    expect(component.isMobile).toBeFalse();
+    expect(mobileServiceSpy).toHaveBeenCalled();
+  });
+
+  it('should have an empty connectedDropListIds array by default', () => {
+    expect(component.connectedDropListIds).toEqual([]);
+  });
+
+  it('should update elements when @Input elements is set', () => {
+    const mockElements: FormField[] = [{ id: '1', label: 'Field 1', type: 'text' } as FormField];
+    component.elements = mockElements;
+    expect(component.elements).toEqual(mockElements);
+  });
+
+  it('should update connectedDropListIds when @Input connectedDropListIds is set', () => {
+    const mockIds = ['list1', 'list2'];
+    component.connectedDropListIds = mockIds;
+    expect(component.connectedDropListIds).toEqual(mockIds);
+  });
 });
