@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import {
   CdkDragDrop,
   DragDropModule,
@@ -13,18 +13,9 @@ import { FormElementComponent } from '../form-element/form-element.component';
 import { DEFAULT_FORM_FIELDS } from '../../constants/form-field-palette.data';
 import { FieldEditorComponent } from '../field-editor/field-editor.component';
 import { DinamycFormComponent } from '../dinamyc-form/dinamyc-form.component';
-
-export interface FormRow {
-  id: string;
-  columnCount: number;
-  columns: FormField[][];
-}
-
-export interface FormSection {
-  id: string;
-  title: string;
-  rows: FormRow[];
-}
+import { FormSection } from '../../interfaces/form-section.interface';
+import { FormRow } from '../../interfaces/form-row.interface';
+import { MobileDetectorService } from 'src/app/services/mobile-detector/mobile-detector.service';
 
 @Component({
   selector: 'app-dinamyc-form-builder',
@@ -48,7 +39,6 @@ export class DinamycFormBuilderComponent {
   formElements: FormField[] = [];
   showPreview = false;
   sections: FormSection[] = [{ id: 'section1', title: 'Sección 1', rows: [] }];
-
   selectedFieldLocation: {
     sectionIndex: number;
     rowIndex: number;
@@ -57,6 +47,12 @@ export class DinamycFormBuilderComponent {
   } | null = null;
 
   idCounter = 0;
+
+  get isMobile(): boolean {
+    return this.mobileService.isMobile;
+  }
+
+  constructor(private mobileService: MobileDetectorService) {}
 
   get connectedDropListIds(): string[] {
     const ids = ['toolbox-list'];

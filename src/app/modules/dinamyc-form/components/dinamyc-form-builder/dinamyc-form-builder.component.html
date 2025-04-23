@@ -1,4 +1,4 @@
-<div class="container-fluid d-flex" style="min-height: 60vh">
+<div class="container-fluid d-flex flex-column flex-md-row gap-3" style="min-height: 60vh">
   <!-- Panel fijo: Elementos disponibles -->
   <app-form-field-palette
     [elements]="elements"
@@ -16,13 +16,21 @@
       <i class="fas fa-list me-2"></i> Formulario construido
     </div>
 
-    <div class="card-body" style="height: 65vh; overflow-y: auto" *ngIf="showPreview">
+    <div
+      class="card-body"
+      style="min-height: 300px; max-height: 70vh; overflow-y: auto"
+      *ngIf="showPreview"
+    >
       <div class="mb-4">
         <app-dinamyc-form [sections]="sections"></app-dinamyc-form>
       </div>
     </div>
 
-    <div class="card-body" style="height: 65vh; overflow-y: auto" *ngIf="!showPreview">
+    <div
+      class="card-body"
+      style="min-height: 300px; max-height: 70vh; overflow-y: auto"
+      *ngIf="!showPreview"
+    >
       <!-- Iteramos secciones -->
       <div
         *ngFor="let section of sections; let s = index"
@@ -43,18 +51,18 @@
             + Fila (3 col)
           </button>
         </div>
-
         <!-- Iteramos filas -->
         <div *ngFor="let row of section.rows; let r = index" class="row mb-3 section-new">
           <!-- Iteramos columnas -->
+
           <div
             *ngFor="let column of row.columns; let c = index"
             class="col"
             [ngClass]="{
-              'col-12': row.columnCount === 1,
-              'col-6': row.columnCount === 2,
-              'col-4': row.columnCount === 3,
-              'col-3': row.columnCount === 4,
+              'col-12': isMobile || row.columnCount === 1,
+              'col-6': !isMobile && row.columnCount === 2,
+              'col-4': !isMobile && row.columnCount === 3,
+              'col-3': !isMobile && row.columnCount === 4,
             }"
             cdkDropList
             [id]="row.id + '-col' + c"
@@ -78,33 +86,34 @@
           </div>
 
           <!-- Selector de columnas -->
-          <div class="col-12 d-flex justify-content-end mt-2">
-            <div class="d-flex align-items-center">
-              <div class="form-group mb-0">
-                <label for="columnCount-{{ row.id }}" class="form-label mb-0 me-2">Columnas:</label>
-                <select
-                  id="columnCount-{{ row.id }}"
-                  class="form-control form-control-sm w-auto d-inline-block"
-                  [ngModel]="row.columnCount"
-                  (ngModelChange)="changeColumnCount(s, r, $event)"
-                >
-                  <option *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]" [value]="n">{{ n }}</option>
-                </select>
-              </div>
-
-              <button
-                class="btn btn-outline-danger btn-sm"
-                (click)="removeRow(s, r)"
-                title="Eliminar esta fila del formulario"
+          <div class="col-12 d-flex justify-content-end mt-2 flex-wrap gap-2">
+            <!-- <div class="d-flex align-items-center"> -->
+            <div class="form-group mb-0">
+              <label for="columnCount-{{ row.id }}" class="form-label mb-0 me-2">Columnas:</label>
+              <select
+                id="columnCount-{{ row.id }}"
+                class="form-control form-control-sm d-inline-block"
+                style="width: auto"
+                [ngModel]="row.columnCount"
+                (ngModelChange)="changeColumnCount(s, r, $event)"
               >
-                <i class="fas fa-trash-alt"></i>
-              </button>
+                <option *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]" [value]="n">{{ n }}</option>
+              </select>
             </div>
+
+            <button
+              class="btn btn-outline-danger btn-sm"
+              (click)="removeRow(s, r)"
+              title="Eliminar esta fila del formulario"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <!--  </div> -->
           </div>
         </div>
       </div>
     </div>
-    <div class="card-footer text-muted d-flex justify-content-end align-items-center">
+    <div class="card-footer text-muted d-flex flex-wrap justify-content-between align-items-center">
       <button class="btn btn-secondary" (click)="addSection()" disabled="true">
         + Agregar sección
       </button>

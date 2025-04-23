@@ -1,8 +1,9 @@
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormField } from '../../interfaces/form.-field.interface';
 import { TranslateModule } from '@ngx-translate/core';
+import { MobileDetectorService } from 'src/app/services/mobile-detector/mobile-detector.service';
 
 @Component({
   selector: 'app-form-field-palette',
@@ -15,4 +16,10 @@ export class FormFieldPaletteComponent {
   @Input() elements: FormField[] = [];
   @Input() connectedDropListIds: string[] = [];
   @Output() dropped = new EventEmitter<CdkDragDrop<FormField[]>>();
+
+  get isMobile(): boolean {
+    return this.mobileService.isMobile;
+  }
+
+  constructor(private mobileService: MobileDetectorService) {}
 }

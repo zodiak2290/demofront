@@ -3,14 +3,19 @@
     <div *ngFor="let section of sections" class="mb-4">
       <h5 class="mb-3">{{ section.title }}</h5>
 
-      <div *ngFor="let row of section.rows" class="row mb-3">
+      <div *ngFor="let row of section.rows" class="row g-3 mb-3">
         <div
           *ngFor="let column of row.columns; let colIndex = index"
           class="col"
-          [ngClass]="'col-' + 12 / row.columnCount"
+          [ngClass]="getResponsiveColumnClass(row.columnCount)"
         >
           <div *ngFor="let field of column" class="mb-3">
-            <label [for]="field.id" class="form-label">{{ field.label }}</label>
+            <label
+              [for]="field.id"
+              class="form-label"
+              *ngIf="field.type !== 'button' && field.type !== 'submit'"
+              >{{ field.label }}</label
+            >
 
             <ng-container [ngSwitch]="field.type">
               <!-- Text / Email / Number / etc -->
@@ -76,6 +81,56 @@
                   <label class="form-check-label" [for]="field.id + '-' + opt">{{ opt }}</label>
                 </div>
               </div>
+
+              <!-- Button -->
+              <button
+                *ngSwitchCase="'button'"
+                type="button"
+                class="btn btn-primary"
+                (click)="onButtonClick(field)"
+              >
+                {{ field.label }}
+              </button>
+
+              <!-- Submit -->
+              <button *ngSwitchCase="'submit'" type="submit" class="btn btn-success w-100">
+                {{ field.label || 'Enviar' }}
+              </button>
+
+              <!-- Date -->
+              <input
+                *ngSwitchCase="'date'"
+                type="date"
+                class="form-control"
+                [formControlName]="field.id"
+                [placeholder]="field.placeholder"
+              />
+
+              <!-- Tel -->
+              <input
+                *ngSwitchCase="'tel'"
+                type="tel"
+                class="form-control"
+                [formControlName]="field.id"
+                [placeholder]="field.placeholder"
+              />
+
+              <!-- URL -->
+              <input
+                *ngSwitchCase="'url'"
+                type="url"
+                class="form-control"
+                [formControlName]="field.id"
+                [placeholder]="field.placeholder"
+              />
+
+              <!-- File -->
+              <input
+                *ngSwitchCase="'file'"
+                type="file"
+                class="form-control"
+                [attr.name]="field.id"
+              />
 
               <!-- Fallback -->
               <input
