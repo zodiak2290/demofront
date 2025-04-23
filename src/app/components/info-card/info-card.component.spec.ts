@@ -13,16 +13,25 @@ describe('InfoCardComponent', () => {
   let userServiceSpy: jasmine.SpyObj<UserService>;
   let toastrSpy: jasmine.SpyObj<ToastrService>;
   beforeEach(async () => {
-    const userServiceMock = jasmine.createSpyObj('UserService', ['getFirstInfoUser', 'getIdentity', 'saveInfoUser']);
-    toastrSpy = jasmine.createSpyObj('ToastrService', ['success', 'error'])
+    const userServiceMock = jasmine.createSpyObj('UserService', [
+      'getFirstInfoUser',
+      'getIdentity',
+      'saveInfoUser',
+    ]);
+    toastrSpy = jasmine.createSpyObj('ToastrService', ['success', 'error']);
     await TestBed.configureTestingModule({
-      imports: [InfoCardComponent, ToastrModule.forRoot(), TranslateModule.forRoot(), BrowserAnimationsModule, ReactiveFormsModule],
+      imports: [
+        InfoCardComponent,
+        ToastrModule.forRoot(),
+        TranslateModule.forRoot(),
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+      ],
       providers: [
         { provide: UserService, useValue: userServiceMock },
-        { provide: ToastrService, useValue: toastrSpy  }
+        { provide: ToastrService, useValue: toastrSpy },
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(InfoCardComponent);
     component = fixture.componentInstance;
@@ -44,7 +53,7 @@ describe('InfoCardComponent', () => {
       email: '',
       telefono: '',
       whatsapp: '',
-      socialLinks: []
+      socialLinks: [],
     });
   });
 
@@ -71,8 +80,8 @@ describe('InfoCardComponent', () => {
     component.isOwner = false;
     const socialLinksArray = new FormArray([
       new FormGroup({
-        url: new FormControl('https://facebook.com')
-      })
+        url: new FormControl('https://facebook.com'),
+      }),
     ]);
     component.form.setControl('socialLinks', socialLinksArray);
     component.removeSocialLink(0);
@@ -90,12 +99,9 @@ describe('InfoCardComponent', () => {
     component.isOwner = true;
     userServiceSpy.saveInfoUser.and.resolveTo();
     await component.save();
-    expect(toastrSpy.success).toHaveBeenCalledWith(
-      'Información guardada correctamente',
-      'Éxito',
-      { timeOut: 3000 }
-    );
-
+    expect(toastrSpy.success).toHaveBeenCalledWith('Información guardada correctamente', 'Éxito', {
+      timeOut: 3000,
+    });
   });
 
   it('should call toastr error on save failure', async () => {
@@ -104,11 +110,9 @@ describe('InfoCardComponent', () => {
     userServiceSpy.saveInfoUser.and.returnValue(Promise.reject(new Error('Error')));
 
     await component.save();
-    expect(toastrSpy.error).toHaveBeenCalledWith(
-      'Error al guardar la información',
-      'Error',
-      { timeOut: 3000 }
-    );
+    expect(toastrSpy.error).toHaveBeenCalledWith('Error al guardar la información', 'Error', {
+      timeOut: 3000,
+    });
   });
 
   it('should load user info on loadInfoUser', async () => {
@@ -120,13 +124,12 @@ describe('InfoCardComponent', () => {
       email: 'john.doe@example.com',
       telefono: '123456789',
       whatsapp: '987654321',
-      socialLinks: [{ url: 'https://facebook.com/johndoe' }]
+      socialLinks: [{ url: 'https://facebook.com/johndoe' }],
     };
     userServiceSpy.getFirstInfoUser.and.resolveTo(mockData);
     await component.loadInfoUser();
     expect(component.form.value).toEqual(mockData);
   });
-
 
   it('should not disable the form when save is called and isOwner is false', async () => {
     component.isOwner = false;
@@ -140,7 +143,6 @@ describe('InfoCardComponent', () => {
   });
 
   it('should disable the form if the user is not the owner', async () => {
-
     const mockIdentity = { uid: '123' };
     userServiceSpy.getIdentity.and.returnValue(mockIdentity);
     userServiceSpy.getFirstInfoUser.and.resolveTo({ id: '456' });
@@ -160,7 +162,7 @@ describe('InfoCardComponent', () => {
 
   it('should call loadSocialLinks with the correct data when loading user info', async () => {
     const mockData = {
-      socialLinks: [{ url: 'https://facebook.com/johndoe' }]
+      socialLinks: [{ url: 'https://facebook.com/johndoe' }],
     };
     userServiceSpy.getFirstInfoUser.and.resolveTo(mockData);
     spyOn(component, 'loadSocialLinks');
@@ -170,7 +172,7 @@ describe('InfoCardComponent', () => {
 
   it('should handle empty socialLinks when loading user info', async () => {
     const mockData = {
-      socialLinks: []
+      socialLinks: [],
     };
     userServiceSpy.getFirstInfoUser.and.resolveTo(mockData);
     spyOn(component, 'loadSocialLinks');
@@ -179,7 +181,10 @@ describe('InfoCardComponent', () => {
   });
 
   it('should correctly map social links when loadSocialLinks is called', () => {
-    const mockLinks = [{ url: 'https://facebook.com/johndoe' }, { url: 'https://twitter.com/johndoe' }];
+    const mockLinks = [
+      { url: 'https://facebook.com/johndoe' },
+      { url: 'https://twitter.com/johndoe' },
+    ];
     component.loadSocialLinks(mockLinks);
     expect(component.socialLinks.length).toBe(2);
     expect(component.socialLinks.at(0).value).toEqual({ url: 'https://facebook.com/johndoe' });
@@ -204,7 +209,7 @@ describe('InfoCardComponent', () => {
       email: 'test@example.com',
       telefono: '1234567890',
       whatsapp: '1234567890',
-      socialLinks: [{ url: 'https://github.com/user' }]
+      socialLinks: [{ url: 'https://github.com/user' }],
     };
 
     const mockIdentity = { uid: 'user-123' };
@@ -244,4 +249,79 @@ describe('InfoCardComponent', () => {
     expect(component.isLoading).toBeFalse();
   });
 
+  it('should call dropField and reorder fields correctly', () => {
+    component.isOwner = true;
+    const mockEvent = {
+      previousIndex: 0,
+      currentIndex: 1,
+    } as any;
+
+    component.fields = [
+      { key: 'nombre', label: 'Nombre' },
+      { key: 'rol', label: 'Rol' },
+    ];
+
+    component.dropField(mockEvent);
+
+    expect(component.fields).toEqual([
+      { key: 'rol', label: 'Rol' },
+      { key: 'nombre', label: 'Nombre' },
+    ]);
+  });
+
+  it('should not reorder fields if user is not owner', () => {
+    component.isOwner = false;
+    const mockEvent = {
+      previousIndex: 0,
+      currentIndex: 1,
+    } as any;
+
+    component.fields = [
+      { key: 'nombre', label: 'Nombre' },
+      { key: 'rol', label: 'Rol' },
+    ];
+
+    component.dropField(mockEvent);
+
+    expect(component.fields).toEqual([
+      { key: 'nombre', label: 'Nombre' },
+      { key: 'rol', label: 'Rol' },
+    ]);
+  });
+
+  it('should not reorder social links if user is not owner', () => {
+    component.isOwner = false;
+    const mockEvent = {
+      previousIndex: 0,
+      currentIndex: 1,
+    } as any;
+
+    const mockLinks = [
+      new FormGroup({ url: new FormControl('https://facebook.com') }),
+      new FormGroup({ url: new FormControl('https://twitter.com') }),
+    ];
+
+    component.form.setControl('socialLinks', new FormArray(mockLinks));
+
+    component.drop(mockEvent);
+
+    expect(component.socialLinks.at(0).value).toEqual({ url: 'https://facebook.com' });
+    expect(component.socialLinks.at(1).value).toEqual({ url: 'https://twitter.com' });
+  });
+
+  it('should call getIcon with the correct URL', () => {
+    const socialIconServiceSpy = spyOn(component['socialIconService'], 'getIcon');
+    const url = 'https://facebook.com';
+    component.getIcon(url);
+    expect(socialIconServiceSpy).toHaveBeenCalledWith(url);
+  });
+
+  it('should update social links correctly when updateSocialLinks is called', () => {
+    const mockLinks = [{ url: 'https://facebook.com' }, { url: 'https://twitter.com' }];
+    component['updateSocialLinks'](mockLinks);
+
+    expect(component.socialLinks.length).toBe(2);
+    expect(component.socialLinks.at(0).value).toEqual({ url: 'https://facebook.com' });
+    expect(component.socialLinks.at(1).value).toEqual({ url: 'https://twitter.com' });
+  });
 });

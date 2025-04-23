@@ -34,4 +34,38 @@ describe('FormFieldPaletteComponent', () => {
 
     expect(component.dropped.emit).toHaveBeenCalledWith(mockEvent);
   });
+
+  it('should set isMobile to true if window width is less than 1300', () => {
+    spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1200);
+
+    component.setMobile();
+
+    expect(component.isMobile).toBeTrue();
+  });
+
+  it('should set isMobile to false if window width is greater than or equal to 1300', () => {
+    spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1300);
+
+    component.setMobile();
+
+    expect(component.isMobile).toBeFalse();
+  });
+
+  it('should update isMobile on window resize', () => {
+    spyOn(component, 'setMobile');
+    const resizeEvent = new Event('resize');
+
+    window.dispatchEvent(resizeEvent);
+
+    expect(component.setMobile).toHaveBeenCalled();
+  });
+
+  it('should log window size on resize', () => {
+    spyOn(console, 'log');
+    const mockEvent = { target: { innerWidth: 1024, innerHeight: 768 } } as unknown as Event;
+
+    component.onResize(mockEvent);
+
+    expect(console.log).toHaveBeenCalledWith('Window size: 1024x768');
+  });
 });
